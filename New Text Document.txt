@@ -1,0 +1,7 @@
+- multi cabang
+- produk
+- jasa
+- user
+- penjualan offline : produk dan jasa
+- gudang : inbound, outbound
+- crm : data customer dan riwayat, laporan penjualan
