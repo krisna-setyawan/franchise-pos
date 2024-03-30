@@ -17,7 +17,7 @@
 									<?php foreach ($menus as $lv2) { ?>
 										<?php if ($lv2['level'] == 2) { ?>
 											<?php if ($lv2['parent'] == $lv1['id']) { ?>
-												<li><a href="<?= base_url() ?><?= $lv2['url'] ?>"><?= $lv2['menu'] ?></a></li>
+												<li><a class="<?= $this->uri->segment(1) ==  $lv2['url'] ? 'active' : '' ?>" href="<?= base_url() ?><?= $lv2['url'] ?>"><?= $lv2['menu'] ?></a></li>
 											<?php } ?>
 										<?php } ?>
 									<?php } ?>
