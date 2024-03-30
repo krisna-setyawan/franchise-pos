@@ -10,7 +10,7 @@
 	<meta name="robots" content="noindex, nofollow">
 	<title>Franchise POS</title>
 
-	<link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/image/favicon/favicon.ico">
+	<link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/image/logo2.png">
 
 	<link rel="stylesheet" href="<?= base_url() ?>assets/template/assets/css/bootstrap.min.css">
 

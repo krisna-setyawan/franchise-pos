@@ -119,6 +119,8 @@ $('ul.tabs li').click(function(){var $this=$(this);var $theTab=$(this).attr('id'
   }, false);
 })();
 
+
+// TOAST NOTIF ----------------------------------------------------------------------------------
 toastr.options = {
   "closeButton": false,
   "debug": false,
@@ -127,7 +129,7 @@ toastr.options = {
   "positionClass": "toast-top-center",
   "preventDuplicates": false,
   "onclick": null,
-  "showDuration": "300",
+  "showDuration": "200",
   "hideDuration": "1000",
   "timeOut": "5000",
   "extendedTimeOut": "1000",
@@ -144,4 +146,24 @@ icon = icon.replace(/"/g, '');
 
 if (pesan.trim() !== '') {
   toastr[icon](pesan)
+}
+
+
+
+// DELETE DATA ----------------------------------------------------------------------------------
+function confirm_delete(url){
+Swal.fire({
+	title: 'Konfirmasi',
+	text: "Data akan dihapus. apakah anda yakin?",
+	icon: 'warning',
+	showCancelButton: true,
+	confirmButtonColor: '#d33',
+	cancelButtonColor: '#3085d6',
+	confirmButtonText: 'Hapus',
+	cancelButtonText: 'Batal',
+}).then((result) => {
+	if (result.isConfirmed) {
+		window.location.href = url
+	}
+})
 }

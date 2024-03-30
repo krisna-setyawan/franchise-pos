@@ -44,24 +44,113 @@ function check_akses($id_menu, $id_user)
 
 
 
-// function get_new_nik()
-// {
-// 	$ci = get_instance();
+function getKodeCabang($length = 3)
+{
+	$code = '';
 
-// 	$quer = "SELECT MAX(RIGHT(nik, 3)) AS kode FROM karyawan";
-// 	$query = $ci->db->query($quer)->row_array();
+	// Loop hingga kode yang dihasilkan unik
+	do {
+		$code = generateRandomCodeCabang($length);
+	} while (codeExistsInDatabaseCabang($code));
 
-// 	if ($query && $query['kode'] !== null) {
-// 		$no = (int)$query['kode'] + 1;
-// 		$kd = sprintf("%03s", $no);
-// 	} else {
-// 		$kd = "001";
-// 	}
+	return 'ASR' . $code;
+}
 
-// 	$nomor_auto = $kd;
+function generateRandomCodeCabang($length)
+{
+	$code = '';
+	for ($i = 0; $i < $length; $i++) {
+		$code .= mt_rand(1, 9);
+	}
+	return $code;
+}
 
-// 	return $nomor_auto;
-// }
+function codeExistsInDatabaseCabang($code)
+{
+	$ci = get_instance();
+	$query = $ci->db->get_where('cabang', array('kode' => $code));
+	return $query->num_rows() > 0;
+}
+
+
+
+function getKodeCustomer($length = 5)
+{
+	$code = '';
+
+	// Loop hingga kode yang dihasilkan unik
+	do {
+		$code = generateRandomCodeCustomer($length);
+	} while (codeExistsInDatabaseCustomer($code));
+
+	return $code;
+}
+
+function generateRandomCodeCustomer($length)
+{
+	$code = '';
+	for ($i = 0; $i < $length; $i++) {
+		$code .= mt_rand(1, 9);
+	}
+	return $code;
+}
+
+function codeExistsInDatabaseCustomer($code)
+{
+	$ci = get_instance();
+	$query = $ci->db->get_where('customer', array('kode' => $code));
+	return $query->num_rows() > 0;
+}
+
+
+
+function getKodeProduk($length = 6)
+{
+	$code = '';
+
+	// Loop hingga kode yang dihasilkan unik
+	do {
+		$code = generateRandomCodeProduk($length);
+	} while (codeExistsInDatabaseProduk($code));
+
+	return $code;
+}
+
+function generateRandomCodeProduk($length)
+{
+	$code = '';
+	for ($i = 0; $i < $length; $i++) {
+		$code .= mt_rand(1, 9);
+	}
+	return $code;
+}
+
+function codeExistsInDatabaseProduk($code)
+{
+	$ci = get_instance();
+	$query = $ci->db->get_where('produk', array('kode' => $code));
+	return $query->num_rows() > 0;
+}
+
+
+function get_new_nik()
+{
+	$ci = get_instance();
+
+	$quer = "SELECT MAX(RIGHT(nik, 3)) AS kode FROM karyawan";
+	$query = $ci->db->query($quer)->row_array();
+
+	if ($query && $query['kode'] !== null) {
+		$no = (int)$query['kode'] + 1;
+		$kd = sprintf("%03s", $no);
+	} else {
+		$kd = "001";
+	}
+
+	$nomor_auto = $kd;
+
+	return $nomor_auto;
+}
 
 
 // function get_new_id_freelance()

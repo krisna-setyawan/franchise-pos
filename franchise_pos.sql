@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2024 at 05:16 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Mar 30, 2024 at 08:19 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,8 +41,9 @@ CREATE TABLE `cabang` (
 --
 
 INSERT INTO `cabang` (`id`, `kode`, `nama`, `alamat`, `telp`, `jenis`) VALUES
-(1, '54618', 'Kantor Pusat', 'Malang', '085123123123', '1'),
-(2, '24869', 'Cabang Surabaya', 'Surabaya', '085222222222', '2');
+(1, 'ASR618', 'Kantor Pusat', 'Malang', '085123123123', '1'),
+(2, 'ASR869', 'Cabang Surabaya', 'Surabaya', '085222222222', '2'),
+(4, 'ASR985', 'ASR Blitar', 'Blitar', '0854331697720', '2');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,7 @@ CREATE TABLE `karyawan` (
   `nama` varchar(50) NOT NULL,
   `ktp` varchar(20) NOT NULL,
   `alamat` varchar(80) NOT NULL,
-  `no_telp` varchar(20) NOT NULL,
+  `telp` varchar(20) NOT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -92,7 +93,7 @@ CREATE TABLE `karyawan` (
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id`, `id_cabang`, `nik`, `nama`, `ktp`, `alamat`, `no_telp`, `deleted_at`) VALUES
+INSERT INTO `karyawan` (`id`, `id_cabang`, `nik`, `nama`, `ktp`, `alamat`, `telp`, `deleted_at`) VALUES
 (1, 1, '001', 'Krisna', '1234567891234567', 'Blitar', '085730656933', NULL),
 (2, 2, '002', 'Admin1 Surabaya', '1234561234561234', 'Malang', '085144444444', NULL),
 (3, 2, '003', 'Admin2 Surabaya', '1234567891234567', 'Surabaya', '085787987980', NULL),
@@ -78762,7 +78763,11 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 (12, 1, 63),
 (13, 2, 1),
 (14, 2, 61),
-(15, 2, 62);
+(15, 2, 62),
+(16, 1, 71),
+(17, 1, 72),
+(18, 1, 73),
+(19, 1, 74);
 
 -- --------------------------------------------------------
 
@@ -78891,7 +78896,7 @@ ALTER TABLE `user_menu`
 -- AUTO_INCREMENT for table `cabang`
 --
 ALTER TABLE `cabang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -78909,7 +78914,7 @@ ALTER TABLE `jasa`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kecamatan`
@@ -78951,7 +78956,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access`
 --
 ALTER TABLE `user_access`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user_menu`

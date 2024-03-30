@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Cabang extends CI_Controller
+class Karyawan extends CI_Controller
 {
 
 	public function __construct()
@@ -20,14 +20,16 @@ class Cabang extends CI_Controller
 			'cabang' => $this->db->get_where('cabang', ['id' => $this->session->userdata('id_cabang')])->row_array(),
 		];
 
+		$q_kry = "SELECT karyawan.*, cabang.nama AS cabang FROM karyawan JOIN cabang ON karyawan.id_cabang = cabang.id";
+		$karyawan = $this->db->query($q_kry)->result();
 		$data = [
-			'cabang' => $this->db->get('cabang')->result()
+			'karyawan' => $karyawan,
 		];
 
 		$this->load->view('template/header');
 		$this->load->view('template/topbar', $data_topbar);
 		$this->load->view('template/sidebar', $data_sidebar);
-		$this->load->view('cabang/index', $data);
+		$this->load->view('karyawan/index', $data);
 		$this->load->view('template/footer');
 	}
 
@@ -44,38 +46,40 @@ class Cabang extends CI_Controller
 		];
 
 		$data = [
-			'kode' => getKodeCabang()
+			'nik' => get_new_nik(),
+			'cabang' => $this->db->get('cabang')->result()
 		];
 
 		$this->load->view('template/header');
 		$this->load->view('template/topbar', $data_topbar);
 		$this->load->view('template/sidebar', $data_sidebar);
-		$this->load->view('cabang/add', $data);
+		$this->load->view('karyawan/add', $data);
 		$this->load->view('template/footer');
 	}
 
 	public function store()
 	{
 		$data = array(
-			'kode' => $this->input->post('kode'),
+			'id_cabang' => $this->input->post('id_cabang'),
+			'nik' => $this->input->post('nik'),
 			'nama' => $this->input->post('nama'),
 			'alamat' => $this->input->post('alamat'),
 			'telp' => $this->input->post('telp'),
-			'jenis' => $this->input->post('jenis'),
+			'ktp' => $this->input->post('ktp'),
 		);
-		$this->db->insert('cabang', $data);
+		$this->db->insert('karyawan', $data);
 
 		$datasession = array(
-			'pesan-notif' => 'Berhasil menambah data cabang.',
+			'pesan-notif' => 'Berhasil menambah data karyawan.',
 			'icon-notif' => 'success'
 		);
 		$this->session->set_flashdata($datasession);
-		redirect('cabang');
+		redirect('karyawan');
 	}
 
 
 
-	public function edit($kode)
+	public function edit($nik)
 	{
 		$data_sidebar = [
 			'menus' => get_menus()
@@ -86,35 +90,37 @@ class Cabang extends CI_Controller
 		];
 
 		$data = [
-			'cabang' => $this->db->get_where('cabang', ['kode' => $kode])->row_array()
+			'karyawan' => $this->db->get_where('karyawan', ['nik' => $nik])->row_array(),
+			'cabang' => $this->db->get('cabang')->result()
 		];
 
 		$this->load->view('template/header');
 		$this->load->view('template/topbar', $data_topbar);
 		$this->load->view('template/sidebar', $data_sidebar);
-		$this->load->view('cabang/edit', $data);
+		$this->load->view('karyawan/edit', $data);
 		$this->load->view('template/footer');
 	}
 
 	public function update()
 	{
-		$kode =  $this->input->post('kode');
+		$nik =  $this->input->post('nik');
 
 		$data = array(
+			'id_cabang' => $this->input->post('id_cabang'),
 			'nama' => $this->input->post('nama'),
 			'alamat' => $this->input->post('alamat'),
 			'telp' => $this->input->post('telp'),
-			'jenis' => $this->input->post('jenis'),
+			'ktp' => $this->input->post('ktp'),
 		);
-		$this->db->where('kode', $kode);
-		$this->db->update('cabang', $data);
+		$this->db->where('nik', $nik);
+		$this->db->update('karyawan', $data);
 
 		$datasession = array(
-			'pesan-notif' => 'Berhasil update data cabang.',
+			'pesan-notif' => 'Berhasil update data karyawan.',
 			'icon-notif' => 'success'
 		);
 		$this->session->set_flashdata($datasession);
-		redirect('cabang');
+		redirect('karyawan');
 	}
 
 
@@ -123,13 +129,13 @@ class Cabang extends CI_Controller
 	{
 		$where = array('id' => $id);
 		$this->db->where($where);
-		$this->db->delete('cabang');
+		$this->db->delete('karyawan');
 
 		$datasession = array(
-			'pesan-notif' => 'Berhasil menghapus data cabang.',
+			'pesan-notif' => 'Berhasil menghapus data karyawan.',
 			'icon-notif' => 'success'
 		);
 		$this->session->set_flashdata($datasession);
-		redirect('cabang');
+		redirect('karyawan');
 	}
 }

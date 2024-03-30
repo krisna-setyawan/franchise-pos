@@ -28,10 +28,10 @@
 				<div class="login-content">
 
 					<form method="POST" action="<?= base_url() ?>zauth" class="login-userset needs-validation" novalidate>
-						<div class=" text-center">
-							<img src="<?= base_url() ?>assets/image/logo.png" alt="img">
-						</div>
-						<div class="login-userheading">
+
+						<img src="<?= base_url() ?>assets/image/logo2.png" alt="img">
+
+						<div class="login-userheading mt-4">
 							<h3>Login</h3>
 						</div>
 						<div class="form-login">
