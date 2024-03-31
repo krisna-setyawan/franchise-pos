@@ -30,9 +30,6 @@ class Akun extends CI_Controller
 	}
 
 
-
-
-
 	public function add()
 	{
 		$data_sidebar = [
@@ -43,14 +40,16 @@ class Akun extends CI_Controller
 			'cabang' => $this->db->get_where('cabang', ['id' => $this->session->userdata('id_cabang')])->row_array(),
 		];
 
+		$q_karyawan_not_in_user = "SELECT karyawan.id, karyawan.nama FROM karyawan LEFT JOIN user ON karyawan.id = user.id_karyawan WHERE user.id IS NULL AND karyawan.deleted_at IS NULL";
+		$karyawan = $this->db->query($q_karyawan_not_in_user)->result();
 		$data = [
-			'karyawan' => $this->db->get_where('karyawan', ['deleted_at' => null])->result()
+			'karyawan' => $karyawan
 		];
 
 		$this->load->view('template/header');
 		$this->load->view('template/topbar', $data_topbar);
 		$this->load->view('template/sidebar', $data_sidebar);
-		$this->load->view('karyawan/add', $data);
+		$this->load->view('akun/add', $data);
 		$this->load->view('template/footer');
 	}
 

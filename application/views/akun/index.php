@@ -1,9 +1,6 @@
 <div class="page-wrapper">
 	<div class="content">
 
-		<div id="pesan-notif" style="display: none;"><?= json_encode($this->session->flashdata('pesan-notif')) ?></div>
-		<div id="icon-notif" style="display: none;"><?= json_encode($this->session->flashdata('icon-notif')) ?></div>
-
 		<div class="page-header">
 			<div class="page-title">
 				<h4>Akun Karyawan</h4>
@@ -22,19 +19,6 @@
 							<a class="btn btn-searchset"><img src="<?= base_url() ?>assets/template/assets/img/icons/search-white.svg" alt="img"></a>
 						</div>
 					</div>
-					<!-- <div class="wordset">
-						<ul>
-							<li>
-								<a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="<?= base_url() ?>assets/template/assets/img/icons/pdf.svg" alt="img"></a>
-							</li>
-							<li>
-								<a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="<?= base_url() ?>assets/template/assets/img/icons/excel.svg" alt="img"></a>
-							</li>
-							<li>
-								<a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="<?= base_url() ?>assets/template/assets/img/icons/printer.svg" alt="img"></a>
-							</li>
-						</ul>
-					</div> -->
 				</div>
 
 
@@ -56,7 +40,7 @@
 									<td><?= $dt->username ?></td>
 									<td class="text-center">
 										<a class="me-3" onclick="hak_menu(<?= $dt->id ?>)">
-											<img src="<?= base_url() ?>assets/template/assets/img/icons/edit.svg" alt="img">
+											<img src="<?= base_url() ?>assets/template/assets/img/icons/settings.svg" alt="img">
 										</a>
 										<a class="me-3" href="javascript:void(0);" onclick="confirm_delete('<?= base_url() ?>akun/delete/<?= $dt->id ?>')">
 											<img src="<?= base_url() ?>assets/template/assets/img/icons/delete.svg" alt="img">
@@ -76,12 +60,14 @@
 
 
 <!-- Modal menu user -->
-<div class="modal fade" id="modal-menu-user" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-scrollable modal-lg">
+<div class="modal fade" id="modal-menu-user" tabindex="-1" aria-labelledby="create" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Menu User</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<h5 class="modal-title">Hak Akses</h5>
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
 			</div>
 			<div class="modal-body">
 				<div class="table-responsive">
@@ -123,10 +109,7 @@
 			data: "&id_menu=" + id_menu +
 				"&id_user=" + id_user,
 			success: function() {
-				Toast.fire({
-					icon: 'success',
-					title: 'Berhasil edit hak akses menu!'
-				})
+				toastr['success']('Berhasil edit hak akses menu!')
 			}
 		});
 	}

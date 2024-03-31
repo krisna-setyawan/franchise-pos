@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2024 at 08:19 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Mar 31, 2024 at 08:03 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,7 @@ CREATE TABLE `cabang` (
 INSERT INTO `cabang` (`id`, `kode`, `nama`, `alamat`, `telp`, `jenis`) VALUES
 (1, 'ASR618', 'Kantor Pusat', 'Malang', '085123123123', '1'),
 (2, 'ASR869', 'Cabang Surabaya', 'Surabaya', '085222222222', '2'),
-(4, 'ASR985', 'ASR Blitar', 'Blitar', '0854331697720', '2');
+(4, 'ASR985', 'ASR Blitar', 'Alamat Blitar', '0854331697720', '2');
 
 -- --------------------------------------------------------
 
@@ -55,9 +55,22 @@ CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
   `kode` varchar(10) NOT NULL,
   `nama` varchar(50) NOT NULL,
+  `id_kelurahan` int(11) NOT NULL,
+  `id_kecamatan` int(11) NOT NULL,
+  `id_kota` int(11) NOT NULL,
+  `id_provinsi` int(11) NOT NULL,
   `alamat` varchar(60) NOT NULL,
-  `telp` varchar(15) NOT NULL
+  `telp` varchar(15) NOT NULL,
+  `cabang_register` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`id`, `kode`, `nama`, `id_kelurahan`, `id_kecamatan`, `id_kota`, `id_provinsi`, `alamat`, `telp`, `cabang_register`) VALUES
+(1, '47456', 'customer 1', 36801, 3505130, 3505, 35, 'alamat customer 1', '085111111111', 1),
+(2, '44895', 'customer 2', 67941, 3507300, 3507, 35, 'alamat customer 2', '085222222222', 1);
 
 -- --------------------------------------------------------
 
@@ -95,9 +108,9 @@ CREATE TABLE `karyawan` (
 
 INSERT INTO `karyawan` (`id`, `id_cabang`, `nik`, `nama`, `ktp`, `alamat`, `telp`, `deleted_at`) VALUES
 (1, 1, '001', 'Krisna', '1234567891234567', 'Blitar', '085730656933', NULL),
-(2, 2, '002', 'Admin1 Surabaya', '1234561234561234', 'Malang', '085144444444', NULL),
+(2, 1, '002', 'Admin1 Surabaya', '1234561234561234', 'Malang', '085144444444', NULL),
 (3, 2, '003', 'Admin2 Surabaya', '1234567891234567', 'Surabaya', '085787987980', NULL),
-(4, 1, '004', 'Noven', '1234561234561234', 'Blitar', '085188888888', NULL);
+(4, 4, '004', 'Noven', '1234561234561234', 'Blitar Wates', '085188888888', NULL);
 
 -- --------------------------------------------------------
 
@@ -78730,8 +78743,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nama`, `username`, `password`, `id_karyawan`, `deleted_at`) VALUES
 (1, 'Krisna', 'krisna', 'krisna', 1, NULL),
-(2, 'Noven', 'noven', 'noven', 4, NULL),
-(3, 'Admin1 Surabaya', 'admin1', 'admin1', 2, NULL);
+(2, 'Noven', 'noven', 'noven', 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -78752,8 +78764,6 @@ CREATE TABLE `user_access` (
 INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 (2, 1, 1),
 (3, 1, 2),
-(4, 1, 11),
-(5, 1, 21),
 (6, 1, 31),
 (7, 1, 51),
 (8, 1, 52),
@@ -78767,7 +78777,12 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 (16, 1, 71),
 (17, 1, 72),
 (18, 1, 73),
-(19, 1, 74);
+(19, 1, 74),
+(21, 1, 81),
+(22, 1, 11),
+(23, 1, 21),
+(33, 2, 11),
+(34, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -78821,7 +78836,12 @@ ALTER TABLE `cabang`
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_kelurahan` (`id_kelurahan`),
+  ADD KEY `id_kecamatan` (`id_kecamatan`),
+  ADD KEY `id_kota` (`id_kota`),
+  ADD KEY `id_provinsi` (`id_provinsi`),
+  ADD KEY `cabang_register` (`cabang_register`);
 
 --
 -- Indexes for table `jasa`
@@ -78902,7 +78922,7 @@ ALTER TABLE `cabang`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `jasa`
@@ -78950,13 +78970,13 @@ ALTER TABLE `provinsi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user_access`
 --
 ALTER TABLE `user_access`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -78967,6 +78987,16 @@ ALTER TABLE `user_menu`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `customer`
+--
+ALTER TABLE `customer`
+  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`id_kelurahan`) REFERENCES `kelurahan` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `customer_ibfk_2` FOREIGN KEY (`id_kecamatan`) REFERENCES `kecamatan` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `customer_ibfk_3` FOREIGN KEY (`id_kota`) REFERENCES `kota` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `customer_ibfk_4` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `customer_ibfk_5` FOREIGN KEY (`cabang_register`) REFERENCES `cabang` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `karyawan`

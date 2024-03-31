@@ -57,3 +57,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['auth'] = 'zauth';
 $route['logout'] = 'zauth/logout';
 $route['dashboard'] = 'zdashboard';
+$route['data-karyawan'] = 'Data_karyawan';

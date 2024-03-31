@@ -1,9 +1,6 @@
 <div class="page-wrapper">
 	<div class="content">
 
-		<div id="pesan-notif" style="display: none;"><?= json_encode($this->session->flashdata('pesan-notif')) ?></div>
-		<div id="icon-notif" style="display: none;"><?= json_encode($this->session->flashdata('icon-notif')) ?></div>
-
 		<div class="page-header">
 			<div class="page-title">
 				<h4>Data Customer</h4>
@@ -46,26 +43,30 @@
 								<th>Nama</th>
 								<th>Telp</th>
 								<th>Alamat</th>
+								<th>Asal</th>
 								<th width="10%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>201</td>
-								<td>
-									<a href="javascript:void(0);">Thomas</a>
-								</td>
-								<td>+12163547758 </td>
-								<td>USA</td>
-								<td class="text-center">
-									<a class="me-3" href="<?= base_url() ?>customer/edit/123">
-										<img src="<?= base_url() ?>assets/template/assets/img/icons/edit.svg" alt="img">
-									</a>
-									<a class="me-3 confirm-text" href="javascript:void(0);">
-										<img src="<?= base_url() ?>assets/template/assets/img/icons/delete.svg" alt="img">
-									</a>
-								</td>
-							</tr>
+							<?php foreach ($customer as $dt) : ?>
+								<tr>
+									<td><?= $dt->kode ?></td>
+									<td>
+										<a href="javascript:void(0);"><?= $dt->nama ?></a>
+									</td>
+									<td><?= $dt->telp ?> </td>
+									<td><?= $dt->alamat ?>, <?= $dt->kelurahan ?>, <?= $dt->kecamatan ?>, <?= $dt->kota ?>, <?= $dt->provinsi ?></td>
+									<td><?= $dt->cabang_asal ?> </td>
+									<td class="text-center">
+										<a class="me-3" href="<?= base_url() ?>customer/edit/<?= $dt->kode ?>">
+											<img src="<?= base_url() ?>assets/template/assets/img/icons/edit.svg" alt="img">
+										</a>
+										<a class="me-3" href="javascript:void(0);" onclick="confirm_delete('<?= base_url() ?>customer/delete/<?= $dt->id ?>')">
+											<img src="<?= base_url() ?>assets/template/assets/img/icons/delete.svg" alt="img">
+										</a>
+									</td>
+								</tr>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</div>

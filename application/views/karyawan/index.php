@@ -1,9 +1,6 @@
 <div class="page-wrapper">
 	<div class="content">
 
-		<div id="pesan-notif" style="display: none;"><?= json_encode($this->session->flashdata('pesan-notif')) ?></div>
-		<div id="icon-notif" style="display: none;"><?= json_encode($this->session->flashdata('icon-notif')) ?></div>
-
 		<div class="page-header">
 			<div class="page-title">
 				<h4>Data Karyawan</h4>

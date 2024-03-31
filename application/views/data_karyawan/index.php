@@ -3,10 +3,7 @@
 
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Data Cabang</h4>
-			</div>
-			<div class="page-btn">
-				<a href="<?= base_url() ?>cabang/add" class="btn btn-added"><img src="<?= base_url() ?>assets/template/assets/img/icons/plus.svg" alt="img">Tambah Cabang</a>
+				<h4>Data Karyawan</h4>
 			</div>
 		</div>
 
@@ -26,32 +23,23 @@
 					<table class="table datanew">
 						<thead>
 							<tr class="text-center">
-								<th>ID</th>
+								<th>NIK</th>
 								<th>Nama</th>
+								<th>KTP</th>
 								<th>Telp</th>
 								<th>Alamat</th>
-								<th>Jenis</th>
-								<th width="10%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($cabang as $dt) : ?>
+							<?php foreach ($karyawan as $dt) : ?>
 								<tr>
-									<td><?= $dt->kode ?></td>
+									<td><?= $dt->nik ?></td>
 									<td>
 										<a href="javascript:void(0);"><?= $dt->nama ?></a>
 									</td>
+									<td><?= $dt->ktp ?></td>
 									<td><?= $dt->telp ?></td>
 									<td><?= $dt->alamat ?></td>
-									<td><?= $dt->jenis == '1' ? 'Pusat' : 'Cabang' ?></td>
-									<td class="text-center">
-										<a class="me-3" href="<?= base_url() ?>cabang/edit/<?= $dt->kode ?>">
-											<img src="<?= base_url() ?>assets/template/assets/img/icons/edit.svg" alt="img">
-										</a>
-										<a class="me-3" href="javascript:void(0);" onclick="confirm_delete('<?= base_url() ?>cabang/delete/<?= $dt->id ?>')">
-											<img src="<?= base_url() ?>assets/template/assets/img/icons/delete.svg" alt="img">
-										</a>
-									</td>
 								</tr>
 							<?php endforeach; ?>
 						</tbody>

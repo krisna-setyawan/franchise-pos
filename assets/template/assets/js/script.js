@@ -139,15 +139,6 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
-var pesan = document.getElementById('pesan-notif').textContent;
-var icon = document.getElementById('icon-notif').textContent;
-pesan = pesan.replace(/"/g, '');
-icon = icon.replace(/"/g, '');
-
-if (pesan.trim() !== '') {
-  toastr[icon](pesan)
-}
-
 
 
 // DELETE DATA ----------------------------------------------------------------------------------
