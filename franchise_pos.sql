@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2024 at 08:03 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Apr 01, 2024 at 09:34 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -75,6 +75,47 @@ INSERT INTO `customer` (`id`, `kode`, `nama`, `id_kelurahan`, `id_kecamatan`, `i
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inbound`
+--
+
+CREATE TABLE `inbound` (
+  `id` int(11) NOT NULL,
+  `nomor` varchar(20) NOT NULL,
+  `tanggal` date NOT NULL,
+  `asal` varchar(50) NOT NULL,
+  `keterangan` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inbound`
+--
+
+INSERT INTO `inbound` (`id`, `nomor`, `tanggal`, `asal`, `keterangan`) VALUES
+(3, 'INB-2024-001', '2024-01-18', 'asd', '-');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inbound_detail`
+--
+
+CREATE TABLE `inbound_detail` (
+  `id` int(11) NOT NULL,
+  `id_inbound` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inbound_detail`
+--
+
+INSERT INTO `inbound_detail` (`id`, `id_inbound`, `id_produk`, `qty`) VALUES
+(2, 3, 1, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jasa`
 --
 
@@ -82,8 +123,16 @@ CREATE TABLE `jasa` (
   `id` int(11) NOT NULL,
   `kode` int(20) NOT NULL,
   `nama` varchar(60) NOT NULL,
-  `harga` int(11) NOT NULL
+  `harga` int(11) NOT NULL,
+  `keterangan` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jasa`
+--
+
+INSERT INTO `jasa` (`id`, `kode`, `nama`, `harga`, `keterangan`) VALUES
+(1, 7619, 'jasa 1', 250000, '-');
 
 -- --------------------------------------------------------
 
@@ -78671,6 +78720,13 @@ CREATE TABLE `produk` (
   `keterangan` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`id`, `kode`, `nama`, `harga`, `stok`, `keterangan`) VALUES
+(1, '716262', 'Produk A', 150000, 50, 'produk favorit');
+
 -- --------------------------------------------------------
 
 --
@@ -78844,6 +78900,20 @@ ALTER TABLE `customer`
   ADD KEY `cabang_register` (`cabang_register`);
 
 --
+-- Indexes for table `inbound`
+--
+ALTER TABLE `inbound`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inbound_detail`
+--
+ALTER TABLE `inbound_detail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_inbound` (`id_inbound`),
+  ADD KEY `id_produk` (`id_produk`);
+
+--
 -- Indexes for table `jasa`
 --
 ALTER TABLE `jasa`
@@ -78925,10 +78995,22 @@ ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `inbound`
+--
+ALTER TABLE `inbound`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `inbound_detail`
+--
+ALTER TABLE `inbound_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `jasa`
 --
 ALTER TABLE `jasa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -78958,7 +79040,7 @@ ALTER TABLE `kota`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `provinsi`
@@ -78997,6 +79079,13 @@ ALTER TABLE `customer`
   ADD CONSTRAINT `customer_ibfk_3` FOREIGN KEY (`id_kota`) REFERENCES `kota` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `customer_ibfk_4` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `customer_ibfk_5` FOREIGN KEY (`cabang_register`) REFERENCES `cabang` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `inbound_detail`
+--
+ALTER TABLE `inbound_detail`
+  ADD CONSTRAINT `inbound_detail_ibfk_1` FOREIGN KEY (`id_inbound`) REFERENCES `inbound` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inbound_detail_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `karyawan`

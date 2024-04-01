@@ -133,6 +133,39 @@ function codeExistsInDatabaseProduk($code)
 }
 
 
+
+function getKodeJasa($length = 4)
+{
+	$code = '';
+
+	// Loop hingga kode yang dihasilkan unik
+	do {
+		$code = generateRandomCodeJasa($length);
+	} while (codeExistsInDatabaseJasa($code));
+
+	return $code;
+}
+
+function generateRandomCodeJasa($length)
+{
+	$code = '';
+	for ($i = 0; $i < $length; $i++) {
+		$code .= mt_rand(1, 9);
+	}
+	return $code;
+}
+
+function codeExistsInDatabaseJasa($code)
+{
+	$ci = get_instance();
+	$query = $ci->db->get_where('jasa', array('kode' => $code));
+	return $query->num_rows() > 0;
+}
+
+
+
+
+
 function get_new_nik()
 {
 	$ci = get_instance();
@@ -148,6 +181,70 @@ function get_new_nik()
 	}
 
 	$nomor_auto = $kd;
+
+	return $nomor_auto;
+}
+
+
+
+
+
+function getNomorInbound($tgl)
+{
+	date_default_timezone_set('Asia/Jakarta');
+
+	$ci = get_instance();
+
+	// Ambil bagian tahun dari tanggal
+	$tahun = date('Y', strtotime($tgl));
+
+	// Query untuk mendapatkan nomor urut terakhir
+	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM inbound WHERE YEAR(tanggal) = '$tahun'";
+	$query = $ci->db->query($quer)->row_array();
+
+	if ($query && $query['kode'] !== null) {
+		// Jika sudah ada nomor urut, tambahkan 1
+		$no = (int)$query['kode'] + 1;
+		$kd = sprintf("%03s", $no);
+	} else {
+		// Jika belum ada nomor urut, gunakan nomor urut pertama
+		$kd = "001";
+	}
+
+	// Format nomor transaksi sesuai dengan keinginan
+	$nomor_auto = 'INB-' . $tahun . '-' . $kd;
+
+	return $nomor_auto;
+}
+
+
+
+
+
+function getNomorOutbound($tgl)
+{
+	date_default_timezone_set('Asia/Jakarta');
+
+	$ci = get_instance();
+
+	// Ambil bagian tahun dari tanggal
+	$tahun = date('Y', strtotime($tgl));
+
+	// Query untuk mendapatkan nomor urut terakhir
+	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM outbound WHERE YEAR(tanggal) = '$tahun'";
+	$query = $ci->db->query($quer)->row_array();
+
+	if ($query && $query['kode'] !== null) {
+		// Jika sudah ada nomor urut, tambahkan 1
+		$no = (int)$query['kode'] + 1;
+		$kd = sprintf("%03s", $no);
+	} else {
+		// Jika belum ada nomor urut, gunakan nomor urut pertama
+		$kd = "001";
+	}
+
+	// Format nomor transaksi sesuai dengan keinginan
+	$nomor_auto = 'OTB-' . $tahun . '-' . $kd;
 
 	return $nomor_auto;
 }
@@ -346,6 +443,7 @@ function get_new_nik()
 
 // 	return $nomor_auto;
 // }
+
 
 
 // function nomor_penawaran_auto($tgl)

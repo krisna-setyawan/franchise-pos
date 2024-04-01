@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Produk extends CI_Controller
+class Inbound extends CI_Controller
 {
 
 	public function __construct()
@@ -21,13 +21,13 @@ class Produk extends CI_Controller
 		];
 
 		$data = [
-			'produk' => $this->db->get('produk')->result()
+			'inbound' => $this->db->get('inbound')->result()
 		];
 
 		$this->load->view('template/header');
 		$this->load->view('template/topbar', $data_topbar);
 		$this->load->view('template/sidebar', $data_sidebar);
-		$this->load->view('produk/index', $data);
+		$this->load->view('inbound/index', $data);
 		$this->load->view('template/footer');
 	}
 
@@ -44,33 +44,45 @@ class Produk extends CI_Controller
 		];
 
 		$data = [
-			'kode' => getKodeProduk(),
+			'nomor' => getNomorInbound(date('Y-m-d')),
 		];
 
 		$this->load->view('template/header');
 		$this->load->view('template/topbar', $data_topbar);
 		$this->load->view('template/sidebar', $data_sidebar);
-		$this->load->view('produk/add', $data);
+		$this->load->view('inbound/add', $data);
 		$this->load->view('template/footer');
 	}
 
 	public function store()
 	{
 		$data = array(
-			'kode' => $this->input->post('kode'),
-			'nama' => $this->input->post('nama'),
-			'harga' => str_replace(".", "", $this->input->post('harga')),
-			'stok' => $this->input->post('stok'),
+			'nomor' => $this->input->post('nomor'),
+			'tanggal' => $this->input->post('tanggal'),
+			'asal' => $this->input->post('asal'),
 			'keterangan' => $this->input->post('keterangan'),
 		);
-		$this->db->insert('produk', $data);
+		$this->db->insert('inbound', $data);
+		$id_inbound = $this->db->insert_id();
+
+		$produk = $this->input->post('id_produk');
+		foreach ($produk as $index => $value) {
+			$list_produk = [
+				'id_inbound' => $id_inbound,
+				'id_produk' => $value,
+				'qty' => $this->input->post('qty')[$index],
+			];
+			if ($index != 0) {
+				$this->db->insert('inbound_detail', $list_produk);
+			}
+		}
 
 		$datasession = array(
-			'pesan-notif' => 'Berhasil menambah data produk.',
+			'pesan-notif' => 'Berhasil menambah data inbound.',
 			'icon-notif' => 'success'
 		);
 		$this->session->set_flashdata($datasession);
-		redirect('produk');
+		redirect('inbound');
 	}
 
 
@@ -86,13 +98,13 @@ class Produk extends CI_Controller
 		];
 
 		$data = [
-			'produk' => $this->db->get_where('produk', ['kode' => $kode])->row_array(),
+			'inbound' => $this->db->get_where('inbound', ['kode' => $kode])->row_array(),
 		];
 
 		$this->load->view('template/header');
 		$this->load->view('template/topbar', $data_topbar);
 		$this->load->view('template/sidebar', $data_sidebar);
-		$this->load->view('produk/edit', $data);
+		$this->load->view('inbound/edit', $data);
 		$this->load->view('template/footer');
 	}
 
@@ -103,18 +115,17 @@ class Produk extends CI_Controller
 		$data = array(
 			'nama' => $this->input->post('nama'),
 			'harga' => str_replace(".", "", $this->input->post('harga')),
-			'stok' => $this->input->post('stok'),
 			'keterangan' => $this->input->post('keterangan'),
 		);
 		$this->db->where('kode', $kode);
-		$this->db->update('produk', $data);
+		$this->db->update('jasa', $data);
 
 		$datasession = array(
-			'pesan-notif' => 'Berhasil update data produk.',
+			'pesan-notif' => 'Berhasil update data jasa.',
 			'icon-notif' => 'success'
 		);
 		$this->session->set_flashdata($datasession);
-		redirect('produk');
+		redirect('jasa');
 	}
 
 
@@ -123,41 +134,13 @@ class Produk extends CI_Controller
 	{
 		$where = array('id' => $id);
 		$this->db->where($where);
-		$this->db->delete('produk');
+		$this->db->delete('jasa');
 
 		$datasession = array(
-			'pesan-notif' => 'Berhasil menghapus data produk.',
+			'pesan-notif' => 'Berhasil menghapus data jasa.',
 			'icon-notif' => 'success'
 		);
 		$this->session->set_flashdata($datasession);
-		redirect('produk');
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public function selectProdukForModal()
-	{
-		$data_view = [
-			'produk' => $this->db->get('produk')->result(),
-		];
-
-		$data = [
-			'table_produk' => $this->load->view('produk/table_modal', $data_view, TRUE),
-		];
-
-		echo json_encode($data);
+		redirect('jasa');
 	}
 }

@@ -3,10 +3,10 @@
 
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Data Produk</h4>
+				<h4>Data Inbound</h4>
 			</div>
 			<div class="page-btn">
-				<a href="<?= base_url() ?>produk/add" class="btn btn-added"><img src="<?= base_url() ?>assets/template/assets/img/icons/plus.svg" alt="img">Tambah Produk</a>
+				<a href="<?= base_url() ?>inbound/add" class="btn btn-added"><img src="<?= base_url() ?>assets/template/assets/img/icons/plus.svg" alt="img">Tambah Inbound</a>
 			</div>
 		</div>
 
@@ -26,29 +26,27 @@
 					<table class="table datanew">
 						<thead>
 							<tr class="text-center">
-								<th>Kode</th>
-								<th>Nama</th>
-								<th>Harga</th>
-								<th>Stok</th>
+								<th>Tanggal</th>
+								<th>Nomor</th>
+								<th>Asal</th>
 								<th>Keterangan</th>
 								<th width="10%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($produk as $dt) : ?>
+							<?php foreach ($inbound as $dt) : ?>
 								<tr>
-									<td><?= $dt->kode ?></td>
+									<td><?= $dt->tanggal ?></td>
 									<td>
-										<a href="javascript:void(0);"><?= $dt->nama ?></a>
+										<a href="javascript:void(0);"><?= $dt->nomor ?></a>
 									</td>
-									<td><?= number_format($dt->harga, 0, ',', '.') ?></td>
-									<td><?= $dt->stok ?></td>
+									<td><?= $dt->asal ?></td>
 									<td><?= $dt->keterangan ?></td>
 									<td class="text-center">
-										<a class="me-3" href="<?= base_url() ?>produk/edit/<?= $dt->kode ?>">
+										<a class="me-3" href="<?= base_url() ?>inbound/edit/<?= $dt->nomor ?>">
 											<img src="<?= base_url() ?>assets/template/assets/img/icons/edit.svg" alt="img">
 										</a>
-										<a class="me-3" href="javascript:void(0);" onclick="confirm_delete('<?= base_url() ?>produk/delete/<?= $dt->id ?>')">
+										<a class="me-3" href="javascript:void(0);" onclick="confirm_delete('<?= base_url() ?>inbound/delete/<?= $dt->id ?>')">
 											<img src="<?= base_url() ?>assets/template/assets/img/icons/delete.svg" alt="img">
 										</a>
 									</td>

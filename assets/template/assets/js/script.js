@@ -158,3 +158,12 @@ Swal.fire({
 	}
 })
 }
+
+
+
+
+$(document).ready(function() {
+$('.input-masked').mask('000.000.000', {
+	reverse: true
+});
+});
