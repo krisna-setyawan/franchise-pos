@@ -1,10 +1,10 @@
 <div class="container-fluid p-3">
-	<table class="table table-bordered table-striped table-hover" id="table-produk">
+	<table class="table table-bordered table-hover" id="table-produk" style="width: 100%;">
 		<thead>
 			<tr>
 				<th>Produk</th>
 				<th>Stok</th>
-				<th>Aksi</th>
+				<th style="width: 10%;">Aksi</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -13,7 +13,7 @@
 					<td><?= $dt->nama ?></td>
 					<td><?= $dt->stok ?></td>
 					<td>
-						<button class="btn btn-success btn-sm py-0 px-2" onclick="pilih_produk(<?= $dt->id ?>, '<?= $dt->nama ?>')">Pilih</button>
+						<button class="btn btn-success btn-sm py-0 px-2" onclick="pilih_produk(<?= $dt->id ?>, '<?= $dt->nama ?>', <?= $row ?>)">Pilih</button>
 					</td>
 				</tr>
 			<?php endforeach ?>

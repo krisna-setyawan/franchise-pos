@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2024 at 09:34 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Apr 01, 2024 at 07:01 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -91,7 +91,7 @@ CREATE TABLE `inbound` (
 --
 
 INSERT INTO `inbound` (`id`, `nomor`, `tanggal`, `asal`, `keterangan`) VALUES
-(3, 'INB-2024-001', '2024-01-18', 'asd', '-');
+(5, 'INB-2024-001', '2024-04-01', 'asal', '-');
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,8 @@ CREATE TABLE `inbound_detail` (
 --
 
 INSERT INTO `inbound_detail` (`id`, `id_inbound`, `id_produk`, `qty`) VALUES
-(2, 3, 1, 2);
+(9, 5, 8, 100),
+(10, 5, 3, 45);
 
 -- --------------------------------------------------------
 
@@ -78708,6 +78709,33 @@ INSERT INTO `kota` (`id`, `nama`, `id_provinsi`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `outbound`
+--
+
+CREATE TABLE `outbound` (
+  `id` int(11) NOT NULL,
+  `nomor` varchar(20) NOT NULL,
+  `tanggal` date NOT NULL,
+  `tujuan` varchar(50) NOT NULL,
+  `keterangan` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `outbound_detail`
+--
+
+CREATE TABLE `outbound_detail` (
+  `id` int(11) NOT NULL,
+  `id_outbound` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `produk`
 --
 
@@ -78725,7 +78753,14 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `kode`, `nama`, `harga`, `stok`, `keterangan`) VALUES
-(1, '716262', 'Produk A', 150000, 50, 'produk favorit');
+(1, '716262', 'Produk A', 150000, 50, 'produk favorit'),
+(3, '367869', 'Produk B', 250000, 50, '-'),
+(4, '533434', 'Produk C', 150000, 10, '-'),
+(5, '639219', 'Produk D', 135000, 0, '-'),
+(6, '271297', 'Produk E', 260000, 0, '-'),
+(7, '169496', 'Produk F', 65000, 7, '-'),
+(8, '451231', 'Produk G', 80000, 100, '-'),
+(9, '168423', 'Produk H', 140000, 2, '-');
 
 -- --------------------------------------------------------
 
@@ -78946,6 +78981,20 @@ ALTER TABLE `kota`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `outbound`
+--
+ALTER TABLE `outbound`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `outbound_detail`
+--
+ALTER TABLE `outbound_detail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_outbound` (`id_outbound`),
+  ADD KEY `id_produk` (`id_produk`);
+
+--
 -- Indexes for table `produk`
 --
 ALTER TABLE `produk`
@@ -78998,13 +79047,13 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `inbound`
 --
 ALTER TABLE `inbound`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `inbound_detail`
 --
 ALTER TABLE `inbound_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `jasa`
@@ -79037,10 +79086,22 @@ ALTER TABLE `kota`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9495;
 
 --
+-- AUTO_INCREMENT for table `outbound`
+--
+ALTER TABLE `outbound`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `outbound_detail`
+--
+ALTER TABLE `outbound_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `provinsi`
@@ -79092,6 +79153,13 @@ ALTER TABLE `inbound_detail`
 --
 ALTER TABLE `karyawan`
   ADD CONSTRAINT `karyawan_ibfk_1` FOREIGN KEY (`id_cabang`) REFERENCES `cabang` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `outbound_detail`
+--
+ALTER TABLE `outbound_detail`
+  ADD CONSTRAINT `outbound_detail_ibfk_1` FOREIGN KEY (`id_outbound`) REFERENCES `outbound` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `outbound_detail_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`

@@ -2,13 +2,13 @@
 	<div class="content">
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Tambah Inbound</h4>
+				<h4>Tambah Outbound</h4>
 			</div>
 		</div>
 
 		<div class="card">
 			<div class="card-body">
-				<form autocomplete="off" class="row needs-validation" novalidate action="<?= base_url() ?>inbound/store" method="post">
+				<form autocomplete="off" class="row needs-validation" novalidate action="<?= base_url() ?>outbound/store" method="post">
 					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Nomor</label>
@@ -23,8 +23,8 @@
 					</div>
 					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
-							<label>Asal</label>
-							<input class="form-control" required id="asal" name="asal" type="text">
+							<label>Tujuan</label>
+							<input class="form-control" required id="tujuan" name="tujuan" type="text">
 						</div>
 					</div>
 					<div class="col-lg-6 col-sm-6 col-12">
@@ -70,7 +70,7 @@
 
 					<div class="col-lg-12">
 						<button href="javascript:void(0);" class="btn btn-submit me-2" type="submit">Simpan</button>
-						<a href="<?= base_url() ?>inbound" class="btn btn-cancel" type="button">Batal</a>
+						<a href="<?= base_url() ?>outbound" class="btn btn-cancel" type="button">Batal</a>
 					</div>
 				</form>
 			</div>

@@ -1,0 +1,86 @@
+
+.ui-datepicker {
+  background-color: #D5F5E3;
+  /* Warna latar belakang hijau muda */
+}
+
+/* Desain dropdown tahun */
+.ui-datepicker-year {
+  width: 50%;
+  /* Lebar dropdown */
+  padding: 5px;
+  /* Padding */
+  border-radius: 5px;
+  /* Sudut melengkung */
+  border: 1px solid #ccc;
+  /* Garis border */
+  background-color: #fff;
+  /* Warna latar belakang */
+}
+
+/* Desain dropdown bulan */
+.ui-datepicker-month {
+  width: 50%;
+  /* Lebar dropdown */
+  padding: 5px;
+  /* Padding */
+  border-radius: 5px;
+  /* Sudut melengkung */
+  border: 1px solid #ccc;
+  /* Garis border */
+  background-color: #fff;
+  /* Warna latar belakang */
+}
+
+/* Warna bulan aktif */
+.ui-datepicker-calendar .ui-state-hover,
+.ui-datepicker-calendar .ui-datepicker-current-day {
+  background: #62B742;
+  /* Warna latar belakang hijau muda */
+}
+
+/* Warna hari yang dipilih */
+.ui-datepicker-calendar .ui-state-active {
+  background: #62B742;
+  color: #fff;
+}
+
+/* Warna teks hari */
+.ui-datepicker-calendar td a {
+  color: #000;
+  background: #fff;
+}
+
+/* Warna teks bulan dan tahun */
+.ui-datepicker-title {
+  color: #000;
+  background: #D5F5E3;
+}
+
+/* Warna latar belakang tombol "Next" dan "Prev" */
+.ui-datepicker-header {
+  background-color: #D5F5E3;
+  border: none;
+}
+
+/* Warna teks tombol "Next" dan "Prev" */
+.ui-datepicker-header .ui-datepicker-prev span,
+.ui-datepicker-header .ui-datepicker-next span {
+  color: #000;
+}
+
+
+
+
+/* CSS TAMBAHAN */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

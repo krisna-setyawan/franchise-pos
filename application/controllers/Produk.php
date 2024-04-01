@@ -150,8 +150,10 @@ class Produk extends CI_Controller
 
 	public function selectProdukForModal()
 	{
+		$row = $this->input->get('row');
 		$data_view = [
 			'produk' => $this->db->get('produk')->result(),
+			'row' => $row
 		];
 
 		$data = [

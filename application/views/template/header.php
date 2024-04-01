@@ -30,6 +30,13 @@
 	<link rel="stylesheet" href="<?= base_url() ?>assets/template/assets/css/style.css">
 
 	<script src="<?= base_url() ?>assets/template/assets/js/fontawesome.js" crossorigin="anonymous"></script>
+
+	<script src="<?= base_url() ?>assets/template/assets/js/jquery-3.6.0.min.js"></script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<link rel="stylesheet" href="<?= base_url() ?>assets/template/assets/css/style-datepicker.css">
+
 </head>
 
 
