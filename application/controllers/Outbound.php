@@ -225,4 +225,25 @@ class Outbound extends CI_Controller
 		$this->session->set_flashdata($datasession);
 		redirect('outbound');
 	}
+
+
+
+	public function show($nomor)
+	{
+		$outbound = $this->db->get_where('outbound', ['nomor' => $nomor])->row_array();
+		$id_outbound = $outbound['id'];
+		$q_outbound_detail = "SELECT outbound_detail.*, produk.nama AS nama_produk FROM outbound_detail JOIN produk ON outbound_detail.id_produk = produk.id WHERE outbound_detail.id_outbound = $id_outbound";
+		$outbound_detail = $this->db->query($q_outbound_detail)->result();
+
+		$data_view = [
+			'outbound' => $outbound,
+			'outbound_detail' => $outbound_detail,
+		];
+
+		$data = [
+			'detail' => $this->load->view('outbound/show', $data_view, TRUE),
+		];
+
+		echo json_encode($data);
+	}
 }

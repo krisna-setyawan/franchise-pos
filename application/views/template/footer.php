@@ -2,6 +2,23 @@
 
 
 
+<!-- Modal -->
+<div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-6" id="modal-label-detail">Pilih Produk</h1>
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span></button>
+			</div>
+			<div class="modal-body m-0 p-0" id="modal-body-detail">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <script src="<?= base_url() ?>assets/template/assets/js/feather.min.js"></script>
 
 <script src="<?= base_url() ?>assets/template/assets/js/jquery.slimscroll.min.js"></script>

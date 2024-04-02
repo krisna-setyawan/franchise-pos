@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2024 at 07:01 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Apr 02, 2024 at 09:31 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -78720,6 +78720,13 @@ CREATE TABLE `outbound` (
   `keterangan` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `outbound`
+--
+
+INSERT INTO `outbound` (`id`, `nomor`, `tanggal`, `tujuan`, `keterangan`) VALUES
+(3, 'OTB-2024-001', '2024-04-02', 'ke brazil', '-');
+
 -- --------------------------------------------------------
 
 --
@@ -78732,6 +78739,14 @@ CREATE TABLE `outbound_detail` (
   `id_produk` int(11) NOT NULL,
   `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `outbound_detail`
+--
+
+INSERT INTO `outbound_detail` (`id`, `id_outbound`, `id_produk`, `qty`) VALUES
+(11, 3, 7, 7),
+(12, 3, 9, 2);
 
 -- --------------------------------------------------------
 
@@ -78758,9 +78773,9 @@ INSERT INTO `produk` (`id`, `kode`, `nama`, `harga`, `stok`, `keterangan`) VALUE
 (4, '533434', 'Produk C', 150000, 10, '-'),
 (5, '639219', 'Produk D', 135000, 0, '-'),
 (6, '271297', 'Produk E', 260000, 0, '-'),
-(7, '169496', 'Produk F', 65000, 7, '-'),
+(7, '169496', 'Produk F', 65000, 0, '-'),
 (8, '451231', 'Produk G', 80000, 100, '-'),
-(9, '168423', 'Produk H', 140000, 2, '-');
+(9, '168423', 'Produk H', 140000, 0, '-');
 
 -- --------------------------------------------------------
 
@@ -79089,13 +79104,13 @@ ALTER TABLE `kota`
 -- AUTO_INCREMENT for table `outbound`
 --
 ALTER TABLE `outbound`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `outbound_detail`
 --
 ALTER TABLE `outbound_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `produk`

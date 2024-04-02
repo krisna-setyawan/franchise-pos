@@ -225,4 +225,25 @@ class Inbound extends CI_Controller
 		$this->session->set_flashdata($datasession);
 		redirect('inbound');
 	}
+
+
+
+	public function show($nomor)
+	{
+		$inbound = $this->db->get_where('inbound', ['nomor' => $nomor])->row_array();
+		$id_inbound = $inbound['id'];
+		$q_inbound_detail = "SELECT inbound_detail.*, produk.nama AS nama_produk FROM inbound_detail JOIN produk ON inbound_detail.id_produk = produk.id WHERE inbound_detail.id_inbound = $id_inbound";
+		$inbound_detail = $this->db->query($q_inbound_detail)->result();
+
+		$data_view = [
+			'inbound' => $inbound,
+			'inbound_detail' => $inbound_detail,
+		];
+
+		$data = [
+			'detail' => $this->load->view('inbound/show', $data_view, TRUE),
+		];
+
+		echo json_encode($data);
+	}
 }

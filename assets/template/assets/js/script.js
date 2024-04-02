@@ -160,6 +160,20 @@ Swal.fire({
 }
 
 
+function detail(url, title) {
+	$.ajax({
+		type: "GET",
+		url: url,
+		dataType: 'JSON',
+		success: function(response) {
+			$('#modal-body-detail').html(response.detail);
+			$('#modal-label-detail').html(title);
+			$('#modal-detail').modal('show');
+		}
+	})
+}
+
+
 
 
 $(document).ready(function() {

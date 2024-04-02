@@ -38,7 +38,7 @@
 								<tr>
 									<td><?= $dt->tanggal ?></td>
 									<td>
-										<a href="javascript:void(0);"><?= $dt->nomor ?></a>
+										<a onclick="detail('<?= base_url() ?>outbound/show/<?= $dt->nomor ?>', 'Detail Outbound')" href="javascript:void(0);"><?= $dt->nomor ?></a>
 									</td>
 									<td><?= $dt->tujuan ?></td>
 									<td><?= $dt->keterangan ?></td>
