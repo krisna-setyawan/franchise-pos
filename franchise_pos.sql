@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2024 at 09:31 AM
+-- Generation Time: Apr 04, 2024 at 09:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -78751,6 +78751,85 @@ INSERT INTO `outbound_detail` (`id`, `id_outbound`, `id_produk`, `qty`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `penjualan_online`
+--
+
+CREATE TABLE `penjualan_online` (
+  `id` int(11) NOT NULL,
+  `nomor` varchar(20) NOT NULL,
+  `no_penjualan_mp` varchar(30) DEFAULT NULL,
+  `marketplace` enum('Shopee','Tokopedia','Lazada','Bukalapak','Blibli','Marketplace Lain') NOT NULL,
+  `tanggal` date NOT NULL,
+  `total_hg_produk` int(11) NOT NULL,
+  `diskon` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `catatan` varchar(70) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penjualan_online_produk`
+--
+
+CREATE TABLE `penjualan_online_produk` (
+  `id` int(11) NOT NULL,
+  `id_penjualan_online` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `satuan` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penjualan_outlet`
+--
+
+CREATE TABLE `penjualan_outlet` (
+  `id` int(11) NOT NULL,
+  `nomor` varchar(20) NOT NULL,
+  `id_customer` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `total_hg_produk` int(11) NOT NULL,
+  `total_hg_jasa` int(11) NOT NULL,
+  `diskon` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `catatan` varchar(70) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penjualan_outlet_jasa`
+--
+
+CREATE TABLE `penjualan_outlet_jasa` (
+  `id` int(11) NOT NULL,
+  `id_penjualan_outlet` int(11) NOT NULL,
+  `id_jasa` int(11) NOT NULL,
+  `harga` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penjualan_outlet_produk`
+--
+
+CREATE TABLE `penjualan_outlet_produk` (
+  `id` int(11) NOT NULL,
+  `id_penjualan_outlet` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `satuan` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `produk`
 --
 
@@ -79010,6 +79089,42 @@ ALTER TABLE `outbound_detail`
   ADD KEY `id_produk` (`id_produk`);
 
 --
+-- Indexes for table `penjualan_online`
+--
+ALTER TABLE `penjualan_online`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `penjualan_online_produk`
+--
+ALTER TABLE `penjualan_online_produk`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_penjualan_online` (`id_penjualan_online`),
+  ADD KEY `id_produk` (`id_produk`);
+
+--
+-- Indexes for table `penjualan_outlet`
+--
+ALTER TABLE `penjualan_outlet`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `penjualan_outlet_jasa`
+--
+ALTER TABLE `penjualan_outlet_jasa`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_penjualan` (`id_penjualan_outlet`),
+  ADD KEY `id_jasa` (`id_jasa`);
+
+--
+-- Indexes for table `penjualan_outlet_produk`
+--
+ALTER TABLE `penjualan_outlet_produk`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_penjualan` (`id_penjualan_outlet`),
+  ADD KEY `id_produk` (`id_produk`);
+
+--
 -- Indexes for table `produk`
 --
 ALTER TABLE `produk`
@@ -79113,6 +79228,36 @@ ALTER TABLE `outbound_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `penjualan_online`
+--
+ALTER TABLE `penjualan_online`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `penjualan_online_produk`
+--
+ALTER TABLE `penjualan_online_produk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `penjualan_outlet`
+--
+ALTER TABLE `penjualan_outlet`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `penjualan_outlet_jasa`
+--
+ALTER TABLE `penjualan_outlet_jasa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `penjualan_outlet_produk`
+--
+ALTER TABLE `penjualan_outlet_produk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
@@ -79175,6 +79320,27 @@ ALTER TABLE `karyawan`
 ALTER TABLE `outbound_detail`
   ADD CONSTRAINT `outbound_detail_ibfk_1` FOREIGN KEY (`id_outbound`) REFERENCES `outbound` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `outbound_detail_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `penjualan_online_produk`
+--
+ALTER TABLE `penjualan_online_produk`
+  ADD CONSTRAINT `penjualan_online_produk_ibfk_1` FOREIGN KEY (`id_penjualan_online`) REFERENCES `penjualan_online` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `penjualan_online_produk_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `penjualan_outlet_jasa`
+--
+ALTER TABLE `penjualan_outlet_jasa`
+  ADD CONSTRAINT `penjualan_outlet_jasa_ibfk_1` FOREIGN KEY (`id_penjualan_outlet`) REFERENCES `penjualan_outlet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `penjualan_outlet_jasa_ibfk_2` FOREIGN KEY (`id_jasa`) REFERENCES `jasa` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `penjualan_outlet_produk`
+--
+ALTER TABLE `penjualan_outlet_produk`
+  ADD CONSTRAINT `penjualan_outlet_produk_ibfk_1` FOREIGN KEY (`id_penjualan_outlet`) REFERENCES `penjualan_outlet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `penjualan_outlet_produk_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`
