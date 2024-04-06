@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 	<title>Login</title>
 
-	<link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/image/logo2.png">
+	<link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/image/Logo2.png">
 
 	<link rel="stylesheet" href="<?= base_url() ?>assets/template/assets/css/bootstrap.min.css">
 
@@ -29,23 +29,23 @@
 
 					<form method="POST" action="<?= base_url() ?>zauth" class="login-userset needs-validation" novalidate>
 
-						<img src="<?= base_url() ?>assets/image/logo2.png" alt="img">
+						<img src="<?= base_url() ?>assets/image/Logo2.png" alt="img">
 
 						<div class="login-userheading mt-4">
 							<h3>Login</h3>
 						</div>
 						<div class="form-login">
-							<label>Username</label>
+							<label class="text-secondary">Username</label>
 							<div class="form-addons">
-								<input name="username" type="text" class="form-control" required>
-								<img class="me-3" src="<?= base_url() ?>assets/template/assets/img/icons/users1.svg" alt="img">
+								<input style="color: grey;" name="username" type="text" class="form-control" required>
+								<img class="mx-3" style="margin-top: -3px;" src="<?= base_url() ?>assets/template/assets/img/icons/users1.svg" alt="img">
 							</div>
 						</div>
 						<div class="form-login">
-							<label>Password</label>
+							<label class="text-secondary">Password</label>
 							<div class="pass-group">
-								<input name="password" type="password" class="pass-input form-control" required>
-								<span class="me-3 fas toggle-password fa-eye-slash"></span>
+								<input style="color: grey;" name="password" type="password" class="pass-input form-control" required>
+								<span class="mx-3 fas toggle-password fa-eye-slash"></span>
 							</div>
 						</div>
 						<div class="form-login">

@@ -55,6 +55,10 @@
 		icon = icon.replace(/"/g, '');
 		toastr[icon](pesan)
 	}
+
+	function alert_toastr(icon, pesan) {
+		toastr[icon](pesan)
+	}
 </script>
 
 </body>

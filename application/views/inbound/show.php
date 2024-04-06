@@ -2,10 +2,10 @@
 
 	<div class="row mt-4">
 		<div class="col-6">
-			<strong style="font-size: 20px; margin-bottom: 0px;">Franchise POS </strong>
+			<strong style="font-size: 20px; margin-bottom: 0px;"><?= $cabang['nama'] ?></strong>
 			<p class="mb-2">
-				address, Blitar, Jawa Timur
-				<br> 085123456789
+				<?= $cabang['alamat'] ?>
+				<br> <?= $cabang['telp'] ?>
 			</p>
 		</div>
 		<div class="col-6 text-end">

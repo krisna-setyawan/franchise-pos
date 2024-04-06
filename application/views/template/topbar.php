@@ -2,7 +2,7 @@
 
 	<div class="header-left active" style="background-color: #FEFFFA;">
 		<a href="#" class="logo">
-			<img src="<?= base_url() ?>assets/image/logo.png" alt="">
+			<img src="<?= base_url() ?>assets/image/Logo.png" alt="">
 		</a>
 		<a href="#" class="logo-small">
 			<img src="<?= base_url() ?>assets/image/logo-small.png" alt="">

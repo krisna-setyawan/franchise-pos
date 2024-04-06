@@ -250,24 +250,77 @@ function getNomorOutbound($tgl)
 }
 
 
-// function get_new_id_freelance()
-// {
-// 	$ci = get_instance();
 
-// 	$quer = "SELECT MAX(RIGHT(id_freelance, 3)) AS kode FROM freelance";
-// 	$query = $ci->db->query($quer)->row_array();
 
-// 	if ($query && $query['kode'] !== null) {
-// 		$no = (int)$query['kode'] + 1;
-// 		$kd = sprintf("%03s", $no);
-// 	} else {
-// 		$kd = "001";
-// 	}
 
-// 	$nomor_auto = 'FR-' . $kd;
+function nomor_penjualan_online_auto($tgl)
+{
+	date_default_timezone_set('Asia/Jakarta');
 
-// 	return $nomor_auto;
-// }
+	$ci = get_instance();
+
+	// Ambil bagian tahun dari tanggal
+	$tahun = date('y', strtotime($tgl));
+	$bulan = date('m', strtotime($tgl));
+	$hari = date('d', strtotime($tgl));
+
+
+	// Query untuk mendapatkan nomor urut terakhir
+	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM penjualan_online WHERE tanggal = '$tgl'";
+	$query = $ci->db->query($quer)->row_array();
+
+	if ($query && $query['kode'] !== null) {
+		// Jika sudah ada nomor urut, tambahkan 1
+		$no = (int)$query['kode'] + 1;
+		$kd = sprintf("%03s", $no);
+	} else {
+		// Jika belum ada nomor urut, gunakan nomor urut pertama
+		$kd = "001";
+	}
+
+	// Format nomor transaksi sesuai dengan keinginan
+	$nomor_auto = 'ONL' . $tahun . '' . $bulan . '' . $hari . '' . $kd;
+
+	return $nomor_auto;
+}
+
+
+
+
+
+function nomor_penjualan_outlet_auto($tgl)
+{
+	date_default_timezone_set('Asia/Jakarta');
+
+	$ci = get_instance();
+
+	// Ambil bagian tahun dari tanggal
+	$tahun = date('y', strtotime($tgl));
+	$bulan = date('m', strtotime($tgl));
+	$hari = date('d', strtotime($tgl));
+
+
+	// Query untuk mendapatkan nomor urut terakhir
+	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM penjualan_outlet WHERE tanggal = '$tgl'";
+	$query = $ci->db->query($quer)->row_array();
+
+	if ($query && $query['kode'] !== null) {
+		// Jika sudah ada nomor urut, tambahkan 1
+		$no = (int)$query['kode'] + 1;
+		$kd = sprintf("%03s", $no);
+	} else {
+		// Jika belum ada nomor urut, gunakan nomor urut pertama
+		$kd = "001";
+	}
+
+	// Format nomor transaksi sesuai dengan keinginan
+	$nomor_auto = 'OTL' . $tahun . '' . $bulan . '' . $hari . '' . $kd;
+
+	return $nomor_auto;
+}
+
+
+
 
 
 // function get_new_sku()
@@ -330,119 +383,6 @@ function getNomorOutbound($tgl)
 // }
 
 
-// function get_new_id_reseller()
-// {
-// 	$ci = get_instance();
-
-// 	$quer = "SELECT MAX(RIGHT(id_reseller, 3)) AS kode FROM cust_reseller";
-// 	$query = $ci->db->query($quer)->row_array();
-
-// 	if ($query && $query['kode'] !== null) {
-// 		$no = (int)$query['kode'] + 1;
-// 		$kd = sprintf("%03s", $no);
-// 	} else {
-// 		$kd = "001";
-// 	}
-
-// 	$nomor_auto = 'RSL-' . $kd;
-
-// 	return $nomor_auto;
-// }
-
-
-// function get_new_id_toko()
-// {
-// 	$ci = get_instance();
-
-// 	$quer = "SELECT MAX(RIGHT(id_toko, 3)) AS kode FROM cust_toko";
-// 	$query = $ci->db->query($quer)->row_array();
-
-// 	if ($query && $query['kode'] !== null) {
-// 		$no = (int)$query['kode'] + 1;
-// 		$kd = sprintf("%03s", $no);
-// 	} else {
-// 		$kd = "001";
-// 	}
-
-// 	$nomor_auto = 'TKO-' . $kd;
-
-// 	return $nomor_auto;
-// }
-
-
-// function get_new_id_cust_off()
-// {
-// 	$ci = get_instance();
-
-// 	$quer = "SELECT MAX(RIGHT(kode_cust, 3)) AS kode FROM cust_off";
-// 	$query = $ci->db->query($quer)->row_array();
-
-// 	if ($query && $query['kode'] !== null) {
-// 		$no = (int)$query['kode'] + 1;
-// 		$kd = sprintf("%03s", $no);
-// 	} else {
-// 		$kd = "001";
-// 	}
-
-// 	$nomor_auto = 'COF-' . $kd;
-
-// 	return $nomor_auto;
-// }
-
-
-// function get_new_id_cust_mp()
-// {
-// 	$ci = get_instance();
-
-// 	$quer = "SELECT MAX(RIGHT(kode_cust, 3)) AS kode FROM cust_mp";
-// 	$query = $ci->db->query($quer)->row_array();
-
-// 	if ($query && $query['kode'] !== null) {
-// 		$no = (int)$query['kode'] + 1;
-// 		$kd = sprintf("%03s", $no);
-// 	} else {
-// 		$kd = "001";
-// 	}
-
-// 	$nomor_auto = 'CMP-' . $kd;
-
-// 	return $nomor_auto;
-// }
-
-
-
-
-
-// function nomor_penjualan_auto($tgl)
-// {
-// 	date_default_timezone_set('Asia/Jakarta');
-
-// 	$ci = get_instance();
-
-// 	// Ambil bagian tahun dari tanggal
-// 	$tahun = date('Y', strtotime($tgl));
-// 	$bulan = date('m', strtotime($tgl));
-// 	$hari = date('d', strtotime($tgl));
-
-
-// 	// Query untuk mendapatkan nomor urut terakhir
-// 	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM penjualan WHERE tanggal = '$tgl'";
-// 	$query = $ci->db->query($quer)->row_array();
-
-// 	if ($query && $query['kode'] !== null) {
-// 		// Jika sudah ada nomor urut, tambahkan 1
-// 		$no = (int)$query['kode'] + 1;
-// 		$kd = sprintf("%03s", $no);
-// 	} else {
-// 		// Jika belum ada nomor urut, gunakan nomor urut pertama
-// 		$kd = "001";
-// 	}
-
-// 	// Format nomor transaksi sesuai dengan keinginan
-// 	$nomor_auto = $tahun . '' . $bulan . '' . $hari . '' . $kd;
-
-// 	return $nomor_auto;
-// }
 
 
 

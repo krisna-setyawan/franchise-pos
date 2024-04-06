@@ -21,7 +21,7 @@ class Inbound extends CI_Controller
 		];
 
 		$data = [
-			'inbound' => $this->db->get('inbound')->result()
+			'inbound' => $this->db->get_where('inbound', ['id_cabang' => $this->session->userdata('id_cabang')])->result()
 		];
 
 		$this->load->view('template/header');
@@ -57,6 +57,7 @@ class Inbound extends CI_Controller
 	public function store()
 	{
 		$data = array(
+			'id_cabang' => $this->session->userdata('id_cabang'),
 			'nomor' => $this->input->post('nomor'),
 			'tanggal' => $this->input->post('tanggal'),
 			'asal' => $this->input->post('asal'),
@@ -235,9 +236,13 @@ class Inbound extends CI_Controller
 		$q_inbound_detail = "SELECT inbound_detail.*, produk.nama AS nama_produk FROM inbound_detail JOIN produk ON inbound_detail.id_produk = produk.id WHERE inbound_detail.id_inbound = $id_inbound";
 		$inbound_detail = $this->db->query($q_inbound_detail)->result();
 
+		$id_cabang = $this->session->userdata('id_cabang');
+		$cabang = $this->db->get_where('cabang', ['id' => $id_cabang])->row_array();
+
 		$data_view = [
 			'inbound' => $inbound,
 			'inbound_detail' => $inbound_detail,
+			'cabang' => $cabang,
 		];
 
 		$data = [

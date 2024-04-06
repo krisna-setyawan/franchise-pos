@@ -21,7 +21,7 @@ class Produk extends CI_Controller
 		];
 
 		$data = [
-			'produk' => $this->db->get('produk')->result()
+			'produk' => $this->db->get_where('produk', ['id_cabang' => $this->session->userdata('id_cabang')])->result(),
 		];
 
 		$this->load->view('template/header');
@@ -57,6 +57,7 @@ class Produk extends CI_Controller
 	public function store()
 	{
 		$data = array(
+			'id_cabang' => $this->session->userdata('id_cabang'),
 			'kode' => $this->input->post('kode'),
 			'nama' => $this->input->post('nama'),
 			'harga' => str_replace(".", "", $this->input->post('harga')),
@@ -152,7 +153,7 @@ class Produk extends CI_Controller
 	{
 		$row = $this->input->get('row');
 		$data_view = [
-			'produk' => $this->db->get('produk')->result(),
+			'produk' => $this->db->get_where('produk', ['id_cabang' => $this->session->userdata('id_cabang')])->result(),
 			'row' => $row
 		];
 

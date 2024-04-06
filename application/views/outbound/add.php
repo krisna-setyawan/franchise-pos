@@ -130,6 +130,7 @@
 				$(this).find("th").first().html(index); // Menambah 1 karena index dimulai dari 0
 			}
 		);
+		rowCounter--;
 	}
 
 
@@ -152,7 +153,7 @@
 		})
 	}
 
-	function pilih_produk(id_produk, nama_produk, row) {
+	function pilih_produk(id_produk, nama_produk, satuan, stok, row) {
 		$('#id_produk_' + row).val(id_produk)
 		$('#nama_produk_' + row).val(nama_produk)
 		$('#mymodal').modal('hide');

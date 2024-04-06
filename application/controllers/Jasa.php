@@ -21,7 +21,7 @@ class Jasa extends CI_Controller
 		];
 
 		$data = [
-			'jasa' => $this->db->get('jasa')->result()
+			'jasa' => $this->db->get_where('jasa', ['id_cabang' => $this->session->userdata('id_cabang')])->result()
 		];
 
 		$this->load->view('template/header');
@@ -57,6 +57,7 @@ class Jasa extends CI_Controller
 	public function store()
 	{
 		$data = array(
+			'id_cabang' => $this->session->userdata('id_cabang'),
 			'kode' => $this->input->post('kode'),
 			'nama' => $this->input->post('nama'),
 			'harga' => str_replace(".", "", $this->input->post('harga')),
@@ -129,5 +130,35 @@ class Jasa extends CI_Controller
 		);
 		$this->session->set_flashdata($datasession);
 		redirect('jasa');
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function selectJasaForModal()
+	{
+		$row = $this->input->get('row');
+		$data_view = [
+			'jasa' => $this->db->get_where('jasa', ['id_cabang' => $this->session->userdata('id_cabang')])->result(),
+			'row' => $row
+		];
+
+		$data = [
+			'table_jasa' => $this->load->view('jasa/table_modal', $data_view, TRUE),
+		];
+
+		echo json_encode($data);
 	}
 }
