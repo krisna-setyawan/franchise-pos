@@ -8,11 +8,11 @@
 
 						<?php if ($lv1['has_child'] == 'n') { ?>
 							<li class="<?= $this->uri->segment(1) ==  $lv1['url'] ? 'active' : '' ?>">
-								<a href="<?= base_url() ?><?= $lv1['url'] ?>"><?= $lv1['icon'] ?><span> <?= $lv1['menu'] ?></span> </a>
+								<a href="<?= base_url() ?><?= $lv1['url'] ?>"><img src="<?= base_url() ?>assets/template/assets/img/icons/<?= $lv1['icon'] ?>" alt="img"><span> <?= $lv1['menu'] ?></span> </a>
 							</li>
 						<?php } else { ?>
 							<li class="submenu <?= $this->uri->segment(1) ==  $lv1['url'] ? 'active' : '' ?>">
-								<a href="javascript:void(0);"><?= $lv1['icon'] ?><span> <?= $lv1['menu'] ?></span> <span class="menu-arrow"></span></a>
+								<a href="javascript:void(0);"><img src="<?= base_url() ?>assets/template/assets/img/icons/<?= $lv1['icon'] ?>" alt="img"><span> <?= $lv1['menu'] ?></span> <span class="menu-arrow"></span></a>
 								<ul>
 									<?php foreach ($menus as $lv2) { ?>
 										<?php if ($lv2['level'] == 2) { ?>

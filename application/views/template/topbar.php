@@ -1,6 +1,6 @@
 <div class="header">
 
-	<div class="header-left active">
+	<div class="header-left active" style="background-color: #FEFFFA;">
 		<a href="#" class="logo">
 			<img src="<?= base_url() ?>assets/image/logo.png" alt="">
 		</a>

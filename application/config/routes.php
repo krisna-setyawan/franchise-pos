@@ -58,3 +58,5 @@ $route['auth'] = 'zauth';
 $route['logout'] = 'zauth/logout';
 $route['dashboard'] = 'zdashboard';
 $route['data-karyawan'] = 'Data_karyawan';
+$route['online'] = 'Penjualan_online';
+$route['outlet'] = 'Penjualan_outlet';

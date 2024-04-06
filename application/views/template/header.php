@@ -41,7 +41,7 @@
 
 
 <body>
-	<div id="global-loader">
+	<div id="global-loader" style="opacity: 0.8;">
 		<div class="whirly-loader"> </div>
 	</div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2024 at 09:08 AM
+-- Generation Time: Apr 06, 2024 at 09:21 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -78990,22 +78990,22 @@ CREATE TABLE `user_menu` (
 --
 
 INSERT INTO `user_menu` (`id`, `menu`, `level`, `parent`, `icon`, `url`, `has_child`) VALUES
-(1, 'Dashboard', '1', '-', '<i class=\"fa-fw fa-solid fa-gauge\"></i>', 'dashboard', 'n'),
-(2, 'Karyawan', '1', '-', '<i class=\"fa-fw fa-solid fa-user\"></i>', 'data-karyawan', 'n'),
-(11, 'Customer', '1', '-', '<i class=\"fa-fw fa-regular fa-newspaper\"></i>', 'customer', 'n'),
-(21, 'Produk', '1', '-', '<i class=\"fa-fw fa-solid fa-address-card\"></i>', 'produk', 'n'),
-(31, 'Jasa', '1', '-', '<i class=\"fa-fw fa-solid fa-user-group\"></i>', 'jasa', 'n'),
-(51, 'Penjualan', '1', '-', '<i class=\"fa-fw fa-solid fa-boxes-packing\"></i>', 'penjualan', 'y'),
+(1, 'Dashboard', '1', '-', 'dashboard.svg', 'dashboard', 'n'),
+(2, 'Karyawan', '1', '-', 'user.svg', 'data-karyawan', 'n'),
+(11, 'Customer', '1', '-', 'user-customer.svg', 'customer', 'n'),
+(21, 'Produk', '1', '-', 'product.svg', 'produk', 'n'),
+(31, 'Jasa', '1', '-', 'jasa.svg', 'jasa', 'n'),
+(51, 'Penjualan', '1', '-', 'cashier.svg', 'penjualan', 'y'),
 (52, 'Outlet', '2', '51', '<i class=\"fa-3x fa-solid fa-envelope\"></i>', 'outlet', 'n'),
 (53, 'Online', '2', '51', '<i class=\"fa-3x fa-solid fa-right-from-bracket fa-rotate-270\"></i>', 'online', 'n'),
-(61, 'Gudang', '1', '-', '<i class=\"fa-fw fa-solid fa-warehouse\"></i>', 'gudang', 'y'),
+(61, 'Gudang', '1', '-', 'gudang.svg', 'gudang', 'y'),
 (62, 'Inbound', '2', '61', '<i class=\"fa-3x fa-solid fa-boxes-packing\"></i>', 'inbound', 'n'),
 (63, 'Outbound', '2', '61', '<i class=\"fa-3x fa-solid fa-shapes\"></i>', 'outbound', 'n'),
-(71, 'Pengaturan', '1', '-', '<i class=\"fa-fw fa-solid fa-screwdriver-wrench\"></i>', 'pengaturan', 'y'),
+(71, 'Pengaturan', '1', '-', 'settings.svg', 'pengaturan', 'y'),
 (72, 'Cabang', '2', '71', '<i class=\"fa-3x fa-regular fa-rectangle-list\"></i>', 'cabang', 'n'),
 (73, 'Karyawan', '2', '71', '<i class=\"fa-3x fa-solid fa-pen-ruler\"></i>', 'karyawan', 'n'),
 (74, 'Akun Karyawan', '2', '71', '<i class=\"fa-3x fa-solid fa-circle-exclamation\"></i>', 'akun', 'n'),
-(81, 'Laporan', '1', '-', '<i class=\"fa-fw fa-solid fa-chart-simple\"></i>', 'laporan', 'n');
+(81, 'Laporan', '1', '-', 'laporan.svg', 'laporan', 'n');
 
 --
 -- Indexes for dumped tables
