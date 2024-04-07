@@ -34,9 +34,6 @@
 <script src="<?= base_url() ?>assets/template/assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
 <script src="<?= base_url() ?>assets/template/assets/plugins/sweetalert/sweetalerts.min.js"></script>
 
-<script src="<?= base_url() ?>assets/template/assets/plugins/apexchart/apexcharts.min.js"></script>
-<script src="<?= base_url() ?>assets/template/assets/plugins/apexchart/chart-data.js"></script>
-
 <script src="<?= base_url() ?>assets/template/assets/plugins/toastr/toastr.min.js"></script>
 <script src="<?= base_url() ?>assets/template/assets/plugins/toastr/toastr.js"></script>
 

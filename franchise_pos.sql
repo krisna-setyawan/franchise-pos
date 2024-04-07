@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2024 at 11:56 PM
+-- Generation Time: Apr 07, 2024 at 11:21 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -78829,6 +78829,15 @@ CREATE TABLE `penjualan_outlet` (
   `catatan` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `penjualan_outlet`
+--
+
+INSERT INTO `penjualan_outlet` (`id`, `id_cabang`, `nomor`, `id_customer`, `tanggal`, `total_hg_produk`, `total_hg_jasa`, `diskon`, `grand_total`, `bayar`, `kembalian`, `catatan`) VALUES
+(3, 1, 'OTL240407002', 4, '2024-04-07', 1650000, 0, 50000, 1600000, 1600000, 0, ''),
+(4, 1, 'OTL240407003', 1, '2024-04-07', 1650000, 0, 0, 1650000, 1700000, 50000, ''),
+(5, 1, 'OTL240407004', 2, '2024-04-07', 800000, 250000, 0, 1050000, 1100000, 50000, '');
+
 -- --------------------------------------------------------
 
 --
@@ -78841,6 +78850,13 @@ CREATE TABLE `penjualan_outlet_jasa` (
   `id_jasa` int(11) NOT NULL,
   `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `penjualan_outlet_jasa`
+--
+
+INSERT INTO `penjualan_outlet_jasa` (`id`, `id_penjualan_outlet`, `id_jasa`, `harga`) VALUES
+(3, 5, 1, 250000);
 
 -- --------------------------------------------------------
 
@@ -78856,6 +78872,17 @@ CREATE TABLE `penjualan_outlet_produk` (
   `satuan` int(11) NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `penjualan_outlet_produk`
+--
+
+INSERT INTO `penjualan_outlet_produk` (`id`, `id_penjualan_outlet`, `id_produk`, `qty`, `satuan`, `total`) VALUES
+(2, 3, 8, 5, 80000, 400000),
+(3, 3, 3, 5, 250000, 1250000),
+(4, 4, 3, 5, 250000, 1250000),
+(5, 4, 8, 5, 80000, 400000),
+(6, 5, 8, 10, 80000, 800000);
 
 -- --------------------------------------------------------
 
@@ -78879,12 +78906,12 @@ CREATE TABLE `produk` (
 
 INSERT INTO `produk` (`id`, `id_cabang`, `kode`, `nama`, `harga`, `stok`, `keterangan`) VALUES
 (1, 1, '716262', 'Produk A', 150000, 40, 'produk favorit'),
-(3, 1, '367869', 'Produk B', 250000, 60, '-'),
+(3, 1, '367869', 'Produk B', 250000, 50, '-'),
 (4, 1, '533434', 'Produk C', 150000, 0, '-'),
 (5, 1, '639219', 'Produk D', 135000, 0, '-'),
 (6, 1, '271297', 'Produk E', 260000, 0, '-'),
 (7, 1, '169496', 'Produk F', 65000, 0, '-'),
-(8, 1, '451231', 'Produk G', 80000, 100, '-'),
+(8, 1, '451231', 'Produk G', 80000, 80, '-'),
 (9, 1, '168423', 'Produk H', 140000, 0, '-'),
 (10, 4, '915898', 'Produk 1 cabang blitar', 325000, 50, '-');
 
@@ -79293,19 +79320,19 @@ ALTER TABLE `penjualan_online_produk`
 -- AUTO_INCREMENT for table `penjualan_outlet`
 --
 ALTER TABLE `penjualan_outlet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet_jasa`
 --
 ALTER TABLE `penjualan_outlet_jasa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet_produk`
 --
 ALTER TABLE `penjualan_outlet_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `produk`

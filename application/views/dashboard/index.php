@@ -7,8 +7,9 @@
 						<span><img src="<?= base_url() ?>assets/template/assets/img/icons/dash1.svg" alt="img"></span>
 					</div>
 					<div class="dash-widgetcontent">
-						<h5>$<span class="counters" data-count="307144.00">$307,144.00</span></h5>
-						<h6>Total Purchase Due</h6>
+						<h5>Rp. <span class="counters"><?= number_format($sum_grand_total_pjl_online['grand_total'], 0, ',', '.') ?></span></h5>
+						<h6><?= $count_pjl_online ?> Invoice Penjualan Online</h6>
+						<h6>Bulan <?= date('m') ?> Tahun <?= date('Y') ?></h6>
 					</div>
 				</div>
 			</div>
@@ -18,8 +19,9 @@
 						<span><img src="<?= base_url() ?>assets/template/assets/img/icons/dash2.svg" alt="img"></span>
 					</div>
 					<div class="dash-widgetcontent">
-						<h5>$<span class="counters" data-count="4385.00">$4,385.00</span></h5>
-						<h6>Total Sales Due</h6>
+						<h5>Rp. <span class="counters"><?= number_format($sum_grand_total_pjl_outlet['grand_total'], 0, ',', '.') ?></span></h5>
+						<h6><?= $count_pjl_outlet ?> Invoice Penjualan Outlet</h6>
+						<h6>Bulan <?= date('m') ?> Tahun <?= date('Y') ?></h6>
 					</div>
 				</div>
 			</div>
@@ -29,8 +31,9 @@
 						<span><img src="<?= base_url() ?>assets/template/assets/img/icons/dash3.svg" alt="img"></span>
 					</div>
 					<div class="dash-widgetcontent">
-						<h5>$<span class="counters" data-count="385656.50">385,656.50</span></h5>
-						<h6>Total Sale Amount</h6>
+						<h5><span class="counters"><?= $count_inbound ?> Transaksi</span></h5>
+						<h6>Inbound</h6>
+						<h6>Bulan <?= date('m') ?> Tahun <?= date('Y') ?></h6>
 					</div>
 				</div>
 			</div>
@@ -40,16 +43,17 @@
 						<span><img src="<?= base_url() ?>assets/template/assets/img/icons/dash4.svg" alt="img"></span>
 					</div>
 					<div class="dash-widgetcontent">
-						<h5>$<span class="counters" data-count="40000.00">400.00</span></h5>
-						<h6>Total Sale Amount</h6>
+						<h5><span class="counters"><?= $count_outbound ?> Transaksi</span></h5>
+						<h6>Outbound</h6>
+						<h6>Bulan <?= date('m') ?> Tahun <?= date('Y') ?></h6>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-3 col-sm-6 col-12 d-flex">
 				<div class="dash-count">
 					<div class="dash-counts">
-						<h4>100</h4>
-						<h5>Customers</h5>
+						<h4><?= $count_karyawan ?></h4>
+						<h5>Karyawan</h5>
 					</div>
 					<div class="dash-imgs">
 						<i data-feather="user"></i>
@@ -59,8 +63,8 @@
 			<div class="col-lg-3 col-sm-6 col-12 d-flex">
 				<div class="dash-count das1">
 					<div class="dash-counts">
-						<h4>100</h4>
-						<h5>Suppliers</h5>
+						<h4><?= $count_customer ?></h4>
+						<h5>Customer</h5>
 					</div>
 					<div class="dash-imgs">
 						<i data-feather="user-check"></i>
@@ -70,8 +74,8 @@
 			<div class="col-lg-3 col-sm-6 col-12 d-flex">
 				<div class="dash-count das2">
 					<div class="dash-counts">
-						<h4>100</h4>
-						<h5>Purchase Invoice</h5>
+						<h4><?= $count_produk ?></h4>
+						<h5>Produk</h5>
 					</div>
 					<div class="dash-imgs">
 						<i data-feather="file-text"></i>
@@ -81,8 +85,8 @@
 			<div class="col-lg-3 col-sm-6 col-12 d-flex">
 				<div class="dash-count das3">
 					<div class="dash-counts">
-						<h4>105</h4>
-						<h5>Sales Invoice</h5>
+						<h4><?= $count_jasa ?></h4>
+						<h5>Jasa</h5>
 					</div>
 					<div class="dash-imgs">
 						<i data-feather="file"></i>
@@ -92,190 +96,97 @@
 		</div>
 
 		<div class="row">
-			<div class="col-lg-7 col-sm-12 col-12 d-flex">
+			<div class="col-lg-8 col-sm-12 col-12 d-flex">
 				<div class="card flex-fill">
 					<div class="card-header pb-0 d-flex justify-content-between align-items-center">
-						<h5 class="card-title mb-0">Purchase & Sales</h5>
-						<div class="graph-sets">
-							<ul>
-								<li>
-									<span>Sales</span>
-								</li>
-								<li>
-									<span>Purchase</span>
-								</li>
-							</ul>
-							<div class="dropdown">
-								<button class="btn btn-white btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-									2022 <img src="<?= base_url() ?>assets/template/assets/img/icons/dropdown.svg" alt="img" class="ms-2">
-								</button>
-								<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<li>
-										<a href="javascript:void(0);" class="dropdown-item">2022</a>
-									</li>
-									<li>
-										<a href="javascript:void(0);" class="dropdown-item">2021</a>
-									</li>
-									<li>
-										<a href="javascript:void(0);" class="dropdown-item">2020</a>
-									</li>
-								</ul>
-							</div>
-						</div>
+						<h5 class="card-title mb-0">Penjualan Online & Outlet tahun <?= date('Y') ?></h5>
 					</div>
 					<div class="card-body">
-						<div id="sales_charts"></div>
+						<div id="s-line" class="chart-set"></div>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-5 col-sm-12 col-12 d-flex">
+			<div class="col-lg-4 col-sm-12 col-12 d-flex">
 				<div class="card flex-fill">
 					<div class="card-header pb-0 d-flex justify-content-between align-items-center">
-						<h4 class="card-title mb-0">Recently Added Products</h4>
-						<div class="dropdown">
-							<a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-								<i class="fa fa-ellipsis-v"></i>
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<li>
-									<a href="productlist.html" class="dropdown-item">Product List</a>
-								</li>
-								<li>
-									<a href="addproduct.html" class="dropdown-item">Product Add</a>
-								</li>
-							</ul>
-						</div>
+						<h5 class="card-title mb-0 text-center">Penjualan Outlet <?= date('m') ?>/<?= date('Y') ?></h5>
 					</div>
 					<div class="card-body">
-						<div class="table-responsive dataview">
-							<table class="table datatable ">
-								<thead>
-									<tr>
-										<th>Sno</th>
-										<th>Products</th>
-										<th>Price</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td class="productimgname">
-											<a href="productlist.html" class="product-img">
-												<img src="<?= base_url() ?>assets/template/assets/img/product/product22.jpg" alt="product">
-											</a>
-											<a href="productlist.html">Apple Earpods</a>
-										</td>
-										<td>$891.2</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td class="productimgname">
-											<a href="productlist.html" class="product-img">
-												<img src="<?= base_url() ?>assets/template/assets/img/product/product23.jpg" alt="product">
-											</a>
-											<a href="productlist.html">iPhone 11</a>
-										</td>
-										<td>$668.51</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td class="productimgname">
-											<a href="productlist.html" class="product-img">
-												<img src="<?= base_url() ?>assets/template/assets/img/product/product24.jpg" alt="product">
-											</a>
-											<a href="productlist.html">samsung</a>
-										</td>
-										<td>$522.29</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td class="productimgname">
-											<a href="productlist.html" class="product-img">
-												<img src="<?= base_url() ?>assets/template/assets/img/product/product6.jpg" alt="product">
-											</a>
-											<a href="productlist.html">Macbook Pro</a>
-										</td>
-										<td>$291.01</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+						<div id="donut-chart" class="chart-set"></div>
 					</div>
-				</div>
-			</div>
-		</div>
-		<div class="card mb-0">
-			<div class="card-body">
-				<h4 class="card-title">Expired Products</h4>
-				<div class="table-responsive dataview">
-					<table class="table datatable ">
-						<thead>
-							<tr>
-								<th>SNo</th>
-								<th>Product Code</th>
-								<th>Product Name</th>
-								<th>Brand Name</th>
-								<th>Category Name</th>
-								<th>Expiry Date</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td><a href="javascript:void(0);">IT0001</a></td>
-								<td class="productimgname">
-									<a class="product-img" href="productlist.html">
-										<img src="<?= base_url() ?>assets/template/assets/img/product/product2.jpg" alt="product">
-									</a>
-									<a href="productlist.html">Orange</a>
-								</td>
-								<td>N/D</td>
-								<td>Fruits</td>
-								<td>12-12-2022</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td><a href="javascript:void(0);">IT0002</a></td>
-								<td class="productimgname">
-									<a class="product-img" href="productlist.html">
-										<img src="<?= base_url() ?>assets/template/assets/img/product/product3.jpg" alt="product">
-									</a>
-									<a href="productlist.html">Pineapple</a>
-								</td>
-								<td>N/D</td>
-								<td>Fruits</td>
-								<td>25-11-2022</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td><a href="javascript:void(0);">IT0003</a></td>
-								<td class="productimgname">
-									<a class="product-img" href="productlist.html">
-										<img src="<?= base_url() ?>assets/template/assets/img/product/product4.jpg" alt="product">
-									</a>
-									<a href="productlist.html">Stawberry</a>
-								</td>
-								<td>N/D</td>
-								<td>Fruits</td>
-								<td>19-11-2022</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td><a href="javascript:void(0);">IT0004</a></td>
-								<td class="productimgname">
-									<a class="product-img" href="productlist.html">
-										<img src="<?= base_url() ?>assets/template/assets/img/product/product5.jpg" alt="product">
-									</a>
-									<a href="productlist.html">Avocat</a>
-								</td>
-								<td>N/D</td>
-								<td>Fruits</td>
-								<td>20-11-2022</td>
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+
+
+<script>
+	if ($('#s-line').length > 0) {
+		var sline = {
+			chart: {
+				height: 350,
+				type: 'line',
+				zoom: {
+					enabled: false
+				},
+				toolbar: {
+					show: false,
+				}
+			},
+			dataLabels: {
+				enabled: false
+			},
+			stroke: {
+				curve: 'straight'
+			},
+			series: [{
+				name: "Total Penjualan",
+				data: <?php echo json_encode(array_values($penjualan_setahun)); ?>
+			}],
+			grid: {
+				row: {
+					colors: ['#f1f2f3', 'transparent'],
+					opacity: 0.5
+				},
+			},
+			xaxis: {
+				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+			}
+		}
+		var chart = new ApexCharts(document.querySelector("#s-line"), sline);
+		chart.render();
+	}
+
+
+
+	if ($('#donut-chart').length > 0) {
+		var donutChart = {
+			chart: {
+				height: 350,
+				type: 'donut',
+				toolbar: {
+					show: false,
+				}
+			},
+			series: [<?= $penjualan_outlet_dg_jasa['jumlah_dengan_jasa'] ?>, <?= $penjualan_outlet_dg_jasa['jumlah_tanpa_jasa'] ?>],
+			labels: ['Dengan Jasa', 'Tanpa Jasa'], // Tambahkan label-label di sini
+			colors: ['#1ab7ea', '#0084ff'], // Atur warna-warna di sini
+			responsive: [{
+				breakpoint: 480,
+				options: {
+					chart: {
+						width: 200
+					},
+					legend: {
+						position: 'bottom'
+					}
+				}
+			}]
+		}
+		var donut = new ApexCharts(document.querySelector("#donut-chart"), donutChart);
+		donut.render();
+	}
+</script>

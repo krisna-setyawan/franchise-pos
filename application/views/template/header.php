@@ -37,6 +37,8 @@
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<link rel="stylesheet" href="<?= base_url() ?>assets/template/assets/css/style-datepicker.css">
 
+	<script src="<?= base_url() ?>assets/template/assets/plugins/apexchart/apexcharts.min.js"></script>
+
 </head>
 
 
