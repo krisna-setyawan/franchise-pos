@@ -52,7 +52,7 @@
 								<tr>
 									<td><?= $dt->kode ?></td>
 									<td>
-										<a href="javascript:void(0);"><?= $dt->nama ?></a>
+										<a onclick="detail('<?= base_url() ?>customer/show/<?= $dt->id ?>', 'Detail Customer')" href="javascript:void(0);"><?= $dt->nama ?></a>
 									</td>
 									<td><?= $dt->telp ?> </td>
 									<td><?= $dt->alamat ?>, <?= $dt->kelurahan ?>, <?= $dt->kecamatan ?>, <?= $dt->kota ?>, <?= $dt->provinsi ?></td>

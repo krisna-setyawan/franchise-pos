@@ -166,6 +166,39 @@ class Customer extends CI_Controller
 
 
 
+	public function show($id)
+	{
+		$q_most_produk = "SELECT pop.id_produk, SUM(pop.qty) AS total_qty, p.nama FROM penjualan_outlet_produk pop
+						INNER JOIN penjualan_outlet po ON pop.id_penjualan_outlet = po.id
+						INNER JOIN produk p ON pop.id_produk = p.id
+						INNER JOIN customer c ON po.id_customer = c.id
+						WHERE c.id = '$id' GROUP BY pop.id_produk ORDER BY total_qty DESC;";
+		$q_most_jasa = "SELECT pop.id_penjualan_outlet, pop.id_jasa, COUNT(pop.id_jasa) AS jumlah_jasa, p.nama FROM penjualan_outlet_jasa pop
+						INNER JOIN penjualan_outlet po ON pop.id_penjualan_outlet = po.id
+						INNER JOIN jasa p ON pop.id_jasa = p.id
+						INNER JOIN customer c ON po.id_customer = c.id
+						WHERE c.id = '$id' GROUP BY pop.id_jasa ORDER BY jumlah_jasa DESC;";
+		$q_riwayat = "SELECT po.tanggal AS tanggal,COUNT(pop.id_produk) AS jumlah_produk, COUNT(poj.id) AS jumlah_jasa, po.grand_total, po.nomor, c.nama AS cabang FROM penjualan_outlet po
+						LEFT JOIN penjualan_outlet_produk pop ON po.id = pop.id_penjualan_outlet
+						LEFT JOIN penjualan_outlet_jasa poj ON po.id = poj.id_penjualan_outlet
+						LEFT JOIN cabang c ON po.id_cabang = c.id
+						WHERE po.id_customer = '$id' GROUP BY po.id ORDER BY po.tanggal DESC;";
+
+		$data_view = [
+			'most_produk' => $this->db->query($q_most_produk)->result(),
+			'most_jasa' => $this->db->query($q_most_jasa)->result(),
+			'riwayat' => $this->db->query($q_riwayat)->result(),
+		];
+
+		$data = [
+			'detail' => $this->load->view('customer/show', $data_view, TRUE),
+		];
+
+		echo json_encode($data);
+	}
+
+
+
 
 
 

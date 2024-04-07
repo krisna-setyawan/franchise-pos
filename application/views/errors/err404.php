@@ -22,7 +22,7 @@
 
 		.four_zero_four_bg {
 
-			background-image: url('<?= base_url() ?>assets/logo/error404.png');
+			background-image: url('<?= base_url() ?>assets/image/error404new.png');
 			background-size: auto;
 			background-repeat: no-repeat;
 			height: 500px;
