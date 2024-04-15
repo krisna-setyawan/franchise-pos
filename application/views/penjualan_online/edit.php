@@ -10,25 +10,19 @@
 			<div class="card-body">
 				<form autocomplete="off" class="row needs-validation" novalidate action="<?= base_url() ?>penjualan_online/update" method="post" onsubmit="return validateForm()">
 					<input type="hidden" name="id_penjualan" value="<?= $penjualan['id'] ?>">
-					<div class="col-lg-4 col-sm-6 col-12">
+					<div class="col-lg-3 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Nomor</label>
 							<input readonly class="form-control bg-white" id="nomor" name="nomor" type="text" value="<?= $penjualan['nomor'] ?>">
 						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6 col-12">
+					<div class="col-lg-3 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Tanggal</label>
 							<input class="form-control" required id="tanggal" name="tanggal" type="text" value="<?= $penjualan['tanggal'] ?>" onchange="ganti_tanggal(this)">
 						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6 col-12">
-						<div class="form-group">
-							<label>Catatan</label>
-							<input class="form-control" id="catatan" name="catatan" type="text" value="<?= $penjualan['catatan'] ?>">
-						</div>
-					</div>
-					<div class="col-lg-4 col-sm-6 col-12">
+					<div class="col-lg-3 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Marketplace</label>
 							<select class="select form-control" required id="marketplace" name="marketplace">
@@ -37,20 +31,46 @@
 								<option <?= $penjualan['marketplace'] == 'Lazada' ? 'selected' : '' ?> value="Lazada">Lazada</option>
 								<option <?= $penjualan['marketplace'] == 'Bukalapak' ? 'selected' : '' ?> value="Bukalapak">Bukalapak</option>
 								<option <?= $penjualan['marketplace'] == 'Blibli' ? 'selected' : '' ?> value="Blibli">Blibli</option>
+								<option <?= $penjualan['marketplace'] == 'Whatsapp' ? 'selected' : '' ?> value="Whatsapp">Whatsapp</option>
 								<option <?= $penjualan['marketplace'] == 'Marketplace' ? 'selected' : '' ?> value="Marketplace Lain">Marketplace Lain</option>
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6 col-12">
+					<div class="col-lg-3 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Invoice Marketplace</label>
 							<input class="form-control" id="no_penjualan_mp" name="no_penjualan_mp" type="text" value="<?= $penjualan['no_penjualan_mp'] ?>">
 						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6 col-12">
+					<div class="col-lg-3 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Customer</label>
-							<input required class="form-control" id="customer" name="customer" type="text" value="<?= $penjualan['customer'] ?>">
+							<input id="id_customer" name="id_customer" type="hidden" value="<?= $penjualan['id_customer'] ?>">
+							<input required readonly class="form-control bg-white" id="customer" name="customer" type="text" value="<?= $penjualan['customer'] ?>" onclick="select_customer()">
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Platform Charge</label>
+							<input class="form-control" id="pajak_platform" name="pajak_platform" type="number" required value="<?= $penjualan['pajak_platform'] ?>">
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Ekspedisi</label>
+							<input class="form-control" id="ekspedisi" name="ekspedisi" type="text" required value="<?= $penjualan['ekspedisi'] ?>">
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Tanggal Pengiriman</label>
+							<input class="form-control" id="tgl_kirim" name="tgl_kirim" type="text" required value="<?= $penjualan['tgl_kirim'] ?>">
+						</div>
+					</div>
+					<div class="col-lg-10 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Catatan</label>
+							<input class="form-control" id="catatan" name="catatan" type="text" value="<?= $penjualan['catatan'] ?>">
 						</div>
 					</div>
 
@@ -65,7 +85,8 @@
 										<th width="60%">Produk</th>
 										<th>Qty</th>
 										<th>Satuan</th>
-										<th>Total</th>
+										<th>Diskon</th>
+										<th width="12%">Total</th>
 										<th width="3%"></th>
 									</tr>
 								</thead>
@@ -83,6 +104,9 @@
 										</td>
 										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="satuan[]" id="satuan_0" value="0" readonly="">
+										</td>
+										<td>
+											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="diskon_item[]" id="diskon_item_0" onkeyup="Calc(this);" value="0">
 										</td>
 										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="total_list[]" id="total_list_0" value="0" readonly="">
@@ -113,6 +137,9 @@
 												<input autocomplete="off" class="form-control text-end bg-white" type="text" name="satuan[]" id="satuan_<?= $no_baris ?>" value="<?= number_format($list->satuan, 0, ',', '.') ?>" readonly="">
 											</td>
 											<td>
+												<input autocomplete="off" class="form-control text-end bg-white" type="text" name="diskon_item[]" id="diskon_item_<?= $no_baris ?>" onkeyup="Calc(this);" value="<?= number_format($list->diskon, 0, ',', '.') ?>">
+											</td>
+											<td>
 												<input autocomplete="off" class="form-control text-end bg-white" type="text" name="total_list[]" id="total_list_<?= $no_baris ?>" value="<?= number_format($list->total, 0, ',', '.') ?>" readonly="">
 											</td>
 											<td>
@@ -123,21 +150,21 @@
 								</tbody>
 								<tbody>
 									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Total</b></td>
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Total</b></td>
 										<td colspan="1">
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="total" id="total" value="<?= number_format($penjualan['total_hg_produk'], 0, ',', '.') ?>" readonly="">
 										</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Diskon</b></td>
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Diskon</b></td>
 										<td colspan="1">
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="diskon" id="diskon" required value="<?= number_format($penjualan['diskon'], 0, ',', '.') ?>" onkeyup="GetTotal()">
 										</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Grand Total</b></td>
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Grand Total</b></td>
 										<td colspan="1">
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="grand_total" id="grand_total" readonly value="<?= number_format($penjualan['grand_total'], 0, ',', '.') ?>">
 										</td>
@@ -186,6 +213,12 @@
 		$('#diskon').mask('000.000.000', {
 			reverse: true
 		});;
+		$('#pajak_platform').mask('000.000.000', {
+			reverse: true
+		});;
+		$("input[name='diskon_item[]']").mask('000.000.000', {
+			reverse: true
+		});
 
 		$(document).keypress(function(event) {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -221,6 +254,11 @@
 		$(v).find("input[name='nama_produk[]']").attr('id', 'nama_produk_' + rowCounter);
 		$(v).find("span").attr('id', 'info_produk_' + rowCounter);
 		$(v).find("input[name='satuan[]']").attr('id', 'satuan_' + rowCounter);
+		$(v).find("input[name='diskon_item[]']").attr('id', 'diskon_item_' + rowCounter);
+		$(v).find("input[name='diskon_item[]']").val('0');
+		$(v).find("input[name='diskon_item[]']").mask('000.000.000', {
+			reverse: true
+		});
 		$(v).find("input[name='total_list[]']").attr('id', 'total_list_' + rowCounter);
 		$(v).find("input[name='qty[]']").attr('id', 'qty_' + rowCounter);
 
@@ -244,13 +282,16 @@
 
 
 	function Calc(v) {
-		var index = $(v).closest('tr').index(); // Menggunakan closest untuk mendapatkan elemen terdekat (tr) dan mengambil indexnya.
+		var id_input = v.id;
+		var index = id_input.match(/\d+/)[0];
 
-		var qty = $("input[name='qty[]']").eq(index).val();
-		var satuan = $("input[name='satuan[]']").eq(index).val();
+		var qty = $("#qty_" + index).val();
+		var satuan = $("#satuan_" + index).val();
+		var diskon = $("#diskon_item_" + index).val();
 
-		var total = formatToNumber(qty) * formatToNumber(satuan);
-		document.getElementsByName("total_list[]")[index].value = formatToCurrency(total); // Menambahkan kurung siku dan mengganti "totla" menjadi "total_list[]"
+		var total = (formatToNumber(satuan) - formatToNumber(diskon)) * formatToNumber(qty);
+
+		$("#total_list_" + index).val(formatToCurrency(total));
 
 		GetTotal();
 	}
@@ -278,18 +319,18 @@
 
 
 	function validateForm() {
-		// Mendapatkan nilai grand_total
 		var grandTotalValue = $('#grand_total').val();
+		var id_customer = $('#id_customer').val();
 
-		// Jika grand_total kosong
+		if (id_customer.trim() === '') {
+			alert_toastr('error', 'Customer belum dipilih.');
+			return false;
+		}
 		if (grandTotalValue.trim() === '') {
-			// Menampilkan alert
 			alert_toastr('error', 'Belum ada list produk yang dijual.');
-			// Mengembalikan false agar formulir tidak disubmit
 			return false;
 		}
 
-		// Jika grand_total tidak kosong
 		return true;
 	}
 
@@ -333,5 +374,26 @@
 		$('#info_produk_' + row).html('Stok : <b>' + stok + '</b>');
 		$('#mymodal').modal('hide');
 		$('#qty_' + row).trigger("focus")
+	}
+
+
+
+
+	function select_customer() {
+		$.ajax({
+			type: "GET",
+			url: "<?= base_url() ?>customer/selectCustomerForModal",
+			dataType: 'JSON',
+			success: function(response) {
+				$('#modal-body').html(response.table_customer);
+				$('#mymodal').modal('show');
+			}
+		})
+	}
+
+	function pilih_customer(id_customer, kode, nama_customer, cabang_register) {
+		$('#id_customer').val(id_customer)
+		$('#customer').val(nama_customer)
+		$('#mymodal').modal('hide');
 	}
 </script>

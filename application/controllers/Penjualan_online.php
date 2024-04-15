@@ -95,11 +95,14 @@ class Penjualan_online extends CI_Controller
 			'no_penjualan_mp' => $this->input->post('no_penjualan_mp'),
 			'tanggal' => $this->input->post('tanggal'),
 			'marketplace' => $this->input->post('marketplace'),
-			'customer' => $this->input->post('customer'),
-			'catatan' => $this->input->post('catatan'),
+			'id_customer' => $this->input->post('id_customer'),
 			'total_hg_produk' => str_replace(".", "", $this->input->post('total')),
 			'diskon' => str_replace(".", "", $this->input->post('diskon')),
 			'grand_total' => str_replace(".", "", $this->input->post('grand_total')),
+			'pajak_platform' => str_replace(".", "", $this->input->post('pajak_platform')),
+			'ekspedisi' => $this->input->post('ekspedisi'),
+			'tgl_kirim' => $this->input->post('tgl_kirim'),
+			'catatan' => $this->input->post('catatan'),
 		);
 		$this->db->insert('penjualan_online', $data);
 		$id_penjualan_online = $this->db->insert_id();
@@ -108,6 +111,7 @@ class Penjualan_online extends CI_Controller
 		$produk = $this->input->post('id_produk');
 		$qty = $this->input->post('qty');
 		$satuan = $this->input->post('satuan');
+		$diskon_item = $this->input->post('diskon_item');
 		$total_list = $this->input->post('total_list');
 
 		if (!empty($produk) && is_array($produk) && !empty($qty) && is_array($qty)) {
@@ -119,6 +123,7 @@ class Penjualan_online extends CI_Controller
 					'id_produk' => $value,
 					'qty' => $qty[$index],
 					'satuan' => str_replace(".", "", $satuan[$index]),
+					'diskon' => str_replace(".", "", $diskon_item[$index]),
 					'total' => str_replace(".", "", $total_list[$index])
 				];
 
@@ -161,7 +166,10 @@ class Penjualan_online extends CI_Controller
 			'cabang' => $this->db->get_where('cabang', ['id' => $this->session->userdata('id_cabang')])->row_array(),
 		];
 
-		$penjualan_online = $this->db->get_where('penjualan_online', ['nomor' => $nomor])->row_array();
+		$q_penjualan_online = "SELECT penjualan_online.*, customer.nama AS customer FROM penjualan_online
+							JOIN customer ON penjualan_online.id_customer = customer.id
+							WHERE penjualan_online.nomor = '$nomor'";
+		$penjualan_online = $this->db->query($q_penjualan_online)->row_array();
 		$id_penjualan_online = $penjualan_online['id'];
 		$q_penjualan_online_produk = "SELECT penjualan_online_produk.*, produk.nama AS nama_produk, produk.stok AS stok FROM penjualan_online_produk JOIN produk ON penjualan_online_produk.id_produk = produk.id WHERE penjualan_online_produk.id_penjualan_online = $id_penjualan_online";
 		$penjualan_online_produk = $this->db->query($q_penjualan_online_produk)->result();
@@ -186,11 +194,14 @@ class Penjualan_online extends CI_Controller
 			'no_penjualan_mp' => $this->input->post('no_penjualan_mp'),
 			'tanggal' => $this->input->post('tanggal'),
 			'marketplace' => $this->input->post('marketplace'),
-			'catatan' => $this->input->post('catatan'),
-			'customer' => $this->input->post('customer'),
+			'id_customer' => $this->input->post('id_customer'),
 			'total_hg_produk' => str_replace(".", "", $this->input->post('total')),
 			'diskon' => str_replace(".", "", $this->input->post('diskon')),
 			'grand_total' => str_replace(".", "", $this->input->post('grand_total')),
+			'pajak_platform' => str_replace(".", "", $this->input->post('pajak_platform')),
+			'ekspedisi' => $this->input->post('ekspedisi'),
+			'tgl_kirim' => $this->input->post('tgl_kirim'),
+			'catatan' => $this->input->post('catatan'),
 		);
 		$id_penjualan = $this->input->post('id_penjualan');
 		$this->db->where('id', $id_penjualan);
@@ -214,6 +225,7 @@ class Penjualan_online extends CI_Controller
 		$produk = $this->input->post('id_produk');
 		$qty = $this->input->post('qty');
 		$satuan = $this->input->post('satuan');
+		$diskon_item = $this->input->post('diskon_item');
 		$total_list = $this->input->post('total_list');
 
 		if (!empty($produk) && is_array($produk) && !empty($qty) && is_array($qty)) {
@@ -225,6 +237,7 @@ class Penjualan_online extends CI_Controller
 					'id_produk' => $value,
 					'qty' => $qty[$index],
 					'satuan' => str_replace(".", "", $satuan[$index]),
+					'diskon' => str_replace(".", "", $diskon_item[$index]),
 					'total' => str_replace(".", "", $total_list[$index])
 				];
 
@@ -284,7 +297,10 @@ class Penjualan_online extends CI_Controller
 
 	public function show($nomor)
 	{
-		$penjualan_online = $this->db->get_where('penjualan_online', ['nomor' => $nomor])->row_array();
+		$q_penjualan_online = "SELECT penjualan_online.*, customer.nama AS customer FROM penjualan_online
+							JOIN customer ON penjualan_online.id_customer = customer.id
+							WHERE penjualan_online.nomor = '$nomor'";
+		$penjualan_online = $this->db->query($q_penjualan_online)->row_array();
 		$id_penjualan_online = $penjualan_online['id'];
 		$q_penjualan_online_produk = "SELECT penjualan_online_produk.*, produk.nama AS nama_produk, produk.stok AS stok FROM penjualan_online_produk JOIN produk ON penjualan_online_produk.id_produk = produk.id WHERE penjualan_online_produk.id_penjualan_online = $id_penjualan_online";
 		$penjualan_online_produk = $this->db->query($q_penjualan_online_produk)->result();

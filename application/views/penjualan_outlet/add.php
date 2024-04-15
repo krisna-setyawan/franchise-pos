@@ -60,7 +60,7 @@
 					<div class="mb-5 mt-4">
 
 						<button type="button" class="btn btn-sm btn-submit p-1 mb-3" onclick="BtnAdd()">Tambah Produk</button>
-						<button type="button" class="btn btn-sm btn-submit p-1 mb-3" onclick="BtnAddJasa()">Tambah Jasa</button>
+						<button type="button" class="btn btn-sm btn-submit p-1 mb-3" onclick="BtnAddJasa()">Tambah Treatment</button>
 
 						<div class="table-responsive">
 							<table class="table" style="background-color: #FAFBFE;">
@@ -69,7 +69,8 @@
 										<th width="60%">Produk</th>
 										<th>Qty</th>
 										<th>Satuan</th>
-										<th>Total</th>
+										<th>Diskon</th>
+										<th width="12%">Total</th>
 										<th width="3%"></th>
 									</tr>
 								</thead>
@@ -89,6 +90,9 @@
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="satuan[]" id="satuan_0" value="0" readonly="">
 										</td>
 										<td>
+											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="diskon_item[]" id="diskon_item_0" onkeyup="Calc(this);" value="0">
+										</td>
+										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="total_list[]" id="total_list_0" value="0" readonly="">
 										</td>
 										<td>
@@ -96,7 +100,7 @@
 										</td>
 									</tr>
 									<tr id="TRow_1" class="d-none">
-										<td colspan="3">
+										<td colspan="4">
 											<input autocomplete="off" class="form-control" type="hidden" name="id_jasa[]" id="id_jasa_0">
 											<input readonly autocomplete="off" style="background: #fff;" class="form-control" type="text" name="nama_jasa[]" id="nama_jasa_0" onclick="select_jasa(this)">
 										</td>
@@ -110,51 +114,62 @@
 								</tbody>
 								<tbody>
 									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Total Produk</b></td>
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Total Produk</b></td>
 										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="total_hg_produk" id="total_hg_produk" value="0" readonly="">
 										</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Total Jasa</b></td>
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Total Treatment</b></td>
 										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="total_hg_jasa" id="total_hg_jasa" value="0" readonly="">
 										</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Produk & Jasa</b></td>
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Produk & Treatment</b></td>
 										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="total_jasa_produk" id="total_jasa_produk" value="0" readonly="">
 										</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Diskon</b></td>
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Diskon</b></td>
 										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="diskon" id="diskon" required value="0" onkeyup="GetTotal()">
 										</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Grand Total</b></td>
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Grand Total</b></td>
 										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="grand_total" id="grand_total" readonly>
 										</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Bayar</b></td>
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Jenis Bayar</b></td>
 										<td>
-											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="bayar" id="bayar" required onkeyup="hitung_kembalian()">
+											<select class="select form-control" required id="jenis_bayar" name="jenis_bayar" onchange="ganti_jenis_bayar(this)">
+												<option value="Cash">Cash</option>
+												<option value="Transfer">Transfer</option>
+												<option value="Kartu Kredit">Kartu Kredit</option>
+											</select>
 										</td>
 										<td></td>
 									</tr>
-									<tr>
-										<td colspan="3" class="fs-5 text-dark text-end"><b>Kembalian</b></td>
+									<tr id="tr-bayar">
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Bayar</b></td>
 										<td>
-											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="kembalian" id="kembalian" readonly>
+											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="bayar" id="bayar" required onkeyup="hitung_kembalian()" value="0">
+										</td>
+										<td></td>
+									</tr>
+									<tr id="tr-kembalian">
+										<td colspan="4" class="fs-5 text-dark text-end"><b>Kembalian</b></td>
+										<td>
+											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="kembalian" id="kembalian" readonly value="0">
 										</td>
 										<td></td>
 									</tr>
@@ -218,6 +233,16 @@
 		})
 	}
 
+	function ganti_jenis_bayar(jenis) {
+		if (jenis.value == 'Cash') {
+			$('#tr-bayar').attr('hidden', false);
+			$('#tr-kembalian').attr('hidden', false);
+		} else {
+			$('#tr-bayar').attr('hidden', true);
+			$('#tr-kembalian').attr('hidden', true);
+		}
+	}
+
 	function hitung_kembalian() {
 		var grand_total = $('#grand_total').val();
 		var bayar = $('#bayar').val();
@@ -239,6 +264,11 @@
 		$(v).find("span").attr('id', 'info_produk_' + rowCounter);
 		$(v).find("input[name='satuan[]']").attr('id', 'satuan_' + rowCounter);
 		$(v).find("input[name='satuan[]']").val('0');
+		$(v).find("input[name='diskon_item[]']").attr('id', 'diskon_item_' + rowCounter);
+		$(v).find("input[name='diskon_item[]']").val('0');
+		$(v).find("input[name='diskon_item[]']").mask('000.000.000', {
+			reverse: true
+		});
 		$(v).find("input[name='total_list[]']").attr('id', 'total_list_' + rowCounter);
 		$(v).find("input[name='total_list[]']").val('0');
 		$(v).find("input[name='qty[]']").attr('id', 'qty_' + rowCounter);
@@ -282,9 +312,9 @@
 
 		var qty = $("#qty_" + index).val();
 		var satuan = $("#satuan_" + index).val();
+		var diskon = $("#diskon_item_" + index).val();
 
-		var total = formatToNumber(qty) * formatToNumber(satuan);
-		console.log(total)
+		var total = (formatToNumber(satuan) - formatToNumber(diskon)) * formatToNumber(qty);
 
 		$("#total_list_" + index).val(formatToCurrency(total));
 

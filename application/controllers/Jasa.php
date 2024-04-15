@@ -20,8 +20,12 @@ class Jasa extends CI_Controller
 			'cabang' => $this->db->get_where('cabang', ['id' => $this->session->userdata('id_cabang')])->row_array(),
 		];
 
+		$id_cabang = $this->session->userdata('id_cabang');
+		$q_jasa = "SELECT jasa.*, jasa_jenis.nama AS jenis FROM jasa 
+					JOIN jasa_jenis ON jasa.id_jenis = jasa_jenis.id 
+					WHERE jasa.id_cabang = $id_cabang";
 		$data = [
-			'jasa' => $this->db->get_where('jasa', ['id_cabang' => $this->session->userdata('id_cabang')])->result()
+			'jasa' => $this->db->query($q_jasa)->result()
 		];
 
 		$this->load->view('template/header');
@@ -45,6 +49,7 @@ class Jasa extends CI_Controller
 
 		$data = [
 			'kode' => getKodeJasa(),
+			'jasa_jenis' => $this->db->get('jasa_jenis')->result()
 		];
 
 		$this->load->view('template/header');
@@ -58,6 +63,7 @@ class Jasa extends CI_Controller
 	{
 		$data = array(
 			'id_cabang' => $this->session->userdata('id_cabang'),
+			'id_jenis' => $this->input->post('id_jenis'),
 			'kode' => $this->input->post('kode'),
 			'nama' => $this->input->post('nama'),
 			'harga' => str_replace(".", "", $this->input->post('harga')),
@@ -87,6 +93,7 @@ class Jasa extends CI_Controller
 
 		$data = [
 			'jasa' => $this->db->get_where('jasa', ['kode' => $kode])->row_array(),
+			'jasa_jenis' => $this->db->get('jasa_jenis')->result()
 		];
 
 		$this->load->view('template/header');
@@ -101,6 +108,7 @@ class Jasa extends CI_Controller
 		$kode =  $this->input->post('kode');
 
 		$data = array(
+			'id_jenis' => $this->input->post('id_jenis'),
 			'nama' => $this->input->post('nama'),
 			'harga' => str_replace(".", "", $this->input->post('harga')),
 			'keterangan' => $this->input->post('keterangan'),
@@ -150,8 +158,14 @@ class Jasa extends CI_Controller
 	public function selectJasaForModal()
 	{
 		$row = $this->input->get('row');
+
+		$id_cabang = $this->session->userdata('id_cabang');
+		$q_jasa = "SELECT jasa.*, jasa_jenis.nama AS jenis FROM jasa 
+					JOIN jasa_jenis ON jasa.id_jenis = jasa_jenis.id 
+					WHERE jasa.id_cabang = $id_cabang";
+
 		$data_view = [
-			'jasa' => $this->db->get_where('jasa', ['id_cabang' => $this->session->userdata('id_cabang')])->result(),
+			'jasa' => $this->db->query($q_jasa)->result(),
 			'row' => $row
 		];
 

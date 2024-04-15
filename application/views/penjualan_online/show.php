@@ -18,8 +18,20 @@
 
 	<div class="row mt-1">
 		<div class="col-12">
-			<div class="text-muted">Nomor &nbsp; &nbsp; &nbsp; <strong><?= $penjualan['nomor'] ?></strong> </div>
-			<div class="text-muted">Tanggal &nbsp; &nbsp; <strong><?= $penjualan['tanggal'] ?></strong> </div>
+			<table>
+				<tr>
+					<td class="text-muted fw-bold">Nomor&nbsp; &nbsp; &nbsp;</td>
+					<td class="text-muted"><?= $penjualan['nomor'] ?></td>
+				</tr>
+				<tr>
+					<td class="text-muted fw-bold">Tanggal&nbsp; &nbsp; &nbsp;</td>
+					<td class="text-muted"><?= $penjualan['tanggal'] ?></td>
+				</tr>
+				<tr>
+					<td class="text-muted fw-bold">Pengiriman&nbsp; &nbsp; &nbsp;</td>
+					<td class="text-muted"><?= $penjualan['ekspedisi'] ?> - <?= $penjualan['tgl_kirim'] ?></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 
@@ -30,6 +42,7 @@
 				<th width="66%">Produk</th>
 				<th class="text-center" width="8%">Qty</th>
 				<th class="text-end" width="13%">Satuan</th>
+				<th class="text-end" width="13%">Diskon</th>
 				<th class="text-end" width="13%">Total</th>
 			</tr>
 		</thead>
@@ -39,19 +52,20 @@
 					<td><?= $ls->nama_produk ?></td>
 					<td class="text-center"><?= $ls->qty ?></td>
 					<td class="text-end">Rp. <?= number_format($ls->satuan, 0, ',', '.') ?></td>
+					<td class="text-end">Rp. <?= number_format($ls->diskon, 0, ',', '.') ?></td>
 					<td class="text-end">Rp. <?= number_format($ls->total, 0, ',', '.') ?></td>
 				</tr>
 			<?php } ?>
 			<tr>
-				<td colspan="3" class="text-end">Total</td>
+				<td colspan="4" class="text-end">Total</td>
 				<td class="text-end">Rp. <?= number_format($penjualan['total_hg_produk'], 0, ',', '.') ?></td>
 			</tr>
 			<tr>
-				<td colspan="3" class="text-end">Diskon</td>
+				<td colspan="4" class="text-end">Diskon</td>
 				<td class="text-end">Rp. <?= number_format($penjualan['diskon'], 0, ',', '.') ?></td>
 			</tr>
 			<tr>
-				<td colspan="3" class="text-end">Grand Total</td>
+				<td colspan="4" class="text-end">Grand Total</td>
 				<td class="text-end">Rp. <?= number_format($penjualan['grand_total'], 0, ',', '.') ?></td>
 			</tr>
 		</tbody>

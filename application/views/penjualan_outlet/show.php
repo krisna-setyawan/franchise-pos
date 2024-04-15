@@ -32,6 +32,7 @@
 				<th width="66%">Produk</th>
 				<th class="text-center" width="8%">Qty</th>
 				<th class="text-end" width="13%">Satuan</th>
+				<th class="text-end" width="13%">Diskon</th>
 				<th class="text-end" width="13%">Total</th>
 			</tr>
 		</thead>
@@ -41,35 +42,42 @@
 					<td><?= $ls->nama_produk ?></td>
 					<td class="text-center"><?= $ls->qty ?></td>
 					<td class="text-end">Rp. <?= number_format($ls->satuan, 0, ',', '.') ?></td>
+					<td class="text-end">Rp. <?= number_format($ls->diskon, 0, ',', '.') ?></td>
 					<td class="text-end">Rp. <?= number_format($ls->total, 0, ',', '.') ?></td>
 				</tr>
 			<?php } ?>
 			<?php foreach ($penjualan_jasa as $ls) { ?>
 				<tr>
-					<td colspan="3"><?= $ls->nama_jasa ?></td>
+					<td colspan="4"><?= $ls->nama_jasa ?></td>
 					<td class="text-end">Rp. <?= number_format($ls->harga, 0, ',', '.') ?></td>
 				</tr>
 			<?php } ?>
 			<tr>
-				<td colspan="3" class="text-end">Total</td>
+				<td colspan="4" class="text-end">Total</td>
 				<td class="text-end">Rp. <?= number_format($penjualan['total_hg_produk'] + $penjualan['total_hg_jasa'], 0, ',', '.') ?></td>
 			</tr>
 			<tr>
-				<td colspan="3" class="text-end">Diskon</td>
+				<td colspan="4" class="text-end">Diskon</td>
 				<td class="text-end">Rp. <?= number_format($penjualan['diskon'], 0, ',', '.') ?></td>
 			</tr>
 			<tr>
-				<td colspan="3" class="text-end">Grand Total</td>
+				<td colspan="4" class="text-end">Grand Total</td>
 				<td class="text-end">Rp. <?= number_format($penjualan['grand_total'], 0, ',', '.') ?></td>
 			</tr>
 			<tr>
-				<td colspan="3" class="text-end">Bayar</td>
-				<td class="text-end">Rp. <?= number_format($penjualan['bayar'], 0, ',', '.') ?></td>
+				<td colspan="4" class="text-end">Jenis Bayar</td>
+				<td class="text-end"><?= $penjualan['jenis_bayar'] ?></td>
 			</tr>
-			<tr>
-				<td colspan="3" class="text-end">Kembalian</td>
-				<td class="text-end">Rp. <?= number_format($penjualan['kembalian'], 0, ',', '.') ?></td>
-			</tr>
+			<?php if ($penjualan['jenis_bayar'] == 'Cash') { ?>
+				<tr>
+					<td colspan="4" class="text-end">Bayar</td>
+					<td class="text-end">Rp. <?= number_format($penjualan['bayar'], 0, ',', '.') ?></td>
+				</tr>
+				<tr>
+					<td colspan="4" class="text-end">Kembalian</td>
+					<td class="text-end">Rp. <?= number_format($penjualan['kembalian'], 0, ',', '.') ?></td>
+				</tr>
+			<?php } ?>
 		</tbody>
 	</table>
 </div>

@@ -20,8 +20,13 @@ class Produk extends CI_Controller
 			'cabang' => $this->db->get_where('cabang', ['id' => $this->session->userdata('id_cabang')])->row_array(),
 		];
 
+		$id_cabang = $this->session->userdata('id_cabang');
+		$q_produk = "SELECT produk.*, produk_jenis.nama AS jenis, produk_label.nama AS label FROM produk 
+					JOIN produk_jenis ON produk.id_jenis = produk_jenis.id 
+					JOIN produk_label ON produk.id_label = produk_label.id 
+					WHERE produk.id_cabang = $id_cabang";
 		$data = [
-			'produk' => $this->db->get_where('produk', ['id_cabang' => $this->session->userdata('id_cabang')])->result(),
+			'produk' => $this->db->query($q_produk)->result()
 		];
 
 		$this->load->view('template/header');
@@ -45,6 +50,8 @@ class Produk extends CI_Controller
 
 		$data = [
 			'kode' => getKodeProduk(),
+			'produk_jenis' => $this->db->get('produk_jenis')->result(),
+			'produk_label' => $this->db->get('produk_label')->result()
 		];
 
 		$this->load->view('template/header');
@@ -58,6 +65,8 @@ class Produk extends CI_Controller
 	{
 		$data = array(
 			'id_cabang' => $this->session->userdata('id_cabang'),
+			'id_jenis' => $this->input->post('id_jenis'),
+			'id_label' => $this->input->post('id_label'),
 			'kode' => $this->input->post('kode'),
 			'nama' => $this->input->post('nama'),
 			'harga' => str_replace(".", "", $this->input->post('harga')),
@@ -88,6 +97,8 @@ class Produk extends CI_Controller
 
 		$data = [
 			'produk' => $this->db->get_where('produk', ['kode' => $kode])->row_array(),
+			'produk_jenis' => $this->db->get('produk_jenis')->result(),
+			'produk_label' => $this->db->get('produk_label')->result()
 		];
 
 		$this->load->view('template/header');
@@ -102,6 +113,8 @@ class Produk extends CI_Controller
 		$kode =  $this->input->post('kode');
 
 		$data = array(
+			'id_jenis' => $this->input->post('id_jenis'),
+			'id_label' => $this->input->post('id_label'),
 			'nama' => $this->input->post('nama'),
 			'harga' => str_replace(".", "", $this->input->post('harga')),
 			'stok' => $this->input->post('stok'),
@@ -152,8 +165,15 @@ class Produk extends CI_Controller
 	public function selectProdukForModal()
 	{
 		$row = $this->input->get('row');
+
+		$id_cabang = $this->session->userdata('id_cabang');
+		$q_produk = "SELECT produk.*, produk_jenis.nama AS jenis, produk_label.nama AS label FROM produk 
+					JOIN produk_jenis ON produk.id_jenis = produk_jenis.id 
+					JOIN produk_label ON produk.id_label = produk_label.id 
+					WHERE produk.id_cabang = $id_cabang";
+
 		$data_view = [
-			'produk' => $this->db->get_where('produk', ['id_cabang' => $this->session->userdata('id_cabang')])->result(),
+			'produk' => $this->db->query($q_produk)->result(),
 			'row' => $row
 		];
 

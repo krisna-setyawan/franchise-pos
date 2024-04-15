@@ -38,6 +38,26 @@
 					</div>
 					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
+							<label>Jenis</label>
+							<select class="select form-control" required id="id_jenis" name="id_jenis">
+								<?php foreach ($produk_jenis as $dt) : ?>
+									<option value="<?= $dt->id ?>"><?= $dt->nama ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Label</label>
+							<select class="select form-control" required id="id_label" name="id_label">
+								<?php foreach ($produk_label as $dt) : ?>
+									<option value="<?= $dt->id ?>"><?= $dt->nama ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-12">
+						<div class="form-group">
 							<label>Keterangan</label>
 							<input class="form-control" required id="keterangan" name="keterangan" type="text">
 						</div>

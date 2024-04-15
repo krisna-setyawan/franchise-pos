@@ -3,7 +3,10 @@
 		<thead>
 			<tr>
 				<th>Produk</th>
+				<th>Jenis</th>
+				<th>Label</th>
 				<th>Stok</th>
+				<th>Harga</th>
 				<th style="width: 10%;">Aksi</th>
 			</tr>
 		</thead>
@@ -11,7 +14,10 @@
 			<?php foreach ($produk as $dt) : ?>
 				<tr>
 					<td><?= $dt->nama ?></td>
+					<td><?= $dt->jenis ?></td>
+					<td><?= $dt->label ?></td>
 					<td><?= $dt->stok ?></td>
+					<td><?= number_format($dt->harga, 0, ',', '.') ?></td>
 					<td>
 						<button class="btn btn-success btn-sm py-0 px-2" onclick="pilih_produk(<?= $dt->id ?>, '<?= $dt->nama ?>', '<?= $dt->harga ?>', '<?= $dt->stok ?>', <?= $row ?>)">Pilih</button>
 					</td>

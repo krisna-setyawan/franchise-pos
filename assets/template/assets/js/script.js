@@ -193,6 +193,14 @@ $(document).ready(function() {
 		maxDate: "+1y",
 		yearRange: "-1:+1",
 	});
+	$('#tgl_kirim').datepicker({
+		dateFormat: "yy-mm-dd",
+		changeMonth: true,
+		changeYear: true,
+		minDate: "-1y",
+		maxDate: "+1y",
+		yearRange: "-1:+1",
+	});
 	$('#tgl_awal').datepicker({
 		dateFormat: "yy-mm-dd",
 		changeMonth: true,

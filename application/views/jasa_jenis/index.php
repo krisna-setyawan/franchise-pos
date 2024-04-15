@@ -3,10 +3,10 @@
 
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Data Produk</h4>
+				<h4>Data Jenis Treatment</h4>
 			</div>
 			<div class="page-btn">
-				<a href="<?= base_url() ?>produk/add" class="btn btn-added"><img src="<?= base_url() ?>assets/template/assets/img/icons/plus.svg" alt="img">Tambah Produk</a>
+				<a href="<?= base_url() ?>jasa_jenis/add" class="btn btn-added"><img src="<?= base_url() ?>assets/template/assets/img/icons/plus.svg" alt="img">Tambah Jenis Treatment</a>
 			</div>
 		</div>
 
@@ -26,31 +26,19 @@
 					<table class="table datanew">
 						<thead>
 							<tr class="text-center">
-								<th>Kode</th>
 								<th>Nama</th>
-								<th>Harga</th>
-								<th>Stok</th>
-								<th>Jenis</th>
-								<th>Label</th>
 								<th width="10%">Aksi</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($produk as $dt) : ?>
+							<?php foreach ($jasa_jenis as $dt) : ?>
 								<tr>
-									<td><?= $dt->kode ?></td>
-									<td>
-										<a href="javascript:void(0);"><?= $dt->nama ?></a>
-									</td>
-									<td><?= number_format($dt->harga, 0, ',', '.') ?></td>
-									<td><?= $dt->stok ?></td>
-									<td><?= $dt->jenis ?></td>
-									<td><?= $dt->label ?></td>
+									<td><?= $dt->nama ?></td>
 									<td class="text-center">
-										<a class="me-3" href="<?= base_url() ?>produk/edit/<?= $dt->kode ?>">
+										<a class="me-3" href="<?= base_url() ?>jasa_jenis/edit/<?= $dt->id ?>">
 											<img src="<?= base_url() ?>assets/template/assets/img/icons/edit.svg" alt="img">
 										</a>
-										<a class="me-3" href="javascript:void(0);" onclick="confirm_delete('<?= base_url() ?>produk/delete/<?= $dt->id ?>')">
+										<a class="me-3" href="javascript:void(0);" onclick="confirm_delete('<?= base_url() ?>jasa_jenis/delete/<?= $dt->id ?>')">
 											<img src="<?= base_url() ?>assets/template/assets/img/icons/delete.svg" alt="img">
 										</a>
 									</td>

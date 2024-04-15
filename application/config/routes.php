@@ -64,3 +64,6 @@ $route['online/edit/(:any)'] = 'Penjualan_online/edit/$1';
 $route['outlet'] = 'Penjualan_outlet';
 $route['outlet/add'] = 'Penjualan_outlet/add';
 $route['outlet/edit/(:any)'] = 'Penjualan_outlet/edit/$1';
+$route['jenis-produk'] = 'Produk_jenis';
+$route['label-produk'] = 'Produk_label';
+$route['jenis-jasa'] = 'Jasa_jenis';

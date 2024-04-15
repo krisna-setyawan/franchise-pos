@@ -2,7 +2,7 @@
 	<div class="content">
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Tambah Jasa</h4>
+				<h4>Tambah Treatment</h4>
 			</div>
 		</div>
 
@@ -19,6 +19,16 @@
 						<div class="form-group">
 							<label>Nama</label>
 							<input class="form-control" required id="nama" name="nama" type="text">
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Jenis</label>
+							<select class="select form-control" required id="id_jenis" name="id_jenis">
+								<?php foreach ($jasa_jenis as $dt) : ?>
+									<option value="<?= $dt->id ?>"><?= $dt->nama ?></option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 					</div>
 					<div class="col-lg-6 col-sm-6 col-12">

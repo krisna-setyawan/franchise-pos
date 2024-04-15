@@ -3,10 +3,10 @@
 
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Data Jasa</h4>
+				<h4>Data Treatment</h4>
 			</div>
 			<div class="page-btn">
-				<a href="<?= base_url() ?>jasa/add" class="btn btn-added"><img src="<?= base_url() ?>assets/template/assets/img/icons/plus.svg" alt="img">Tambah Jasa</a>
+				<a href="<?= base_url() ?>jasa/add" class="btn btn-added"><img src="<?= base_url() ?>assets/template/assets/img/icons/plus.svg" alt="img">Tambah Treatment</a>
 			</div>
 		</div>
 
@@ -29,6 +29,7 @@
 								<th>Kode</th>
 								<th>Nama</th>
 								<th>Harga</th>
+								<th>Jenis</th>
 								<th>Keterangan</th>
 								<th width="10%">Aksi</th>
 							</tr>
@@ -41,6 +42,7 @@
 										<a href="javascript:void(0);"><?= $dt->nama ?></a>
 									</td>
 									<td><?= number_format($dt->harga, 0, ',', '.') ?></td>
+									<td><?= $dt->jenis ?></td>
 									<td><?= $dt->keterangan ?></td>
 									<td class="text-center">
 										<a class="me-3" href="<?= base_url() ?>jasa/edit/<?= $dt->kode ?>">

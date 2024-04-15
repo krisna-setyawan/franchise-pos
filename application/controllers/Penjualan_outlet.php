@@ -102,6 +102,7 @@ class Penjualan_outlet extends CI_Controller
 			'grand_total' => str_replace(".", "", $this->input->post('grand_total')),
 			'bayar' => str_replace(".", "", $this->input->post('bayar')),
 			'kembalian' => str_replace(".", "", $this->input->post('kembalian')),
+			'jenis_bayar' => $this->input->post('jenis_bayar'),
 			'catatan' => $this->input->post('catatan'),
 		);
 		$this->db->insert('penjualan_outlet', $data);
@@ -111,6 +112,7 @@ class Penjualan_outlet extends CI_Controller
 		$produk = $this->input->post('id_produk');
 		$qty = $this->input->post('qty');
 		$satuan = $this->input->post('satuan');
+		$diskon_item = $this->input->post('diskon_item');
 		$total_list = $this->input->post('total_list');
 
 		if (!empty($produk) && is_array($produk) && !empty($qty) && is_array($qty)) {
@@ -122,6 +124,7 @@ class Penjualan_outlet extends CI_Controller
 					'id_produk' => $value,
 					'qty' => $qty[$index],
 					'satuan' => str_replace(".", "", $satuan[$index]),
+					'diskon' => str_replace(".", "", $diskon_item[$index]),
 					'total' => str_replace(".", "", $total_list[$index])
 				];
 
@@ -223,6 +226,7 @@ class Penjualan_outlet extends CI_Controller
 			'grand_total' => str_replace(".", "", $this->input->post('grand_total')),
 			'bayar' => str_replace(".", "", $this->input->post('bayar')),
 			'kembalian' => str_replace(".", "", $this->input->post('kembalian')),
+			'jenis_bayar' => $this->input->post('jenis_bayar'),
 			'catatan' => $this->input->post('catatan'),
 		);
 		$id_penjualan = $this->input->post('id_penjualan');

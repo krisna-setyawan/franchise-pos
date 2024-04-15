@@ -65,7 +65,8 @@
 										<th width="60%">Produk</th>
 										<th>Qty</th>
 										<th>Satuan</th>
-										<th>Total</th>
+										<th>Diskon</th>
+										<th width="12%">Total</th>
 										<th width="3%"></th>
 									</tr>
 								</thead>
@@ -83,6 +84,9 @@
 										</td>
 										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="satuan[]" id="satuan_0" value="0" readonly="">
+										</td>
+										<td>
+											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="diskon[]" id="diskon_0" onkeyup="Calc(this);" value="0">
 										</td>
 										<td>
 											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="total_list[]" id="total_list_0" value="0" readonly="">
@@ -111,6 +115,9 @@
 											</td>
 											<td>
 												<input autocomplete="off" class="form-control text-end bg-white" type="text" name="satuan[]" id="satuan_<?= $no_baris ?>" value="<?= number_format($list->satuan, 0, ',', '.') ?>" readonly="">
+											</td>
+											<td>
+												<input autocomplete="off" class="form-control text-end bg-white" type="text" name="diskon[]" id="diskon_<?= $no_baris ?>" onkeyup="Calc(this);" value="<?= number_format($list->diskon, 0, ',', '.') ?>">
 											</td>
 											<td>
 												<input autocomplete="off" class="form-control text-end bg-white" type="text" name="total_list[]" id="total_list_<?= $no_baris ?>" value="<?= number_format($list->total, 0, ',', '.') ?>" readonly="">

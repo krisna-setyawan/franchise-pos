@@ -39,7 +39,7 @@
 									<th width="12%">Nomor</th>
 									<th width="12%">Customer</th>
 									<th width="12%">Total Produk</th>
-									<th width="12%">Total Jasa</th>
+									<th width="12%">Total Treatment</th>
 									<th width="12%">Diskon</th>
 									<th width="12%">Grand Total</th>
 									<th width="6%">Aksi</th>

@@ -2,7 +2,7 @@
 	<div class="content">
 		<div class="page-header">
 			<div class="page-title">
-				<h4>Edit Jasa</h4>
+				<h4>Edit Treatment</h4>
 			</div>
 		</div>
 
@@ -25,6 +25,16 @@
 								<span class="input-group-text" style="font-size: 14px;">Rp</span>
 								<input class="form-control input-masked" required id="harga" name="harga" type="text" value="<?= number_format($jasa['harga'], 0, ',', '.') ?>">
 							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Jenis</label>
+							<select class="select form-control" required id="id_jenis" name="id_jenis">
+								<?php foreach ($jasa_jenis as $dt) : ?>
+									<option <?= $jasa['id_jenis'] == $dt->id ? 'selected' : '' ?> value="<?= $dt->id ?>"><?= $dt->nama ?></option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 					</div>
 					<div class="col-lg-6 col-sm-6 col-12">
