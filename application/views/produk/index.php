@@ -28,7 +28,6 @@
 							<tr class="text-center">
 								<th>Kode</th>
 								<th>Nama</th>
-								<th>Harga</th>
 								<th>Stok</th>
 								<th>Jenis</th>
 								<th>Label</th>
@@ -42,7 +41,6 @@
 									<td>
 										<a href="javascript:void(0);"><?= $dt->nama ?></a>
 									</td>
-									<td><?= number_format($dt->harga, 0, ',', '.') ?></td>
 									<td><?= $dt->stok ?></td>
 									<td><?= $dt->jenis ?></td>
 									<td><?= $dt->label ?></td>

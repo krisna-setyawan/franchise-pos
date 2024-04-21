@@ -33,20 +33,26 @@
 					</div>
 					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
-							<label>KTP</label>
-							<input class="form-control" required id="ktp" name="ktp" type="text">
+							<label>Jabatan</label>
+							<input class="form-control" required id="jabatan" name="jabatan" type="text">
 						</div>
 					</div>
-					<div class="col-lg-8 col-12">
-						<div class="form-group">
-							<label>Alamat</label>
-							<input class="form-control" required id="alamat" name="alamat" type="text">
-						</div>
-					</div>
-					<div class="col-lg-4 col-sm-6 col-12">
+					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Telepon</label>
 							<input class="form-control" required id="telp" name="telp" type="text">
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Kontak Darurat</label>
+							<input class="form-control" required id="kontak_darurat" name="kontak_darurat" type="text">
+						</div>
+					</div>
+					<div class="col-lg-12 col-12">
+						<div class="form-group">
+							<label>Alamat</label>
+							<input class="form-control" required id="alamat" name="alamat" type="text">
 						</div>
 					</div>
 					<div class="col-lg-12">

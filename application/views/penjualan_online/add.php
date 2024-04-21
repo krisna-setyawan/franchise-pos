@@ -25,13 +25,13 @@
 						<div class="form-group">
 							<label>Marketplace</label>
 							<select class="select form-control" required id="marketplace" name="marketplace">
+								<option value=""></option>
 								<option value="Shopee">Shopee</option>
 								<option value="Tokopedia">Tokopedia</option>
 								<option value="Lazada">Lazada</option>
 								<option value="Bukalapak">Bukalapak</option>
 								<option value="Blibli">Blibli</option>
 								<option value="Whatsapp">Whatsapp</option>
-								<option value="Marketplace Lain">Marketplace Lain</option>
 							</select>
 						</div>
 					</div>
@@ -317,17 +317,22 @@
 	function select_produk(element) {
 		var id_input = element.id;
 		var row = id_input.match(/\d+/)[0];
+		var marketplace = $('#marketplace').val();
 
-		$.ajax({
-			type: "GET",
-			url: "<?= base_url() ?>produk/selectProdukForModal",
-			data: 'row=' + row,
-			dataType: 'JSON',
-			success: function(response) {
-				$('#modal-body').html(response.table_produk);
-				$('#mymodal').modal('show');
-			}
-		})
+		if (marketplace == '') {
+			alert_toastr('error', 'Channel marketplace belum dipilih.');
+		} else {
+			$.ajax({
+				type: "GET",
+				url: "<?= base_url() ?>produk/selectProdukForModal",
+				data: 'row=' + row + '&marketplace=' + marketplace,
+				dataType: 'JSON',
+				success: function(response) {
+					$('#modal-body').html(response.table_produk);
+					$('#mymodal').modal('show');
+				}
+			})
+		}
 	}
 
 	function pilih_produk(id_produk, nama_produk, satuan, stok, row) {

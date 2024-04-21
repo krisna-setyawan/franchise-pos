@@ -45,6 +45,7 @@
 								<th>KTP</th>
 								<th>Telp</th>
 								<th>Alamat</th>
+								<th>Kontak Darurat</th>
 								<th width="10%">Aksi</th>
 							</tr>
 						</thead>
@@ -56,9 +57,10 @@
 									<td>
 										<a href="javascript:void(0);"><?= $dt->nama ?></a>
 									</td>
-									<td><?= $dt->ktp ?></td>
+									<td><?= $dt->jabatan ?></td>
 									<td><?= $dt->telp ?></td>
 									<td><?= $dt->alamat ?></td>
+									<td><?= $dt->kontak_darurat ?></td>
 									<td class="text-center">
 										<a class="me-3" href="<?= base_url() ?>karyawan/edit/<?= $dt->nik ?>">
 											<img src="<?= base_url() ?>assets/template/assets/img/icons/edit.svg" alt="img">

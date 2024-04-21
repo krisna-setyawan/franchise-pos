@@ -65,7 +65,8 @@ class Karyawan extends CI_Controller
 			'nama' => $this->input->post('nama'),
 			'alamat' => $this->input->post('alamat'),
 			'telp' => $this->input->post('telp'),
-			'ktp' => $this->input->post('ktp'),
+			'kontak_darurat' => $this->input->post('kontak_darurat'),
+			'jabatan' => $this->input->post('jabatan'),
 		);
 		$this->db->insert('karyawan', $data);
 
@@ -110,7 +111,9 @@ class Karyawan extends CI_Controller
 			'nama' => $this->input->post('nama'),
 			'alamat' => $this->input->post('alamat'),
 			'telp' => $this->input->post('telp'),
-			'ktp' => $this->input->post('ktp'),
+			'kontak_darurat' => $this->input->post('kontak_darurat'),
+			'kontak_darurat' => $this->input->post('kontak_darurat'),
+			'jabatan' => $this->input->post('jabatan'),
 		);
 		$this->db->where('nik', $nik);
 		$this->db->update('karyawan', $data);

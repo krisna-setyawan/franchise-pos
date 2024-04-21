@@ -69,7 +69,13 @@ class Produk extends CI_Controller
 			'id_label' => $this->input->post('id_label'),
 			'kode' => $this->input->post('kode'),
 			'nama' => $this->input->post('nama'),
-			'harga' => str_replace(".", "", $this->input->post('harga')),
+			'hg_outlet' => str_replace(".", "", $this->input->post('hg_outlet')),
+			'hg_shopee' => str_replace(".", "", $this->input->post('hg_shopee')),
+			'hg_tokopedia' => str_replace(".", "", $this->input->post('hg_tokopedia')),
+			'hg_lazada' => str_replace(".", "", $this->input->post('hg_lazada')),
+			'hg_bukalapak' => str_replace(".", "", $this->input->post('hg_bukalapak')),
+			'hg_blibli' => str_replace(".", "", $this->input->post('hg_blibli')),
+			'hg_whatsapp' => str_replace(".", "", $this->input->post('hg_whatsapp')),
 			'stok' => $this->input->post('stok'),
 			'keterangan' => $this->input->post('keterangan'),
 		);
@@ -116,7 +122,19 @@ class Produk extends CI_Controller
 			'id_jenis' => $this->input->post('id_jenis'),
 			'id_label' => $this->input->post('id_label'),
 			'nama' => $this->input->post('nama'),
-			'harga' => str_replace(".", "", $this->input->post('harga')),
+			'hg_outlet' => str_replace(".", "", $this->input->post('hg_outlet')),
+			'hg_outlet' => str_replace(".", "", $this->input->post('hg_outlet')),
+			'hg_shopee' => str_replace(".", "", $this->input->post('hg_shopee')),
+			'hg_shopee' => str_replace(".", "", $this->input->post('hg_shopee')),
+			'hg_tokopedia' => str_replace(".", "", $this->input->post('hg_tokopedia')),
+			'hg_tokopedia' => str_replace(".", "", $this->input->post('hg_tokopedia')),
+			'hg_lazada' => str_replace(".", "", $this->input->post('hg_lazada')),
+			'hg_lazada' => str_replace(".", "", $this->input->post('hg_lazada')),
+			'hg_bukalapak' => str_replace(".", "", $this->input->post('hg_bukalapak')),
+			'hg_bukalapak' => str_replace(".", "", $this->input->post('hg_bukalapak')),
+			'hg_blibli' => str_replace(".", "", $this->input->post('hg_blibli')),
+			'hg_blibli' => str_replace(".", "", $this->input->post('hg_blibli')),
+			'hg_whatsapp' => str_replace(".", "", $this->input->post('hg_whatsapp')),
 			'stok' => $this->input->post('stok'),
 			'keterangan' => $this->input->post('keterangan'),
 		);
@@ -165,6 +183,7 @@ class Produk extends CI_Controller
 	public function selectProdukForModal()
 	{
 		$row = $this->input->get('row');
+		$marketplace = $this->input->get('marketplace') ? $this->input->get('marketplace') : 'outlet';
 
 		$id_cabang = $this->session->userdata('id_cabang');
 		$q_produk = "SELECT produk.*, produk_jenis.nama AS jenis, produk_label.nama AS label FROM produk 
@@ -174,7 +193,8 @@ class Produk extends CI_Controller
 
 		$data_view = [
 			'produk' => $this->db->query($q_produk)->result(),
-			'row' => $row
+			'row' => $row,
+			'marketplace' => $marketplace,
 		];
 
 		$data = [

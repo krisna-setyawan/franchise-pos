@@ -25,9 +25,10 @@
 							<tr class="text-center">
 								<th>NIK</th>
 								<th>Nama</th>
-								<th>KTP</th>
+								<th>Jabatan</th>
 								<th>Telp</th>
 								<th>Alamat</th>
+								<th>Kontak Darurat</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -37,9 +38,10 @@
 									<td>
 										<a href="javascript:void(0);"><?= $dt->nama ?></a>
 									</td>
-									<td><?= $dt->ktp ?></td>
+									<td><?= $dt->jabatan ?></td>
 									<td><?= $dt->telp ?></td>
 									<td><?= $dt->alamat ?></td>
+									<td><?= $dt->kontak_darurat ?></td>
 								</tr>
 							<?php endforeach; ?>
 						</tbody>

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 15, 2024 at 06:30 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Apr 21, 2024 at 04:11 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cabang` (
-  `id` int(11) NOT NULL,
-  `kode` varchar(10) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `alamat` varchar(60) NOT NULL,
-  `telp` varchar(15) NOT NULL,
-  `jenis` enum('2','1') NOT NULL
+  `id` int NOT NULL,
+  `kode` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
+  `telp` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `jenis` enum('2','1') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -41,9 +41,10 @@ CREATE TABLE `cabang` (
 --
 
 INSERT INTO `cabang` (`id`, `kode`, `nama`, `alamat`, `telp`, `jenis`) VALUES
-(1, 'ASR618', 'Kantor Pusat', 'Malang', '085123123123', '1'),
-(2, 'ASR869', 'Cabang Surabaya', 'Surabaya', '085222222222', '2'),
-(4, 'ASR985', 'ASR Blitar', 'Alamat Blitar', '0854331697720', '2');
+(1, 'ASR618', 'Acha Skincarecare Clinic Malang', 'Jl. Kebalen Wetan No.23 kavling 7, Kotalama, Kec. Kedungkand', '081234467676', '1'),
+(2, 'ASR869', 'Acha Skincarecare Clinic Surabaya', 'Jl. Tampomas No.4, RT.001/RW.09, Sawahan, Kec. Sawahan, Sura', '082231080004', '2'),
+(4, 'ASR985', 'Acha Skincare Official', 'Jl. Kebalen Wetan No.23 kavling 7, Kotalama, Kec. Kedungkand', '081944844903', '2'),
+(5, 'ASR887', 'Gudang Pusat', 'Jl. Locari, Lowokwaru, Kec. Lowokwaru, Kota Malang, Jawa Tim', '0854331697720', '2');
 
 -- --------------------------------------------------------
 
@@ -52,16 +53,16 @@ INSERT INTO `cabang` (`id`, `kode`, `nama`, `alamat`, `telp`, `jenis`) VALUES
 --
 
 CREATE TABLE `customer` (
-  `id` int(11) NOT NULL,
-  `kode` varchar(10) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `id_kelurahan` int(11) NOT NULL,
-  `id_kecamatan` int(11) NOT NULL,
-  `id_kota` int(11) NOT NULL,
-  `id_provinsi` int(11) NOT NULL,
-  `alamat` varchar(60) NOT NULL,
-  `telp` varchar(15) NOT NULL,
-  `cabang_register` int(11) NOT NULL
+  `id` int NOT NULL,
+  `kode` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_kelurahan` int NOT NULL,
+  `id_kecamatan` int NOT NULL,
+  `id_kota` int NOT NULL,
+  `id_provinsi` int NOT NULL,
+  `alamat` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
+  `telp` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
+  `cabang_register` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -80,12 +81,12 @@ INSERT INTO `customer` (`id`, `kode`, `nama`, `id_kelurahan`, `id_kecamatan`, `i
 --
 
 CREATE TABLE `inbound` (
-  `id` int(11) NOT NULL,
-  `id_cabang` int(11) NOT NULL,
-  `nomor` varchar(20) NOT NULL,
+  `id` int NOT NULL,
+  `id_cabang` int NOT NULL,
+  `nomor` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `tanggal` date NOT NULL,
-  `asal` varchar(50) NOT NULL,
-  `keterangan` varchar(80) NOT NULL
+  `asal` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `keterangan` varchar(80) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -94,7 +95,10 @@ CREATE TABLE `inbound` (
 
 INSERT INTO `inbound` (`id`, `id_cabang`, `nomor`, `tanggal`, `asal`, `keterangan`) VALUES
 (5, 1, 'INB-2024-001', '2024-04-01', 'asal', '-'),
-(8, 4, 'INB-2024-002', '2024-04-07', 'Malang', '-');
+(8, 4, 'INB-2024-002', '2024-04-07', 'Malang', '-'),
+(9, 4, 'INB-2024-003', '2024-04-19', 'Gudang', '-'),
+(10, 1, 'INB-2024-004', '2024-04-20', 'G', 'U'),
+(11, 1, 'INB-2024-005', '2024-04-20', 'Gudang Pusat', '-');
 
 -- --------------------------------------------------------
 
@@ -103,10 +107,10 @@ INSERT INTO `inbound` (`id`, `id_cabang`, `nomor`, `tanggal`, `asal`, `keteranga
 --
 
 CREATE TABLE `inbound_detail` (
-  `id` int(11) NOT NULL,
-  `id_inbound` int(11) NOT NULL,
-  `id_produk` int(11) NOT NULL,
-  `qty` int(11) NOT NULL
+  `id` int NOT NULL,
+  `id_inbound` int NOT NULL,
+  `id_produk` int NOT NULL,
+  `qty` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -116,7 +120,11 @@ CREATE TABLE `inbound_detail` (
 INSERT INTO `inbound_detail` (`id`, `id_inbound`, `id_produk`, `qty`) VALUES
 (9, 5, 8, 100),
 (10, 5, 3, 45),
-(11, 8, 10, 35);
+(11, 8, 10, 35),
+(12, 9, 11, 25),
+(13, 10, 8, 10),
+(14, 11, 15, 100),
+(15, 11, 14, 500);
 
 -- --------------------------------------------------------
 
@@ -125,13 +133,13 @@ INSERT INTO `inbound_detail` (`id`, `id_inbound`, `id_produk`, `qty`) VALUES
 --
 
 CREATE TABLE `jasa` (
-  `id` int(11) NOT NULL,
-  `id_cabang` int(11) NOT NULL,
-  `id_jenis` int(11) NOT NULL,
-  `kode` int(20) NOT NULL,
-  `nama` varchar(60) NOT NULL,
-  `harga` int(11) NOT NULL,
-  `keterangan` varchar(60) NOT NULL
+  `id` int NOT NULL,
+  `id_cabang` int NOT NULL,
+  `id_jenis` int NOT NULL,
+  `kode` int NOT NULL,
+  `nama` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
+  `harga` int NOT NULL,
+  `keterangan` varchar(60) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -148,8 +156,8 @@ INSERT INTO `jasa` (`id`, `id_cabang`, `id_jenis`, `kode`, `nama`, `harga`, `ket
 --
 
 CREATE TABLE `jasa_jenis` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(60) NOT NULL
+  `id` int NOT NULL,
+  `nama` varchar(60) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -157,8 +165,8 @@ CREATE TABLE `jasa_jenis` (
 --
 
 INSERT INTO `jasa_jenis` (`id`, `nama`) VALUES
-(1, 'jenis treatment a'),
-(2, 'jenis treatment b');
+(1, 'Facial'),
+(2, 'Hifu');
 
 -- --------------------------------------------------------
 
@@ -167,13 +175,14 @@ INSERT INTO `jasa_jenis` (`id`, `nama`) VALUES
 --
 
 CREATE TABLE `karyawan` (
-  `id` int(11) NOT NULL,
-  `id_cabang` int(11) NOT NULL,
-  `nik` varchar(10) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `ktp` varchar(20) NOT NULL,
-  `alamat` varchar(80) NOT NULL,
-  `telp` varchar(20) NOT NULL,
+  `id` int NOT NULL,
+  `id_cabang` int NOT NULL,
+  `jabatan` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
+  `nik` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `telp` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `kontak_darurat` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -181,11 +190,15 @@ CREATE TABLE `karyawan` (
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id`, `id_cabang`, `nik`, `nama`, `ktp`, `alamat`, `telp`, `deleted_at`) VALUES
-(1, 1, '001', 'Krisna', '1234567891234567', 'Blitar', '085730656933', NULL),
-(2, 1, '002', 'Admin1 Surabaya', '1234561234561234', 'Malang', '085144444444', NULL),
-(3, 2, '003', 'Admin2 Surabaya', '1234567891234567', 'Surabaya', '085787987980', NULL),
-(4, 1, '004', 'Noven', '1234561234561234', 'Blitar Wates', '085188888888', NULL);
+INSERT INTO `karyawan` (`id`, `id_cabang`, `jabatan`, `nik`, `nama`, `alamat`, `telp`, `kontak_darurat`, `deleted_at`) VALUES
+(1, 1, '', '001', 'Galih Restu', 'Malang', '082230293301', '1234567891234567', NULL),
+(2, 4, '', '002', 'Silviana', 'Malang', '081358055375', '1234561234561234', NULL),
+(3, 2, '', '003', 'Putri', 'Malang', '085787987980', '1234567891234567', NULL),
+(6, 5, '', '004', 'Galih', 'Malang', '08123456789', '1234567890', NULL),
+(7, 1, '', '005', 'Devita', 'Malang', '0812341234', '1234567890', NULL),
+(8, 2, '', '006', 'Debie', 'sby', '0000', '00', NULL),
+(9, 1, '', '003', 'Misbachul Firdausiah', 'Mess Manuhua, Halim Perdanakusuma, Jakarta Timur', '087859881218', '00', NULL),
+(10, 5, '', '007', 'Arek Gudang New', 'Alamat Jauh', '0854331697720', '456456', NULL);
 
 -- --------------------------------------------------------
 
@@ -194,10 +207,10 @@ INSERT INTO `karyawan` (`id`, `id_cabang`, `nik`, `nama`, `ktp`, `alamat`, `telp
 --
 
 CREATE TABLE `kecamatan` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `id_kota` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `id_kota` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kecamatan`
@@ -7265,12 +7278,12 @@ INSERT INTO `kecamatan` (`id`, `nama`, `id_kota`) VALUES
 --
 
 CREATE TABLE `kelurahan` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `id_kecamatan` varchar(7) NOT NULL,
   `village_code` varchar(10) NOT NULL,
   `village_postcode` char(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `kelurahan`
@@ -78208,10 +78221,10 @@ INSERT INTO `kelurahan` (`id`, `nama`, `id_kecamatan`, `village_code`, `village_
 --
 
 CREATE TABLE `kota` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `id_provinsi` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `id_provinsi` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kota`
@@ -78738,12 +78751,12 @@ INSERT INTO `kota` (`id`, `nama`, `id_provinsi`) VALUES
 --
 
 CREATE TABLE `outbound` (
-  `id` int(11) NOT NULL,
-  `id_cabang` int(11) NOT NULL,
-  `nomor` varchar(20) NOT NULL,
+  `id` int NOT NULL,
+  `id_cabang` int NOT NULL,
+  `nomor` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `tanggal` date NOT NULL,
-  `tujuan` varchar(50) NOT NULL,
-  `keterangan` varchar(80) NOT NULL
+  `tujuan` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `keterangan` varchar(80) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -78751,7 +78764,8 @@ CREATE TABLE `outbound` (
 --
 
 INSERT INTO `outbound` (`id`, `id_cabang`, `nomor`, `tanggal`, `tujuan`, `keterangan`) VALUES
-(3, 1, 'OTB-2024-001', '2024-04-02', 'ke brazil', '-');
+(3, 1, 'OTB-2024-001', '2024-04-02', 'ke brazil', '-'),
+(4, 5, 'OTB-2024-002', '2024-04-20', 'Acha Skincare Cabang Malang', '-');
 
 -- --------------------------------------------------------
 
@@ -78760,10 +78774,10 @@ INSERT INTO `outbound` (`id`, `id_cabang`, `nomor`, `tanggal`, `tujuan`, `ketera
 --
 
 CREATE TABLE `outbound_detail` (
-  `id` int(11) NOT NULL,
-  `id_outbound` int(11) NOT NULL,
-  `id_produk` int(11) NOT NULL,
-  `qty` int(11) NOT NULL
+  `id` int NOT NULL,
+  `id_outbound` int NOT NULL,
+  `id_produk` int NOT NULL,
+  `qty` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -78772,7 +78786,9 @@ CREATE TABLE `outbound_detail` (
 
 INSERT INTO `outbound_detail` (`id`, `id_outbound`, `id_produk`, `qty`) VALUES
 (11, 3, 7, 7),
-(12, 3, 9, 2);
+(12, 3, 9, 2),
+(13, 4, 13, 500),
+(14, 4, 12, 100);
 
 -- --------------------------------------------------------
 
@@ -78781,20 +78797,20 @@ INSERT INTO `outbound_detail` (`id`, `id_outbound`, `id_produk`, `qty`) VALUES
 --
 
 CREATE TABLE `penjualan_online` (
-  `id` int(11) NOT NULL,
-  `id_cabang` int(11) NOT NULL,
-  `nomor` varchar(20) NOT NULL,
-  `no_penjualan_mp` varchar(30) DEFAULT NULL,
-  `marketplace` enum('Shopee','Tokopedia','Lazada','Bukalapak','Blibli','Whatsapp','Marketplace Lain') NOT NULL,
-  `id_customer` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `id_cabang` int NOT NULL,
+  `nomor` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `no_penjualan_mp` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `marketplace` enum('Shopee','Tokopedia','Lazada','Bukalapak','Blibli','Whatsapp','Marketplace Lain') COLLATE utf8mb4_general_ci NOT NULL,
+  `id_customer` int NOT NULL,
   `tanggal` date NOT NULL,
-  `total_hg_produk` int(11) NOT NULL,
-  `diskon` int(11) NOT NULL,
-  `grand_total` int(11) NOT NULL,
-  `pajak_platform` int(11) NOT NULL,
-  `ekspedisi` varchar(50) NOT NULL,
+  `total_hg_produk` int NOT NULL,
+  `diskon` int NOT NULL,
+  `grand_total` int NOT NULL,
+  `pajak_platform` int NOT NULL,
+  `ekspedisi` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `tgl_kirim` date DEFAULT NULL,
-  `catatan` varchar(70) DEFAULT NULL
+  `catatan` varchar(70) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -78805,7 +78821,8 @@ INSERT INTO `penjualan_online` (`id`, `id_cabang`, `nomor`, `no_penjualan_mp`, `
 (4, 1, 'ONL240406001', '', 'Shopee', 1, '2024-04-06', 750000, 50000, 700000, 0, '', NULL, ''),
 (5, 1, 'ONL240406002', 'asdas12312', 'Tokopedia', 2, '2024-04-06', 2250000, 0, 2250000, 0, '', NULL, 'note'),
 (7, 1, 'ONL240407001', '456789', 'Lazada', 2, '2024-04-07', 400000, 0, 400000, 0, '', NULL, 'catat'),
-(11, 1, 'ONL240415001', '123', 'Lazada', 4, '2024-04-15', 740000, 0, 740000, 15000, 'JNT', '2024-04-16', 'note');
+(11, 1, 'ONL240415001', '123', 'Lazada', 4, '2024-04-15', 740000, 0, 740000, 15000, 'JNT', '2024-04-16', 'note'),
+(12, 1, 'ONL240420001', '\'', 'Whatsapp', 4, '2024-04-20', 129990, 0, 129990, 0, 'J&T', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -78814,13 +78831,13 @@ INSERT INTO `penjualan_online` (`id`, `id_cabang`, `nomor`, `no_penjualan_mp`, `
 --
 
 CREATE TABLE `penjualan_online_produk` (
-  `id` int(11) NOT NULL,
-  `id_penjualan_online` int(11) NOT NULL,
-  `id_produk` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `satuan` int(11) NOT NULL,
-  `diskon` int(11) NOT NULL,
-  `total` int(11) NOT NULL
+  `id` int NOT NULL,
+  `id_penjualan_online` int NOT NULL,
+  `id_produk` int NOT NULL,
+  `qty` int NOT NULL,
+  `satuan` int NOT NULL,
+  `diskon` int NOT NULL,
+  `total` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -78832,7 +78849,8 @@ INSERT INTO `penjualan_online_produk` (`id`, `id_penjualan_online`, `id_produk`,
 (8, 5, 1, 5, 150000, 0, 750000),
 (9, 5, 4, 10, 150000, 0, 1500000),
 (10, 7, 8, 5, 80000, 0, 400000),
-(15, 11, 8, 10, 80000, 6000, 740000);
+(15, 11, 8, 10, 80000, 6000, 740000),
+(16, 12, 7, 2, 65000, 5, 129990);
 
 -- --------------------------------------------------------
 
@@ -78841,19 +78859,19 @@ INSERT INTO `penjualan_online_produk` (`id`, `id_penjualan_online`, `id_produk`,
 --
 
 CREATE TABLE `penjualan_outlet` (
-  `id` int(11) NOT NULL,
-  `id_cabang` int(11) NOT NULL,
-  `nomor` varchar(20) NOT NULL,
-  `id_customer` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `id_cabang` int NOT NULL,
+  `nomor` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_customer` int NOT NULL,
   `tanggal` date NOT NULL,
-  `total_hg_produk` int(11) NOT NULL,
-  `total_hg_jasa` int(11) NOT NULL,
-  `diskon` int(11) NOT NULL,
-  `grand_total` int(11) NOT NULL,
-  `bayar` int(11) NOT NULL,
-  `kembalian` int(11) NOT NULL,
-  `jenis_bayar` enum('Cash','Transfer','Kartu Kredit','') NOT NULL,
-  `catatan` varchar(70) NOT NULL
+  `total_hg_produk` int NOT NULL,
+  `total_hg_jasa` int NOT NULL,
+  `diskon` int NOT NULL,
+  `grand_total` int NOT NULL,
+  `bayar` int NOT NULL,
+  `kembalian` int NOT NULL,
+  `jenis_bayar` enum('Cash','Transfer','Kartu Kredit','') COLLATE utf8mb4_general_ci NOT NULL,
+  `catatan` varchar(70) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -78864,7 +78882,8 @@ INSERT INTO `penjualan_outlet` (`id`, `id_cabang`, `nomor`, `id_customer`, `tang
 (3, 1, 'OTL240407002', 4, '2024-04-07', 1650000, 0, 50000, 1600000, 1600000, 0, 'Cash', ''),
 (4, 1, 'OTL240407003', 1, '2024-04-07', 1650000, 0, 0, 1650000, 1700000, 50000, 'Cash', ''),
 (5, 1, 'OTL240407004', 2, '2024-04-07', 800000, 250000, 0, 1050000, 1100000, 50000, 'Cash', ''),
-(9, 1, 'OTL240415001', 2, '2024-04-15', 1225000, 250000, 5000, 1470000, 0, 0, 'Kartu Kredit', 'note');
+(9, 1, 'OTL240415001', 2, '2024-04-15', 1225000, 250000, 5000, 1470000, 0, 0, 'Kartu Kredit', 'note'),
+(10, 1, 'OTL240420001', 2, '2024-04-20', 0, 250000, 0, 250000, 0, 0, 'Cash', '');
 
 -- --------------------------------------------------------
 
@@ -78873,10 +78892,10 @@ INSERT INTO `penjualan_outlet` (`id`, `id_cabang`, `nomor`, `id_customer`, `tang
 --
 
 CREATE TABLE `penjualan_outlet_jasa` (
-  `id` int(11) NOT NULL,
-  `id_penjualan_outlet` int(11) NOT NULL,
-  `id_jasa` int(11) NOT NULL,
-  `harga` int(11) NOT NULL
+  `id` int NOT NULL,
+  `id_penjualan_outlet` int NOT NULL,
+  `id_jasa` int NOT NULL,
+  `harga` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -78885,7 +78904,8 @@ CREATE TABLE `penjualan_outlet_jasa` (
 
 INSERT INTO `penjualan_outlet_jasa` (`id`, `id_penjualan_outlet`, `id_jasa`, `harga`) VALUES
 (3, 5, 1, 250000),
-(6, 9, 1, 250000);
+(6, 9, 1, 250000),
+(7, 10, 1, 250000);
 
 -- --------------------------------------------------------
 
@@ -78894,13 +78914,13 @@ INSERT INTO `penjualan_outlet_jasa` (`id`, `id_penjualan_outlet`, `id_jasa`, `ha
 --
 
 CREATE TABLE `penjualan_outlet_produk` (
-  `id` int(11) NOT NULL,
-  `id_penjualan_outlet` int(11) NOT NULL,
-  `id_produk` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `satuan` int(11) NOT NULL,
-  `diskon` int(11) NOT NULL,
-  `total` int(11) NOT NULL
+  `id` int NOT NULL,
+  `id_penjualan_outlet` int NOT NULL,
+  `id_produk` int NOT NULL,
+  `qty` int NOT NULL,
+  `satuan` int NOT NULL,
+  `diskon` int NOT NULL,
+  `total` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -78913,7 +78933,8 @@ INSERT INTO `penjualan_outlet_produk` (`id`, `id_penjualan_outlet`, `id_produk`,
 (4, 4, 3, 5, 250000, 0, 1250000),
 (5, 4, 8, 5, 80000, 0, 400000),
 (6, 5, 8, 10, 80000, 0, 800000),
-(10, 9, 3, 5, 250000, 5000, 1225000);
+(10, 9, 3, 5, 250000, 5000, 1225000),
+(11, 10, 1, 0, 150000, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -78922,31 +78943,43 @@ INSERT INTO `penjualan_outlet_produk` (`id`, `id_penjualan_outlet`, `id_produk`,
 --
 
 CREATE TABLE `produk` (
-  `id` int(11) NOT NULL,
-  `id_cabang` int(11) NOT NULL,
-  `id_jenis` int(11) NOT NULL,
-  `id_label` int(11) NOT NULL,
-  `kode` varchar(20) NOT NULL,
-  `nama` varchar(60) NOT NULL,
-  `harga` int(11) NOT NULL,
-  `stok` int(11) NOT NULL,
-  `keterangan` varchar(60) NOT NULL
+  `id` int NOT NULL,
+  `id_cabang` int NOT NULL,
+  `id_jenis` int NOT NULL,
+  `id_label` int NOT NULL,
+  `kode` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(60) COLLATE utf8mb4_general_ci NOT NULL,
+  `hg_outlet` int NOT NULL,
+  `hg_shopee` int NOT NULL,
+  `hg_tokopedia` int NOT NULL,
+  `hg_lazada` int NOT NULL,
+  `hg_bukalapak` int NOT NULL,
+  `hg_blibli` int NOT NULL,
+  `hg_whatsapp` int NOT NULL,
+  `stok` int NOT NULL,
+  `keterangan` varchar(60) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id`, `id_cabang`, `id_jenis`, `id_label`, `kode`, `nama`, `harga`, `stok`, `keterangan`) VALUES
-(1, 1, 2, 1, '716262', 'Produk A', 150000, 40, 'produk favorit'),
-(3, 1, 2, 1, '367869', 'Produk B', 250000, 40, '-'),
-(4, 1, 2, 1, '533434', 'Produk C', 150000, 0, '-'),
-(5, 1, 2, 1, '639219', 'Produk D', 135000, 0, '-'),
-(6, 1, 2, 1, '271297', 'Produk E', 260000, 0, '-'),
-(7, 1, 2, 1, '169496', 'Produk F', 65000, 0, '-'),
-(8, 1, 2, 1, '451231', 'Produk G', 80000, 60, '-'),
-(9, 1, 3, 2, '168423', 'Produk H', 140000, 0, '-'),
-(10, 4, 2, 1, '915898', 'Produk 1 cabang blitar', 325000, 50, '-');
+INSERT INTO `produk` (`id`, `id_cabang`, `id_jenis`, `id_label`, `kode`, `nama`, `hg_outlet`, `hg_shopee`, `hg_tokopedia`, `hg_lazada`, `hg_bukalapak`, `hg_blibli`, `hg_whatsapp`, `stok`, `keterangan`) VALUES
+(1, 1, 2, 1, '716262', 'Produk A', 150000, 0, 0, 0, 0, 0, 0, 40, 'produk favorit'),
+(3, 1, 2, 1, '367869', 'Produk B', 250000, 0, 0, 0, 0, 0, 0, 40, '-'),
+(4, 1, 2, 1, '533434', 'Produk C', 150000, 0, 0, 0, 0, 0, 0, 0, '-'),
+(5, 1, 2, 1, '639219', 'Produk D', 135000, 0, 0, 0, 0, 0, 0, 0, '-'),
+(6, 1, 2, 1, '271297', 'Produk E', 260000, 0, 0, 0, 0, 0, 0, 0, '-'),
+(7, 1, 2, 1, '169496', 'Produk F', 65000, 0, 0, 0, 0, 0, 0, -2, '-'),
+(8, 1, 2, 1, '451231', 'Produk G', 80000, 0, 0, 0, 0, 0, 0, 70, '-'),
+(9, 1, 3, 2, '168423', 'Produk H', 140000, 0, 0, 0, 0, 0, 0, 0, '-'),
+(10, 4, 2, 1, '915898', 'Produk 1 cabang blitar', 325000, 0, 0, 0, 0, 0, 0, 50, '-'),
+(11, 4, 3, 2, '625923', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 50, '-'),
+(12, 5, 3, 1, '218598', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 900, '-'),
+(13, 5, 2, 2, '337845', 'Facial Wash Glowing', 35000, 0, 0, 0, 0, 0, 0, 500, '-'),
+(14, 1, 3, 2, '562952', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 500, '-'),
+(15, 1, 2, 2, '864957', 'Facial Wash Glowing', 35000, 0, 0, 0, 0, 0, 0, 100, '-'),
+(16, 5, 3, 1, '452647', 'Produk 3', 50000, 45000, 35000, 25000, 15000, 5000, 55000, 0, '-');
 
 -- --------------------------------------------------------
 
@@ -78955,8 +78988,8 @@ INSERT INTO `produk` (`id`, `id_cabang`, `id_jenis`, `id_label`, `kode`, `nama`,
 --
 
 CREATE TABLE `produk_jenis` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(60) NOT NULL
+  `id` int NOT NULL,
+  `nama` varchar(60) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -78964,8 +78997,8 @@ CREATE TABLE `produk_jenis` (
 --
 
 INSERT INTO `produk_jenis` (`id`, `nama`) VALUES
-(2, 'jenis1'),
-(3, 'jenis2');
+(2, 'Facial Wash'),
+(3, 'Toner');
 
 -- --------------------------------------------------------
 
@@ -78974,8 +79007,8 @@ INSERT INTO `produk_jenis` (`id`, `nama`) VALUES
 --
 
 CREATE TABLE `produk_label` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(60) NOT NULL
+  `id` int NOT NULL,
+  `nama` varchar(60) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -78983,8 +79016,8 @@ CREATE TABLE `produk_label` (
 --
 
 INSERT INTO `produk_label` (`id`, `nama`) VALUES
-(1, 'label aa'),
-(2, 'label bb');
+(1, 'Label Biru'),
+(2, 'BPOM');
 
 -- --------------------------------------------------------
 
@@ -78993,9 +79026,9 @@ INSERT INTO `produk_label` (`id`, `nama`) VALUES
 --
 
 CREATE TABLE `provinsi` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nama` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `provinsi`
@@ -79044,11 +79077,11 @@ INSERT INTO `provinsi` (`id`, `nama`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL,
-  `id_karyawan` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_karyawan` int DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -79057,8 +79090,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `username`, `password`, `id_karyawan`, `deleted_at`) VALUES
-(1, 'Krisna', 'krisna', 'krisna', 1, NULL),
-(2, 'Noven', 'noven', 'noven', 4, NULL);
+(11, 'Silviana', 'silviana', 'silviana', 2, NULL),
+(12, 'Putri', 'putri', 'putri', 3, NULL),
+(13, 'Galih', 'galih', 'galih', 6, NULL),
+(14, 'Devita', 'devita', 'devita', 7, NULL),
+(15, 'Debie', 'Debie', '111', 8, NULL),
+(16, 'Misbachul Firdausiah', 'Firda Bachul', '0505', 9, NULL),
+(17, 'Arek Gudang New', 'gudangnew', '123', 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -79067,9 +79105,9 @@ INSERT INTO `user` (`id`, `nama`, `username`, `password`, `id_karyawan`, `delete
 --
 
 CREATE TABLE `user_access` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_menu` int(11) NOT NULL
+  `id` int NOT NULL,
+  `id_user` int NOT NULL,
+  `id_menu` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -79077,44 +79115,91 @@ CREATE TABLE `user_access` (
 --
 
 INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
-(2, 1, 1),
-(3, 1, 2),
-(6, 1, 31),
-(7, 1, 51),
-(8, 1, 52),
-(9, 1, 53),
-(10, 1, 61),
-(11, 1, 62),
-(12, 1, 63),
-(13, 2, 1),
-(14, 2, 61),
-(15, 2, 62),
-(16, 1, 71),
-(17, 1, 72),
-(18, 1, 73),
-(19, 1, 74),
-(21, 1, 81),
-(22, 1, 11),
-(23, 1, 21),
-(33, 2, 11),
-(34, 2, 2),
-(35, 2, 21),
-(36, 2, 31),
-(37, 2, 51),
-(38, 2, 52),
-(39, 2, 53),
-(40, 2, 63),
-(41, 2, 71),
-(42, 2, 72),
-(43, 2, 73),
-(44, 2, 74),
-(45, 2, 81),
-(46, 1, 75),
-(47, 1, 76),
-(48, 1, 77),
-(49, 2, 75),
-(50, 2, 76),
-(51, 2, 77);
+(52, 11, 1),
+(53, 11, 11),
+(54, 11, 21),
+(55, 11, 51),
+(56, 11, 52),
+(57, 11, 53),
+(58, 11, 61),
+(59, 11, 62),
+(60, 11, 63),
+(61, 11, 75),
+(62, 11, 76),
+(63, 12, 1),
+(64, 12, 11),
+(65, 12, 21),
+(66, 12, 31),
+(67, 12, 51),
+(68, 12, 52),
+(69, 12, 53),
+(70, 12, 61),
+(71, 12, 62),
+(72, 12, 81),
+(73, 13, 1),
+(74, 13, 2),
+(75, 13, 11),
+(76, 13, 21),
+(77, 13, 31),
+(78, 13, 51),
+(79, 13, 52),
+(80, 13, 53),
+(81, 13, 61),
+(82, 13, 62),
+(83, 13, 63),
+(84, 13, 71),
+(85, 13, 72),
+(86, 13, 73),
+(87, 13, 74),
+(88, 13, 75),
+(89, 13, 76),
+(90, 13, 77),
+(91, 13, 81),
+(92, 14, 1),
+(93, 14, 11),
+(94, 14, 21),
+(95, 14, 31),
+(96, 14, 51),
+(97, 14, 52),
+(98, 14, 53),
+(99, 14, 61),
+(100, 14, 62),
+(101, 14, 63),
+(102, 14, 81),
+(103, 14, 76),
+(104, 14, 77),
+(105, 14, 75),
+(106, 12, 77),
+(107, 12, 76),
+(108, 12, 75),
+(109, 12, 63),
+(110, 11, 81),
+(111, 15, 1),
+(112, 16, 1),
+(113, 16, 2),
+(115, 16, 21),
+(116, 16, 11),
+(117, 16, 31),
+(118, 16, 51),
+(119, 16, 52),
+(120, 16, 53),
+(121, 16, 61),
+(122, 16, 62),
+(123, 16, 63),
+(124, 16, 71),
+(125, 16, 72),
+(126, 16, 73),
+(127, 16, 74),
+(128, 16, 75),
+(129, 16, 76),
+(130, 16, 77),
+(131, 16, 81),
+(132, 17, 1),
+(133, 17, 21),
+(134, 17, 61),
+(135, 17, 62),
+(136, 17, 63),
+(137, 17, 2);
 
 -- --------------------------------------------------------
 
@@ -79123,13 +79208,13 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 --
 
 CREATE TABLE `user_menu` (
-  `id` int(11) NOT NULL,
-  `menu` varchar(80) NOT NULL,
-  `level` enum('1','2') NOT NULL,
-  `parent` varchar(30) DEFAULT NULL,
-  `icon` varchar(80) DEFAULT NULL,
-  `url` varchar(80) NOT NULL,
-  `has_child` enum('n','y') NOT NULL
+  `id` int NOT NULL,
+  `menu` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
+  `level` enum('1','2') COLLATE utf8mb4_general_ci NOT NULL,
+  `parent` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `icon` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `url` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
+  `has_child` enum('n','y') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -79344,145 +79429,145 @@ ALTER TABLE `user_menu`
 -- AUTO_INCREMENT for table `cabang`
 --
 ALTER TABLE `cabang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `inbound`
 --
 ALTER TABLE `inbound`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `inbound_detail`
 --
 ALTER TABLE `inbound_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `jasa`
 --
 ALTER TABLE `jasa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `jasa_jenis`
 --
 ALTER TABLE `jasa_jenis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `kecamatan`
 --
 ALTER TABLE `kecamatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9471105;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9471105;
 
 --
 -- AUTO_INCREMENT for table `kelurahan`
 --
 ALTER TABLE `kelurahan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70882;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70882;
 
 --
 -- AUTO_INCREMENT for table `kota`
 --
 ALTER TABLE `kota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9495;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9495;
 
 --
 -- AUTO_INCREMENT for table `outbound`
 --
 ALTER TABLE `outbound`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `outbound_detail`
 --
 ALTER TABLE `outbound_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `penjualan_online`
 --
 ALTER TABLE `penjualan_online`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `penjualan_online_produk`
 --
 ALTER TABLE `penjualan_online_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet`
 --
 ALTER TABLE `penjualan_outlet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet_jasa`
 --
 ALTER TABLE `penjualan_outlet_jasa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet_produk`
 --
 ALTER TABLE `penjualan_outlet_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `produk_jenis`
 --
 ALTER TABLE `produk_jenis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `produk_label`
 --
 ALTER TABLE `produk_label`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `provinsi`
 --
 ALTER TABLE `provinsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user_access`
 --
 ALTER TABLE `user_access`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- Constraints for dumped tables

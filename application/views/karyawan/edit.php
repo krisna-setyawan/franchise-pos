@@ -29,8 +29,8 @@
 					</div>
 					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
-							<label>KTP</label>
-							<input class="form-control" required id="ktp" name="ktp" type="text" value="<?= $karyawan['ktp'] ?>">
+							<label>Jabatan</label>
+							<input class="form-control" required id="jabatan" name="jabatan" type="text" value="<?= $karyawan['jabatan'] ?>">
 						</div>
 					</div>
 					<div class="col-lg-6 col-sm-6 col-12">
@@ -39,10 +39,16 @@
 							<input class="form-control" required id="telp" name="telp" type="text" value="<?= $karyawan['telp'] ?>">
 						</div>
 					</div>
-					<div class="col-lg-12 col-12">
+					<div class="col-lg-6 col-12">
 						<div class="form-group">
 							<label>Alamat</label>
 							<input class="form-control" required id="alamat" name="alamat" type="text" value="<?= $karyawan['alamat'] ?>">
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Kontak Darurat</label>
+							<input class="form-control" required id="kontak_darurat" name="kontak_darurat" type="text" value="<?= $karyawan['kontak_darurat'] ?>">
 						</div>
 					</div>
 					<div class="col-lg-12">
