@@ -116,9 +116,10 @@ class Produk extends CI_Controller
 
 	public function update()
 	{
-		$kode =  $this->input->post('kode');
+		$kode =  $this->input->post('oldkode');
 
 		$data = array(
+			'kode' => $this->input->post('kode'),
 			'id_jenis' => $this->input->post('id_jenis'),
 			'id_label' => $this->input->post('id_label'),
 			'nama' => $this->input->post('nama'),

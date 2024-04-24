@@ -102,6 +102,8 @@ class Penjualan_online extends CI_Controller
 			'pajak_platform' => str_replace(".", "", $this->input->post('pajak_platform')),
 			'ekspedisi' => $this->input->post('ekspedisi'),
 			'tgl_kirim' => $this->input->post('tgl_kirim'),
+			'bank_transfer' => $this->input->post('bank_transfer'),
+			'alamat_kirim' => $this->input->post('alamat_kirim'),
 			'catatan' => $this->input->post('catatan'),
 		);
 		$this->db->insert('penjualan_online', $data);
@@ -148,7 +150,8 @@ class Penjualan_online extends CI_Controller
 
 		$datasession = array(
 			'pesan-notif' => 'Berhasil membuat penjualan online.',
-			'icon-notif' => 'success'
+			'icon-notif' => 'success',
+			'penjualan_online' => $this->input->post('nomor')
 		);
 		$this->session->set_flashdata($datasession);
 		redirect('penjualan_online');
@@ -201,6 +204,8 @@ class Penjualan_online extends CI_Controller
 			'pajak_platform' => str_replace(".", "", $this->input->post('pajak_platform')),
 			'ekspedisi' => $this->input->post('ekspedisi'),
 			'tgl_kirim' => $this->input->post('tgl_kirim'),
+			'bank_transfer' => $this->input->post('bank_transfer'),
+			'alamat_kirim' => $this->input->post('alamat_kirim'),
 			'catatan' => $this->input->post('catatan'),
 		);
 		$id_penjualan = $this->input->post('id_penjualan');
@@ -319,5 +324,29 @@ class Penjualan_online extends CI_Controller
 		];
 
 		echo json_encode($data);
+	}
+
+
+
+	public function print($nomor)
+	{
+		$q_penjualan_online = "SELECT penjualan_online.*, customer.nama AS customer FROM penjualan_online
+							JOIN customer ON penjualan_online.id_customer = customer.id
+							WHERE penjualan_online.nomor = '$nomor'";
+		$penjualan_online = $this->db->query($q_penjualan_online)->row_array();
+		$id_penjualan_online = $penjualan_online['id'];
+		$q_penjualan_online_produk = "SELECT penjualan_online_produk.*, produk.nama AS nama_produk, produk.stok AS stok FROM penjualan_online_produk JOIN produk ON penjualan_online_produk.id_produk = produk.id WHERE penjualan_online_produk.id_penjualan_online = $id_penjualan_online";
+		$penjualan_online_produk = $this->db->query($q_penjualan_online_produk)->result();
+
+		$id_cabang = $this->session->userdata('id_cabang');
+		$cabang = $this->db->get_where('cabang', ['id' => $id_cabang])->row_array();
+
+		$data_view = [
+			'penjualan' => $penjualan_online,
+			'penjualan_produk' => $penjualan_online_produk,
+			'cabang' => $cabang,
+		];
+
+		$this->load->view('penjualan_online/print', $data_view);
 	}
 }

@@ -6,7 +6,7 @@
 				<th>Jenis</th>
 				<th>Label</th>
 				<th>Stok</th>
-				<th>Harga Outlet</th>
+				<th>Harga</th>
 				<th style="width: 10%;">Aksi</th>
 			</tr>
 		</thead>

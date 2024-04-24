@@ -39,6 +39,19 @@ function check_akses($id_menu, $id_user)
 }
 
 
+function checkAccess($id_menu)
+{
+	$ci = get_instance();
+	$id_user = $ci->session->userdata('id_user');
+	$ada = $ci->db->get_where('user_access', ['id_user' => $id_user, 'id_menu' => $id_menu]);
+	if ($ada->num_rows() > 0) {
+		return "1";
+	} else {
+		return "0";
+	}
+}
+
+
 
 
 

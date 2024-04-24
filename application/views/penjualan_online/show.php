@@ -1,4 +1,4 @@
-<div class="m-4 mb-5">
+<div class="m-4 mb-3">
 
 	<div class="row mt-4">
 		<div class="col-6">
@@ -7,31 +7,23 @@
 				<?= $cabang['alamat'] ?>
 				<br> <?= $cabang['telp'] ?>
 			</p>
+			<div class="row mt-1">
+				<div class="col-12">
+					<div class="text-muted">Nomor &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong><?= $penjualan['nomor'] ?></strong> </div>
+					<div class="text-muted">Tanggal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong><?= $penjualan['tanggal'] ?></strong> </div>
+					<div class="text-muted">Pengiriman &nbsp; &nbsp; &nbsp;<strong><?= $penjualan['ekspedisi'] ?> - <?= $penjualan['tgl_kirim'] ?></strong> </div>
+					<div class="text-muted">Alamat Kirim &nbsp; &nbsp;<strong><?= $penjualan['alamat_kirim'] ?></strong> </div>
+				</div>
+			</div>
+
 		</div>
 		<div class="col-6 text-end">
 			<div class="text-muted">Customer</div>
 			<strong><?= $penjualan['marketplace'] ?></strong> <br>
-			<strong><?= $penjualan['no_penjualan_mp'] ?></strong> <br>
 			<strong><?= $penjualan['customer'] ?></strong>
-		</div>
-	</div>
-
-	<div class="row mt-1">
-		<div class="col-12">
-			<table>
-				<tr>
-					<td class="text-muted fw-bold">Nomor&nbsp; &nbsp; &nbsp;</td>
-					<td class="text-muted"><?= $penjualan['nomor'] ?></td>
-				</tr>
-				<tr>
-					<td class="text-muted fw-bold">Tanggal&nbsp; &nbsp; &nbsp;</td>
-					<td class="text-muted"><?= $penjualan['tanggal'] ?></td>
-				</tr>
-				<tr>
-					<td class="text-muted fw-bold">Pengiriman&nbsp; &nbsp; &nbsp;</td>
-					<td class="text-muted"><?= $penjualan['ekspedisi'] ?> - <?= $penjualan['tgl_kirim'] ?></td>
-				</tr>
-			</table>
+			<br>
+			<br>
+			<strong><?= $penjualan['no_penjualan_mp'] ?></strong>
 		</div>
 	</div>
 
@@ -68,6 +60,24 @@
 				<td colspan="4" class="text-end">Grand Total</td>
 				<td class="text-end">Rp. <?= number_format($penjualan['grand_total'], 0, ',', '.') ?></td>
 			</tr>
+			<?php if ($penjualan['marketplace'] == 'Whatsapp') { ?>
+				<tr>
+					<td colspan="4" class="text-end">Bank Transfer</td>
+					<td class="text-end"><?= $penjualan['bank_transfer'] ?></td>
+				</tr>
+			<?php } ?>
 		</tbody>
 	</table>
+
+	<div class="text-center mt-5">
+		<button class="btn btn-success" onclick="print_nota('<?= $penjualan['nomor'] ?>')">Print <i class="fa-solid fa-print"></i></button>
+	</div>
 </div>
+
+
+<script>
+	function print_nota(nomor) {
+		var s5_taf_parent = window.location;
+		window.open('<?= base_url() ?>penjualan_online/print/' + nomor, 'page', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=900,height=750,left=50,top=50,titlebar=yes')
+	}
+</script>

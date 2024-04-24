@@ -35,10 +35,21 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-3 col-sm-6 col-12">
+					<div class="col-lg-3 col-sm-6 col-12" id="div-bank-transfer" hidden>
+						<div class="form-group">
+							<label>Bank Transfer</label>
+							<select class="select form-control" id="bank_transfer" name="bank_transfer">
+								<option value=""></option>
+								<option value="Bank BCA">Bank BCA</option>
+								<option value="Bank BRI">Bank BRI</option>
+								<option value="Bank Mandiri">Bank Mandiri</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-12" id="div-invoice-marketplace">
 						<div class="form-group">
 							<label>Invoice Marketplace</label>
-							<input required class="form-control" id="no_penjualan_mp" name="no_penjualan_mp" type="text">
+							<input class="form-control" id="no_penjualan_mp" name="no_penjualan_mp" type="text">
 						</div>
 					</div>
 					<div class="col-lg-3 col-sm-6 col-12">
@@ -66,7 +77,13 @@
 							<input class="form-control" id="tgl_kirim" name="tgl_kirim" type="text" required>
 						</div>
 					</div>
-					<div class="col-lg-10 col-sm-6 col-12">
+					<div class="col-lg-6 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Alamat Kirim</label>
+							<input class="form-control" id="alamat_kirim" name="alamat_kirim" type="text">
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Catatan</label>
 							<input class="form-control" id="catatan" name="catatan" type="text">
@@ -183,6 +200,15 @@
 		$('#pajak_platform').mask('000.000.000', {
 			reverse: true
 		});;
+		$('#marketplace').change(function() {
+			if ($(this).val() == 'Whatsapp') {
+				$('#div-bank-transfer').attr('hidden', false);
+				$('#div-invoice-marketplace').attr('hidden', true);
+			} else {
+				$('#div-bank-transfer').attr('hidden', true);
+				$('#div-invoice-marketplace').attr('hidden', false);
+			}
+		})
 
 		$(document).keypress(function(event) {
 			var keycode = (event.keyCode ? event.keyCode : event.which);

@@ -53,6 +53,16 @@
 		toastr[icon](pesan)
 	}
 
+	var penjualan_online = <?= (!empty($this->session->flashdata('penjualan_online')) ? json_encode($this->session->flashdata('penjualan_online')) : '""'); ?>;
+	if (pesan != '') {
+		detail('<?= base_url() ?>penjualan_online/show/' + penjualan_online, 'Detail Penjualan')
+	}
+
+	var penjualan_outlet = <?= (!empty($this->session->flashdata('penjualan_outlet')) ? json_encode($this->session->flashdata('penjualan_outlet')) : '""'); ?>;
+	if (pesan != '') {
+		detail('<?= base_url() ?>penjualan_outlet/show/' + penjualan_outlet, 'Detail Penjualan')
+	}
+
 	function alert_toastr(icon, pesan) {
 		toastr[icon](pesan)
 	}

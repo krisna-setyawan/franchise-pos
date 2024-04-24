@@ -29,8 +29,6 @@
 
 					<form method="POST" action="<?= base_url() ?>zauth" class="login-userset needs-validation" novalidate>
 
-						<img src="<?= base_url() ?>assets/image/Logo2.png" alt="img">
-
 						<div class="login-userheading mt-4">
 							<h3>Login</h3>
 						</div>
@@ -55,7 +53,7 @@
 
 				</div>
 				<div class="login-img">
-					<img src="<?= base_url() ?>assets/image/login-image.png" alt="img">
+					<img src="<?= base_url() ?>assets/image/login-bg.png" alt="img">
 				</div>
 			</div>
 		</div>

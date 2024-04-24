@@ -6,7 +6,7 @@
 				<h4>Data Penjualan Online</h4>
 			</div>
 			<div class="page-btn">
-				<a href="<?= base_url() ?>online/add" class="btn btn-added"><img src="<?= base_url() ?>assets/template/assets/img/icons/plus.svg" alt="img">Tambah Penjualan</a>
+				<a <?= checkAccess(57) == '0' ? 'hidden' : '' ?> href="<?= base_url() ?>online/add" class="btn btn-added"><img src="<?= base_url() ?>assets/template/assets/img/icons/plus.svg" alt="img">Tambah Penjualan</a>
 			</div>
 		</div>
 
@@ -58,10 +58,10 @@
 										<td class="text-end px-3"><?= number_format($dt->diskon, 0, ',', '.') ?></td>
 										<td class="text-end px-3"><?= number_format($dt->grand_total, 0, ',', '.') ?></td>
 										<td class="text-center">
-											<a class="me-3" href="<?= base_url() ?>online/edit/<?= $dt->nomor ?>">
+											<a <?= checkAccess(58) == '0' ? 'hidden' : '' ?> class="me-3" href="<?= base_url() ?>online/edit/<?= $dt->nomor ?>">
 												<img src="<?= base_url() ?>assets/template/assets/img/icons/edit.svg" alt="img">
 											</a>
-											<a class="me-3" href="javascript:void(0);" onclick="confirm_delete('<?= base_url() ?>penjualan_online/delete/<?= $dt->id ?>')">
+											<a <?= checkAccess(59) == '0' ? 'hidden' : '' ?> class="me-3" href="javascript:void(0);" onclick="confirm_delete('<?= base_url() ?>penjualan_online/delete/<?= $dt->id ?>')">
 												<img src="<?= base_url() ?>assets/template/assets/img/icons/delete.svg" alt="img">
 											</a>
 										</td>

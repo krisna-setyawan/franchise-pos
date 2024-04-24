@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 21, 2024 at 04:11 PM
+-- Generation Time: Apr 24, 2024 at 02:54 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.6
 
@@ -194,7 +194,7 @@ INSERT INTO `karyawan` (`id`, `id_cabang`, `jabatan`, `nik`, `nama`, `alamat`, `
 (1, 1, '', '001', 'Galih Restu', 'Malang', '082230293301', '1234567891234567', NULL),
 (2, 4, '', '002', 'Silviana', 'Malang', '081358055375', '1234561234561234', NULL),
 (3, 2, '', '003', 'Putri', 'Malang', '085787987980', '1234567891234567', NULL),
-(6, 5, '', '004', 'Galih', 'Malang', '08123456789', '1234567890', NULL),
+(6, 1, 'Supervisor', '004', 'Galih', 'Malang', '08123456789', '1234567890', NULL),
 (7, 1, '', '005', 'Devita', 'Malang', '0812341234', '1234567890', NULL),
 (8, 2, '', '006', 'Debie', 'sby', '0000', '00', NULL),
 (9, 1, '', '003', 'Misbachul Firdausiah', 'Mess Manuhua, Halim Perdanakusuma, Jakarta Timur', '087859881218', '00', NULL),
@@ -78810,6 +78810,8 @@ CREATE TABLE `penjualan_online` (
   `pajak_platform` int NOT NULL,
   `ekspedisi` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `tgl_kirim` date DEFAULT NULL,
+  `bank_transfer` enum('Saldo Marketplace','Bank BCA','Bank BRI','Bank Mandiri') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Saldo Marketplace',
+  `alamat_kirim` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `catatan` varchar(70) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -78817,12 +78819,14 @@ CREATE TABLE `penjualan_online` (
 -- Dumping data for table `penjualan_online`
 --
 
-INSERT INTO `penjualan_online` (`id`, `id_cabang`, `nomor`, `no_penjualan_mp`, `marketplace`, `id_customer`, `tanggal`, `total_hg_produk`, `diskon`, `grand_total`, `pajak_platform`, `ekspedisi`, `tgl_kirim`, `catatan`) VALUES
-(4, 1, 'ONL240406001', '', 'Shopee', 1, '2024-04-06', 750000, 50000, 700000, 0, '', NULL, ''),
-(5, 1, 'ONL240406002', 'asdas12312', 'Tokopedia', 2, '2024-04-06', 2250000, 0, 2250000, 0, '', NULL, 'note'),
-(7, 1, 'ONL240407001', '456789', 'Lazada', 2, '2024-04-07', 400000, 0, 400000, 0, '', NULL, 'catat'),
-(11, 1, 'ONL240415001', '123', 'Lazada', 4, '2024-04-15', 740000, 0, 740000, 15000, 'JNT', '2024-04-16', 'note'),
-(12, 1, 'ONL240420001', '\'', 'Whatsapp', 4, '2024-04-20', 129990, 0, 129990, 0, 'J&T', '0000-00-00', '');
+INSERT INTO `penjualan_online` (`id`, `id_cabang`, `nomor`, `no_penjualan_mp`, `marketplace`, `id_customer`, `tanggal`, `total_hg_produk`, `diskon`, `grand_total`, `pajak_platform`, `ekspedisi`, `tgl_kirim`, `bank_transfer`, `alamat_kirim`, `catatan`) VALUES
+(4, 1, 'ONL240406001', '', 'Shopee', 1, '2024-04-06', 750000, 50000, 700000, 0, '', NULL, 'Saldo Marketplace', '', ''),
+(5, 1, 'ONL240406002', 'asdas12312', 'Tokopedia', 2, '2024-04-06', 2250000, 0, 2250000, 0, '', NULL, 'Saldo Marketplace', '', 'note'),
+(7, 1, 'ONL240407001', '456789', 'Lazada', 2, '2024-04-07', 400000, 0, 400000, 0, '', NULL, 'Saldo Marketplace', '', 'catat'),
+(11, 1, 'ONL240415001', '123', 'Lazada', 4, '2024-04-15', 740000, 0, 740000, 15000, 'JNT', '2024-04-16', 'Saldo Marketplace', '', 'note'),
+(12, 1, 'ONL240420001', '\'', 'Whatsapp', 4, '2024-04-20', 129990, 0, 129990, 0, 'J&T', '0000-00-00', 'Saldo Marketplace', '', ''),
+(13, 5, 'ONL240422001', '-', 'Shopee', 4, '2024-04-22', 45000, 0, 45000, 0, 'jne', '2024-04-22', 'Saldo Marketplace', '', '-'),
+(16, 1, 'ONL240424001', '', 'Whatsapp', 2, '2024-04-24', 200000, 0, 200000, 0, 'JNE', '2024-04-24', 'Bank BCA', 'alamat kirim cus2', '-');
 
 -- --------------------------------------------------------
 
@@ -78850,7 +78854,9 @@ INSERT INTO `penjualan_online_produk` (`id`, `id_penjualan_online`, `id_produk`,
 (9, 5, 4, 10, 150000, 0, 1500000),
 (10, 7, 8, 5, 80000, 0, 400000),
 (15, 11, 8, 10, 80000, 6000, 740000),
-(16, 12, 7, 2, 65000, 5, 129990);
+(16, 12, 7, 2, 65000, 5, 129990),
+(17, 13, 16, 1, 45000, 0, 45000),
+(20, 16, 15, 4, 50000, 0, 200000);
 
 -- --------------------------------------------------------
 
@@ -78975,11 +78981,11 @@ INSERT INTO `produk` (`id`, `id_cabang`, `id_jenis`, `id_label`, `kode`, `nama`,
 (9, 1, 3, 2, '168423', 'Produk H', 140000, 0, 0, 0, 0, 0, 0, 0, '-'),
 (10, 4, 2, 1, '915898', 'Produk 1 cabang blitar', 325000, 0, 0, 0, 0, 0, 0, 50, '-'),
 (11, 4, 3, 2, '625923', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 50, '-'),
-(12, 5, 3, 1, '218598', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 900, '-'),
-(13, 5, 2, 2, '337845', 'Facial Wash Glowing', 35000, 0, 0, 0, 0, 0, 0, 500, '-'),
+(12, 5, 2, 2, '218598', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 900, '-'),
+(13, 5, 2, 2, '337845', 'Facial Wash Glowing', 35000, 50000, 0, 0, 0, 0, 50000, 500, '-'),
 (14, 1, 3, 2, '562952', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 500, '-'),
-(15, 1, 2, 2, '864957', 'Facial Wash Glowing', 35000, 0, 0, 0, 0, 0, 0, 100, '-'),
-(16, 5, 3, 1, '452647', 'Produk 3', 50000, 45000, 35000, 25000, 15000, 5000, 55000, 0, '-');
+(15, 1, 2, 2, '864957', 'Facial Wash Glowing', 35000, 50000, 0, 0, 0, 0, 50000, 96, '-'),
+(16, 5, 3, 1, '452647', 'Produk 3', 50000, 45000, 35000, 25000, 15000, 5000, 55000, -1, '-');
 
 -- --------------------------------------------------------
 
@@ -79120,7 +79126,7 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 (54, 11, 21),
 (55, 11, 51),
 (56, 11, 52),
-(57, 11, 53),
+(57, 11, 56),
 (58, 11, 61),
 (59, 11, 62),
 (60, 11, 63),
@@ -79132,7 +79138,7 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 (66, 12, 31),
 (67, 12, 51),
 (68, 12, 52),
-(69, 12, 53),
+(69, 12, 56),
 (70, 12, 61),
 (71, 12, 62),
 (72, 12, 81),
@@ -79143,7 +79149,7 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 (77, 13, 31),
 (78, 13, 51),
 (79, 13, 52),
-(80, 13, 53),
+(80, 13, 56),
 (81, 13, 61),
 (82, 13, 62),
 (83, 13, 63),
@@ -79161,7 +79167,7 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 (95, 14, 31),
 (96, 14, 51),
 (97, 14, 52),
-(98, 14, 53),
+(98, 14, 56),
 (99, 14, 61),
 (100, 14, 62),
 (101, 14, 63),
@@ -79182,7 +79188,7 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 (117, 16, 31),
 (118, 16, 51),
 (119, 16, 52),
-(120, 16, 53),
+(120, 16, 56),
 (121, 16, 61),
 (122, 16, 62),
 (123, 16, 63),
@@ -79199,7 +79205,12 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 (134, 17, 61),
 (135, 17, 62),
 (136, 17, 63),
-(137, 17, 2);
+(137, 17, 2),
+(139, 13, 55),
+(140, 13, 58),
+(141, 13, 59),
+(142, 13, 57),
+(143, 13, 53);
 
 -- --------------------------------------------------------
 
@@ -79210,7 +79221,7 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 CREATE TABLE `user_menu` (
   `id` int NOT NULL,
   `menu` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
-  `level` enum('1','2') COLLATE utf8mb4_general_ci NOT NULL,
+  `level` enum('1','2','3') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `parent` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `icon` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `url` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
@@ -79229,7 +79240,12 @@ INSERT INTO `user_menu` (`id`, `menu`, `level`, `parent`, `icon`, `url`, `has_ch
 (31, 'Treatment', '1', '-', 'jasa.svg', 'jasa', 'n'),
 (51, 'Penjualan', '1', '-', 'cashier.svg', 'penjualan', 'y'),
 (52, 'Outlet', '2', '51', '<i class=\"fa-3x fa-solid fa-envelope\"></i>', 'outlet', 'n'),
-(53, 'Online', '2', '51', '<i class=\"fa-3x fa-solid fa-right-from-bracket fa-rotate-270\"></i>', 'online', 'n'),
+(53, 'Tambah', '3', '52', '-', '-', 'n'),
+(55, 'Hapus', '3', '52', '-', '-', 'n'),
+(56, 'Online', '2', '51', '<i class=\"fa-3x fa-solid fa-right-from-bracket fa-rotate-270\"></i>', 'online', 'n'),
+(57, 'Tambah', '3', '56', '-', '-', 'n'),
+(58, 'Edit', '3', '56', '-', '-', 'n'),
+(59, 'Hapus', '3', '56', '-', '-', 'n'),
 (61, 'Gudang', '1', '-', 'gudang.svg', 'gudang', 'y'),
 (62, 'Inbound', '2', '61', '<i class=\"fa-3x fa-solid fa-boxes-packing\"></i>', 'inbound', 'n'),
 (63, 'Outbound', '2', '61', '<i class=\"fa-3x fa-solid fa-shapes\"></i>', 'outbound', 'n'),
@@ -79501,19 +79517,19 @@ ALTER TABLE `outbound_detail`
 -- AUTO_INCREMENT for table `penjualan_online`
 --
 ALTER TABLE `penjualan_online`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `penjualan_online_produk`
 --
 ALTER TABLE `penjualan_online_produk`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet`
 --
 ALTER TABLE `penjualan_outlet`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet_jasa`
@@ -79525,7 +79541,7 @@ ALTER TABLE `penjualan_outlet_jasa`
 -- AUTO_INCREMENT for table `penjualan_outlet_produk`
 --
 ALTER TABLE `penjualan_outlet_produk`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -79561,7 +79577,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access`
 --
 ALTER TABLE `user_access`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `user_menu`

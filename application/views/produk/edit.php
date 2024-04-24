@@ -12,11 +12,11 @@
 
 					<div class="row">
 						<div class="col-md-6">
-							<input id="kode" name="kode" type="hidden" value="<?= $produk['kode'] ?>">
+							<input id="oldkode" name="oldkode" type="hidden" value="<?= $produk['kode'] ?>">
 							<div class="col-lg-12 col-sm-12 col-12">
 								<div class="form-group">
 									<label>Kode</label>
-									<input class="form-control" disabled id="kode" name="kode" type="text" value="<?= $produk['kode'] ?>">
+									<input class="form-control" required id="kode" name="kode" type="text" value="<?= $produk['kode'] ?>">
 								</div>
 							</div>
 							<div class="col-lg-12 col-sm-12 col-12">

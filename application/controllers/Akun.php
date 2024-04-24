@@ -106,10 +106,12 @@ class Akun extends CI_Controller
 		$user_menu = $this->db->get_where('user_menu', ['id !=' => 1])->result();
 
 		foreach ($user_menu as $um) {
-			if ($um->level == 2) {
+			if ($um->level == 3) {
 				$class_td = 'class="ps-5"';
+			} else if ($um->level == 2) {
+				$class_td = 'class="ps-4"';
 			} else {
-				$class_td = 'class="ps-3"';
+				$class_td = 'class="ps-2"';
 			}
 			echo "
         <tr>

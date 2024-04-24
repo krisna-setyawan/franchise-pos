@@ -32,11 +32,21 @@
 								<option <?= $penjualan['marketplace'] == 'Bukalapak' ? 'selected' : '' ?> value="Bukalapak">Bukalapak</option>
 								<option <?= $penjualan['marketplace'] == 'Blibli' ? 'selected' : '' ?> value="Blibli">Blibli</option>
 								<option <?= $penjualan['marketplace'] == 'Whatsapp' ? 'selected' : '' ?> value="Whatsapp">Whatsapp</option>
-								<option <?= $penjualan['marketplace'] == 'Marketplace' ? 'selected' : '' ?> value="Marketplace Lain">Marketplace Lain</option>
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-3 col-sm-6 col-12">
+					<div class="col-lg-3 col-sm-6 col-12" id="div-bank-transfer" <?= $penjualan['marketplace'] !== 'Whatsapp' ? 'hidden' : '' ?>>
+						<div class="form-group">
+							<label>Bank Transfer</label>
+							<select class="select form-control" id="bank_transfer" name="bank_transfer">
+								<option value=""></option>
+								<option <?= $penjualan['bank_transfer'] == 'Bank BCA' ? 'selected' : '' ?> value="Bank BCA">Bank BCA</option>
+								<option <?= $penjualan['bank_transfer'] == 'Bank BRI' ? 'selected' : '' ?> value="Bank BRI">Bank BRI</option>
+								<option <?= $penjualan['bank_transfer'] == 'Bank Mandiri' ? 'selected' : '' ?> value="Bank Mandiri">Bank Mandiri</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-12" id="div-invoice-marketplace" <?= $penjualan['marketplace'] == 'Whatsapp' ? 'hidden' : '' ?>>
 						<div class="form-group">
 							<label>Invoice Marketplace</label>
 							<input class="form-control" id="no_penjualan_mp" name="no_penjualan_mp" type="text" value="<?= $penjualan['no_penjualan_mp'] ?>">
@@ -67,7 +77,13 @@
 							<input class="form-control" id="tgl_kirim" name="tgl_kirim" type="text" required value="<?= $penjualan['tgl_kirim'] ?>">
 						</div>
 					</div>
-					<div class="col-lg-10 col-sm-6 col-12">
+					<div class="col-lg-6 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Alamat Kirim</label>
+							<input class="form-control" id="alamat_kirim" name="alamat_kirim" type="text" value="<?= $penjualan['alamat_kirim'] ?>">
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Catatan</label>
 							<input class="form-control" id="catatan" name="catatan" type="text" value="<?= $penjualan['catatan'] ?>">
@@ -219,6 +235,15 @@
 		$("input[name='diskon_item[]']").mask('000.000.000', {
 			reverse: true
 		});
+		$('#marketplace').change(function() {
+			if ($(this).val() == 'Whatsapp') {
+				$('#div-bank-transfer').attr('hidden', false);
+				$('#div-invoice-marketplace').attr('hidden', true);
+			} else {
+				$('#div-bank-transfer').attr('hidden', true);
+				$('#div-invoice-marketplace').attr('hidden', false);
+			}
+		})
 
 		$(document).keypress(function(event) {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
