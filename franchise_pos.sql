@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2024 at 02:54 PM
+-- Generation Time: Apr 28, 2024 at 09:13 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.6
 
@@ -70,9 +70,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `kode`, `nama`, `id_kelurahan`, `id_kecamatan`, `id_kota`, `id_provinsi`, `alamat`, `telp`, `cabang_register`) VALUES
-(1, '47456', 'customer 1', 36801, 3505130, 3505, 35, 'alamat customer 1', '085111111111', 1),
-(2, '44895', 'customer 2', 67941, 3507300, 3507, 35, 'alamat customer 2', '085222222222', 1),
-(4, '79676', 'customer blitar 1', 43740, 3572030, 3572, 35, 'alamat cus blitar', '085777999444', 4);
+(5, '63184', 'krisna', 36805, 3505130, 3505, 35, 'alamat', '0854331697720', 1);
 
 -- --------------------------------------------------------
 
@@ -94,11 +92,8 @@ CREATE TABLE `inbound` (
 --
 
 INSERT INTO `inbound` (`id`, `id_cabang`, `nomor`, `tanggal`, `asal`, `keterangan`) VALUES
-(5, 1, 'INB-2024-001', '2024-04-01', 'asal', '-'),
 (8, 4, 'INB-2024-002', '2024-04-07', 'Malang', '-'),
-(9, 4, 'INB-2024-003', '2024-04-19', 'Gudang', '-'),
-(10, 1, 'INB-2024-004', '2024-04-20', 'G', 'U'),
-(11, 1, 'INB-2024-005', '2024-04-20', 'Gudang Pusat', '-');
+(9, 4, 'INB-2024-003', '2024-04-19', 'Gudang', '-');
 
 -- --------------------------------------------------------
 
@@ -118,13 +113,8 @@ CREATE TABLE `inbound_detail` (
 --
 
 INSERT INTO `inbound_detail` (`id`, `id_inbound`, `id_produk`, `qty`) VALUES
-(9, 5, 8, 100),
-(10, 5, 3, 45),
 (11, 8, 10, 35),
-(12, 9, 11, 25),
-(13, 10, 8, 10),
-(14, 11, 15, 100),
-(15, 11, 14, 500);
+(12, 9, 11, 25);
 
 -- --------------------------------------------------------
 
@@ -147,7 +137,78 @@ CREATE TABLE `jasa` (
 --
 
 INSERT INTO `jasa` (`id`, `id_cabang`, `id_jenis`, `kode`, `nama`, `harga`, `keterangan`) VALUES
-(1, 1, 2, 7619, 'jasa 1', 250000, '-');
+(2, 5, 1, 1001, 'Facial Whitening', 200000, '-'),
+(3, 5, 1, 1002, 'Facial Acne', 225000, '-'),
+(4, 5, 1, 1003, 'Facial Glasskin', 240000, '-'),
+(5, 5, 1, 1004, 'Facial Bright Detox', 250000, '-'),
+(6, 5, 2, 2001, 'Hifu Dahi', 250000, '-'),
+(7, 5, 2, 2002, 'Hifu Double Chin', 750000, '-'),
+(8, 5, 2, 2003, 'Hifu Full Face', 2700000, '-'),
+(9, 5, 2, 2004, 'Hifu Mata', 450000, '-'),
+(10, 5, 2, 2005, 'Hifu Miss V', 500000, '-'),
+(11, 5, 2, 2006, 'Hifu Pipi', 900000, '-'),
+(12, 5, 2, 2007, 'Hifu Shoot', 14000, '-'),
+(13, 5, 3, 3001, 'Hydradermabrasi', 300000, '-'),
+(14, 5, 3, 3002, 'Microdermabrasi', 300000, '-'),
+(15, 5, 3, 3003, 'RF Full Face', 200000, '-'),
+(16, 5, 3, 3004, 'RF Eye Bag', 150000, '-'),
+(17, 5, 10, 4001, 'IPL Acne', 300000, '-'),
+(18, 5, 10, 4002, 'IPL Dark Spot', 300000, '-'),
+(19, 5, 10, 4003, 'IPL Underarm', 350000, '-'),
+(20, 5, 10, 4004, 'IPL HR Pubis', 350000, '-'),
+(21, 5, 10, 4005, 'IPL HR Foot', 400000, '-'),
+(22, 5, 10, 4006, 'IPL HR Hand', 400000, '-'),
+(23, 5, 10, 4007, 'IPL Rejuve', 300000, '-'),
+(24, 5, 10, 4008, 'IPL Vascular', 300000, '-'),
+(25, 5, 10, 4009, 'IPL HR Face', 350000, '-'),
+(26, 5, 5, 5001, 'Laser Blackdoll', 370000, '-'),
+(27, 5, 5, 5002, 'Laser Glasskin', 420000, '-'),
+(28, 5, 5, 5003, 'Laser Undearm', 300000, '-'),
+(29, 5, 5, 5004, 'Laser Acne', 420000, '-'),
+(30, 5, 5, 5005, 'Laser Melasma', 420000, '-'),
+(32, 5, 5, 5007, 'Laser Bibir', 320000, '-'),
+(33, 5, 5, 5006, 'Laser Eyebrow Remover', 370000, '-'),
+(34, 5, 5, 5008, 'Laser Pore Shrinking', 420000, '-'),
+(35, 5, 5, 5009, 'Laser Tatto 1x1 CM', 15000, '-'),
+(36, 5, 4, 6001, 'Peeling Acne', 275000, '-'),
+(37, 5, 4, 6002, 'Peeling Whitening', 275000, '-'),
+(38, 5, 4, 6003, 'Peeling Scar', 275000, '-'),
+(39, 5, 4, 6004, 'Peeling Melasma', 275000, '-'),
+(40, 5, 4, 6005, 'Peeling Pori', 275000, '-'),
+(41, 5, 4, 6006, 'Facial + Peeling Punggung', 475000, '-'),
+(42, 5, 6, 7001, 'Meso Doublechin', 1400000, '-'),
+(43, 5, 6, 7002, 'Meso Whitening', 825000, '-'),
+(44, 5, 6, 7003, 'Meso Melasma', 825000, '-'),
+(45, 5, 6, 7004, 'Meso Melasma Premium', 1250000, '-'),
+(46, 5, 6, 7005, 'Meso Eye Contour', 1000000, '-'),
+(47, 5, 6, 7006, 'Meso Hair', 1200000, '-'),
+(48, 5, 6, 7007, 'Meso Hair Inj', 800000, '-'),
+(50, 5, 6, 7008, 'Demapen', 625000, '-'),
+(51, 5, 6, 7009, 'PRP', 775000, '-'),
+(52, 5, 6, 70010, 'PRP Hair', 775000, '-'),
+(53, 5, 6, 70011, 'DNA Salmon', 2500000, '-'),
+(54, 5, 6, 70012, 'DNA Salmon Premium', 2850000, '-'),
+(55, 5, 6, 70013, 'Skin Booster', 1500000, '-'),
+(56, 5, 6, 70014, 'Skin Booster Premium', 2500000, '-'),
+(57, 5, 6, 70015, 'Skin Booster Exo', 3500000, '-'),
+(58, 5, 6, 70016, 'Skin Booster Nucleofill', 5000000, '-'),
+(59, 5, 6, 70015, 'Skin Booster Profhilo', 6000000, '-'),
+(60, 5, 11, 8001, 'Botox Full Face', 2750000, '40 unit'),
+(61, 5, 11, 8002, 'Botox V-Shape', 2750000, '40 unit'),
+(62, 5, 11, 8003, 'Botox Injection', 750000, '10 unit'),
+(63, 5, 8, 9001, 'Threadlift Nose', 500000, '-'),
+(64, 5, 8, 9002, 'Threadlift Cheek', 650000, '-'),
+(65, 5, 8, 9003, 'Threadlift Double Chin', 4000000, '-'),
+(66, 5, 8, 9004, 'Threadlift Foxy Eyes', 4000000, '-'),
+(67, 5, 9, 10001, 'Filler Nose', 2750000, '-'),
+(68, 5, 9, 10002, 'Filler Lip', 2750000, '-'),
+(69, 5, 9, 10003, 'Filler Chin', 2750000, '-'),
+(70, 5, 9, 10004, 'Filler Eyebag', 3500000, '-'),
+(71, 5, 9, 10005, 'Filler Smile Line', 2750000, '-'),
+(73, 1, 1, 1, 'Acne Facial', 225000, '-'),
+(74, 1, 1, 2, 'Bright Detox Facial', 250000, '-'),
+(75, 1, 1, 3, 'Glasskin Facial', 240000, '-'),
+(76, 1, 1, 4, 'Whitening Facial', 200000, '-');
 
 -- --------------------------------------------------------
 
@@ -165,8 +226,19 @@ CREATE TABLE `jasa_jenis` (
 --
 
 INSERT INTO `jasa_jenis` (`id`, `nama`) VALUES
-(1, 'Facial'),
-(2, 'Hifu');
+(1, 'Facial Treatment'),
+(2, 'Hifu Treatment'),
+(3, 'Advan Treatment'),
+(4, 'Chemical Treatment'),
+(5, 'Laser Treatment'),
+(6, 'Medical Treatment'),
+(7, 'Infus/Injection'),
+(8, 'Threadlift Treatment'),
+(9, 'Filler Treatment'),
+(10, 'IPL Treatment'),
+(11, 'Botox Treatment'),
+(12, 'Body Treatment'),
+(13, 'Tindakan');
 
 -- --------------------------------------------------------
 
@@ -180,9 +252,9 @@ CREATE TABLE `karyawan` (
   `jabatan` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
   `nik` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
   `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `alamat` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `telp` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `kontak_darurat` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
+  `telp` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `kontak_darurat` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -191,14 +263,22 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`id`, `id_cabang`, `jabatan`, `nik`, `nama`, `alamat`, `telp`, `kontak_darurat`, `deleted_at`) VALUES
-(1, 1, '', '001', 'Galih Restu', 'Malang', '082230293301', '1234567891234567', NULL),
-(2, 4, '', '002', 'Silviana', 'Malang', '081358055375', '1234561234561234', NULL),
-(3, 2, '', '003', 'Putri', 'Malang', '085787987980', '1234567891234567', NULL),
-(6, 1, 'Supervisor', '004', 'Galih', 'Malang', '08123456789', '1234567890', NULL),
-(7, 1, '', '005', 'Devita', 'Malang', '0812341234', '1234567890', NULL),
-(8, 2, '', '006', 'Debie', 'sby', '0000', '00', NULL),
-(9, 1, '', '003', 'Misbachul Firdausiah', 'Mess Manuhua, Halim Perdanakusuma, Jakarta Timur', '087859881218', '00', NULL),
-(10, 5, '', '007', 'Arek Gudang New', 'Alamat Jauh', '0854331697720', '456456', NULL);
+(1, 1, 'Staff', '000', 'Noven', 'Blitar', '-', '-', NULL),
+(11, 1, 'Front Office', '001', 'Devita Sari', 'Jl. Kebalen Wetan nomor 23, Kel. Kotalama, Kec. Kedungkandang, Kota Malang', '082247104755', '081333202360', NULL),
+(12, 1, 'Admin', '002', 'Galih Restu Rahayu', 'Jl. Kresno, gg Petruk no. 15, Polehan, Kota Malang', '082230293301', '082236939121', NULL),
+(13, 1, 'Supervisor Management', '003', 'Misbachul Firdausiah', 'Jl. IR Rais IV/220, Kel. Bareng, Kec. Klojen, Kota Malang', '087859881218', '087859043138', NULL),
+(14, 1, 'Perawat', '004', 'Cici Andriati', 'Jl. Sukoanyar Cokro RT003/RW003, Kec. Pakis, Kabupaten Malang', '083834166285', '082142037236', NULL),
+(15, 1, 'Digital Marketing', '007', 'Tya Mahendy Fitrizia', 'Jl. Permadi No. 24, RT03/RW04, Kel. Polehan, Kec. Blimbing, Kota Malang', '089602256209', '089609791138', NULL),
+(16, 1, 'Office Girl', '008', 'Bintang Zahrotul Mufidah', 'Jl. Raya Sawojajar no. 20', '08883510765', '083848220533', NULL),
+(17, 1, 'Beautician', '009', 'Almania Nur Nafisa', 'Jl. Kenikir No.57, RT03/RW04, Bumiayu, Kota Malang', '087818184304', '081334299012', NULL),
+(18, 1, 'Beautician', '010', 'Icha Puspa Dinda Agus Saputri', 'Jl. Puntodewo Selatan RT06/RW05, Kel. Polehan, Kec. Blimbing, Kota Malang', '081216792811', '083846592021', NULL),
+(19, 1, 'Digital Marketing', '011', 'Distia Lailatul Ramadhani', 'Jl. Kebonsari V No. 38, Kel. Kebonsari, Kec. Sukun, Kota Malang', '081336237255', '0881082475438', NULL),
+(20, 1, 'Digital Marketing', '012', 'Camandira Razakimah Wicaksono', 'Jl. Cucak Rawun IV, 8F no.4', '082139124450', '082132400222', NULL),
+(21, 1, 'Dokter', '006', 'dr. Andita Garindra Putri', 'Bandara Palmerah XVI/Q39', '081235148626', '0817592464', NULL),
+(22, 1, 'Front Office', '005', 'Putri Amelia Nanda Efendi', 'Muharto 7A', '0881027948622', '0895613228900', NULL),
+(23, 4, 'Admin', '013', 'Silviana', 'Jl. Simpang Teluk Bayur No. 9C, gg 1 RT03/RW08, Kel. Pandanwangi, Kec. Blimbing,', '081358055375', '082335077378', NULL),
+(24, 5, '-', '0', 'Acha Yuli', '-', '-', '-', NULL),
+(25, 5, 'Admin', '014', 'Sukarti', 'Jl. Locari No. 20, RT04/RW14, Lowokwaru, Kota Malang', '085706518449', '-', NULL);
 
 -- --------------------------------------------------------
 
@@ -78764,7 +78844,6 @@ CREATE TABLE `outbound` (
 --
 
 INSERT INTO `outbound` (`id`, `id_cabang`, `nomor`, `tanggal`, `tujuan`, `keterangan`) VALUES
-(3, 1, 'OTB-2024-001', '2024-04-02', 'ke brazil', '-'),
 (4, 5, 'OTB-2024-002', '2024-04-20', 'Acha Skincare Cabang Malang', '-');
 
 -- --------------------------------------------------------
@@ -78785,8 +78864,6 @@ CREATE TABLE `outbound_detail` (
 --
 
 INSERT INTO `outbound_detail` (`id`, `id_outbound`, `id_produk`, `qty`) VALUES
-(11, 3, 7, 7),
-(12, 3, 9, 2),
 (13, 4, 13, 500),
 (14, 4, 12, 100);
 
@@ -78810,23 +78887,10 @@ CREATE TABLE `penjualan_online` (
   `pajak_platform` int NOT NULL,
   `ekspedisi` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `tgl_kirim` date DEFAULT NULL,
-  `bank_transfer` enum('Saldo Marketplace','Bank BCA','Bank BRI','Bank Mandiri') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Saldo Marketplace',
+  `bank_transfer` enum('Saldo Marketplace','Bank BCA','Bank BRI','Bank Mandiri') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Saldo Marketplace',
   `alamat_kirim` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `catatan` varchar(70) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `penjualan_online`
---
-
-INSERT INTO `penjualan_online` (`id`, `id_cabang`, `nomor`, `no_penjualan_mp`, `marketplace`, `id_customer`, `tanggal`, `total_hg_produk`, `diskon`, `grand_total`, `pajak_platform`, `ekspedisi`, `tgl_kirim`, `bank_transfer`, `alamat_kirim`, `catatan`) VALUES
-(4, 1, 'ONL240406001', '', 'Shopee', 1, '2024-04-06', 750000, 50000, 700000, 0, '', NULL, 'Saldo Marketplace', '', ''),
-(5, 1, 'ONL240406002', 'asdas12312', 'Tokopedia', 2, '2024-04-06', 2250000, 0, 2250000, 0, '', NULL, 'Saldo Marketplace', '', 'note'),
-(7, 1, 'ONL240407001', '456789', 'Lazada', 2, '2024-04-07', 400000, 0, 400000, 0, '', NULL, 'Saldo Marketplace', '', 'catat'),
-(11, 1, 'ONL240415001', '123', 'Lazada', 4, '2024-04-15', 740000, 0, 740000, 15000, 'JNT', '2024-04-16', 'Saldo Marketplace', '', 'note'),
-(12, 1, 'ONL240420001', '\'', 'Whatsapp', 4, '2024-04-20', 129990, 0, 129990, 0, 'J&T', '0000-00-00', 'Saldo Marketplace', '', ''),
-(13, 5, 'ONL240422001', '-', 'Shopee', 4, '2024-04-22', 45000, 0, 45000, 0, 'jne', '2024-04-22', 'Saldo Marketplace', '', '-'),
-(16, 1, 'ONL240424001', '', 'Whatsapp', 2, '2024-04-24', 200000, 0, 200000, 0, 'JNE', '2024-04-24', 'Bank BCA', 'alamat kirim cus2', '-');
 
 -- --------------------------------------------------------
 
@@ -78844,20 +78908,6 @@ CREATE TABLE `penjualan_online_produk` (
   `total` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `penjualan_online_produk`
---
-
-INSERT INTO `penjualan_online_produk` (`id`, `id_penjualan_online`, `id_produk`, `qty`, `satuan`, `diskon`, `total`) VALUES
-(1, 4, 1, 5, 150000, 0, 750000),
-(8, 5, 1, 5, 150000, 0, 750000),
-(9, 5, 4, 10, 150000, 0, 1500000),
-(10, 7, 8, 5, 80000, 0, 400000),
-(15, 11, 8, 10, 80000, 6000, 740000),
-(16, 12, 7, 2, 65000, 5, 129990),
-(17, 13, 16, 1, 45000, 0, 45000),
-(20, 16, 15, 4, 50000, 0, 200000);
-
 -- --------------------------------------------------------
 
 --
@@ -78867,16 +78917,19 @@ INSERT INTO `penjualan_online_produk` (`id`, `id_penjualan_online`, `id_produk`,
 CREATE TABLE `penjualan_outlet` (
   `id` int NOT NULL,
   `id_cabang` int NOT NULL,
+  `id_user` int NOT NULL,
   `nomor` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `id_customer` int NOT NULL,
   `tanggal` date NOT NULL,
+  `jam` time NOT NULL,
   `total_hg_produk` int NOT NULL,
   `total_hg_jasa` int NOT NULL,
   `diskon` int NOT NULL,
   `grand_total` int NOT NULL,
   `bayar` int NOT NULL,
   `kembalian` int NOT NULL,
-  `jenis_bayar` enum('Cash','Transfer','Kartu Kredit','') COLLATE utf8mb4_general_ci NOT NULL,
+  `jenis_bayar` enum('Cash','Transfer','Kartu Kredit','Debit') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `bank` enum('-','BCA','BRI','Mandiri') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `catatan` varchar(70) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -78884,12 +78937,9 @@ CREATE TABLE `penjualan_outlet` (
 -- Dumping data for table `penjualan_outlet`
 --
 
-INSERT INTO `penjualan_outlet` (`id`, `id_cabang`, `nomor`, `id_customer`, `tanggal`, `total_hg_produk`, `total_hg_jasa`, `diskon`, `grand_total`, `bayar`, `kembalian`, `jenis_bayar`, `catatan`) VALUES
-(3, 1, 'OTL240407002', 4, '2024-04-07', 1650000, 0, 50000, 1600000, 1600000, 0, 'Cash', ''),
-(4, 1, 'OTL240407003', 1, '2024-04-07', 1650000, 0, 0, 1650000, 1700000, 50000, 'Cash', ''),
-(5, 1, 'OTL240407004', 2, '2024-04-07', 800000, 250000, 0, 1050000, 1100000, 50000, 'Cash', ''),
-(9, 1, 'OTL240415001', 2, '2024-04-15', 1225000, 250000, 5000, 1470000, 0, 0, 'Kartu Kredit', 'note'),
-(10, 1, 'OTL240420001', 2, '2024-04-20', 0, 250000, 0, 250000, 0, 0, 'Cash', '');
+INSERT INTO `penjualan_outlet` (`id`, `id_cabang`, `id_user`, `nomor`, `id_customer`, `tanggal`, `jam`, `total_hg_produk`, `total_hg_jasa`, `diskon`, `grand_total`, `bayar`, `kembalian`, `jenis_bayar`, `bank`, `catatan`) VALUES
+(15, 1, 18, 'OTL240428001', 5, '2024-04-28', '15:06:18', 260000, 200000, 0, 460000, 500000, 40000, 'Cash', 'BCA', ''),
+(16, 1, 18, 'OTL240428002', 5, '2024-04-28', '15:07:30', 135000, 0, 0, 135000, 135000, 0, 'Debit', 'BRI', '');
 
 -- --------------------------------------------------------
 
@@ -78909,9 +78959,7 @@ CREATE TABLE `penjualan_outlet_jasa` (
 --
 
 INSERT INTO `penjualan_outlet_jasa` (`id`, `id_penjualan_outlet`, `id_jasa`, `harga`) VALUES
-(3, 5, 1, 250000),
-(6, 9, 1, 250000),
-(7, 10, 1, 250000);
+(9, 15, 76, 200000);
 
 -- --------------------------------------------------------
 
@@ -78934,13 +78982,9 @@ CREATE TABLE `penjualan_outlet_produk` (
 --
 
 INSERT INTO `penjualan_outlet_produk` (`id`, `id_penjualan_outlet`, `id_produk`, `qty`, `satuan`, `diskon`, `total`) VALUES
-(2, 3, 8, 5, 80000, 0, 400000),
-(3, 3, 3, 5, 250000, 0, 1250000),
-(4, 4, 3, 5, 250000, 0, 1250000),
-(5, 4, 8, 5, 80000, 0, 400000),
-(6, 5, 8, 10, 80000, 0, 800000),
-(10, 9, 3, 5, 250000, 5000, 1225000),
-(11, 10, 1, 0, 150000, 0, 0);
+(17, 15, 17, 1, 110000, 0, 110000),
+(18, 15, 19, 1, 150000, 0, 150000),
+(19, 16, 18, 1, 135000, 0, 135000);
 
 -- --------------------------------------------------------
 
@@ -78971,21 +79015,14 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `id_cabang`, `id_jenis`, `id_label`, `kode`, `nama`, `hg_outlet`, `hg_shopee`, `hg_tokopedia`, `hg_lazada`, `hg_bukalapak`, `hg_blibli`, `hg_whatsapp`, `stok`, `keterangan`) VALUES
-(1, 1, 2, 1, '716262', 'Produk A', 150000, 0, 0, 0, 0, 0, 0, 40, 'produk favorit'),
-(3, 1, 2, 1, '367869', 'Produk B', 250000, 0, 0, 0, 0, 0, 0, 40, '-'),
-(4, 1, 2, 1, '533434', 'Produk C', 150000, 0, 0, 0, 0, 0, 0, 0, '-'),
-(5, 1, 2, 1, '639219', 'Produk D', 135000, 0, 0, 0, 0, 0, 0, 0, '-'),
-(6, 1, 2, 1, '271297', 'Produk E', 260000, 0, 0, 0, 0, 0, 0, 0, '-'),
-(7, 1, 2, 1, '169496', 'Produk F', 65000, 0, 0, 0, 0, 0, 0, -2, '-'),
-(8, 1, 2, 1, '451231', 'Produk G', 80000, 0, 0, 0, 0, 0, 0, 70, '-'),
-(9, 1, 3, 2, '168423', 'Produk H', 140000, 0, 0, 0, 0, 0, 0, 0, '-'),
 (10, 4, 2, 1, '915898', 'Produk 1 cabang blitar', 325000, 0, 0, 0, 0, 0, 0, 50, '-'),
 (11, 4, 3, 2, '625923', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 50, '-'),
-(12, 5, 2, 2, '218598', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 900, '-'),
-(13, 5, 2, 2, '337845', 'Facial Wash Glowing', 35000, 50000, 0, 0, 0, 0, 50000, 500, '-'),
-(14, 1, 3, 2, '562952', 'Toner Purifying', 125000, 0, 0, 0, 0, 0, 0, 500, '-'),
-(15, 1, 2, 2, '864957', 'Facial Wash Glowing', 35000, 50000, 0, 0, 0, 0, 50000, 96, '-'),
-(16, 5, 3, 1, '452647', 'Produk 3', 50000, 45000, 35000, 25000, 15000, 5000, 55000, -1, '-');
+(12, 5, 3, 2, '218598', 'Toner Purifying', 85000, 0, 0, 0, 0, 0, 0, 0, '-'),
+(13, 5, 3, 1, '337845', 'Toner Glowing', 160000, 0, 0, 0, 0, 0, 0, 500, '-'),
+(16, 5, 3, 2, '452647', 'Toner Hydrating', 85000, 0, 0, 0, 0, 0, 0, 0, '-'),
+(17, 1, 6, 2, '1001', 'Day Lotion', 110000, 0, 0, 0, 0, 0, 110000, -1, '-'),
+(18, 1, 6, 2, '1002', 'Night Lotion', 135000, 0, 0, 0, 0, 0, 135000, -1, '-'),
+(19, 1, 6, 1, '1003', 'Dosting Booster', 150000, 0, 0, 0, 0, 0, 150000, -1, '-');
 
 -- --------------------------------------------------------
 
@@ -79004,7 +79041,12 @@ CREATE TABLE `produk_jenis` (
 
 INSERT INTO `produk_jenis` (`id`, `nama`) VALUES
 (2, 'Facial Wash'),
-(3, 'Toner');
+(3, 'Toner'),
+(4, 'Sunscreen'),
+(5, 'Serum'),
+(6, 'Lotion'),
+(7, 'D/N Cream'),
+(8, 'Medician');
 
 -- --------------------------------------------------------
 
@@ -79088,6 +79130,7 @@ CREATE TABLE `user` (
   `username` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
   `id_karyawan` int DEFAULT NULL,
+  `id_cabang` int NOT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -79095,14 +79138,24 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nama`, `username`, `password`, `id_karyawan`, `deleted_at`) VALUES
-(11, 'Silviana', 'silviana', 'silviana', 2, NULL),
-(12, 'Putri', 'putri', 'putri', 3, NULL),
-(13, 'Galih', 'galih', 'galih', 6, NULL),
-(14, 'Devita', 'devita', 'devita', 7, NULL),
-(15, 'Debie', 'Debie', '111', 8, NULL),
-(16, 'Misbachul Firdausiah', 'Firda Bachul', '0505', 9, NULL),
-(17, 'Arek Gudang New', 'gudangnew', '123', 10, NULL);
+INSERT INTO `user` (`id`, `nama`, `username`, `password`, `id_karyawan`, `id_cabang`, `deleted_at`) VALUES
+(18, 'Noven', 'noven', 'noven', 1, 1, NULL),
+(19, 'Misbachul Firdausiah', 'firdabachul', '12345678', 13, 1, NULL),
+(20, 'Acha Yuli', 'achayuli', '0000', 24, 5, NULL),
+(21, 'Devita Sari', 'devitas', '1111', 11, 1, NULL),
+(22, 'Galih Restu Rahayu', 'galihrr', '2222', 12, 1, NULL),
+(23, 'Cici Andriati', 'cicia', '4444', 14, 1, NULL),
+(24, 'Putri Amelia Nanda Efendi', 'putriane', '5555', 22, 1, NULL),
+(25, 'dr. Andita Garindra Putri', 'anditagp', '6666', 21, 1, NULL),
+(26, 'Tya Mahendy Fitrizia', 'tyamf', '7777', 15, 1, NULL),
+(27, 'Bintang Zahrotul Mufidah', 'bintangzm', '8888', 16, 1, NULL),
+(28, 'Almania Nur Nafisa', 'almaniann', '9999', 17, 1, NULL),
+(29, 'Icha Puspa Dinda Agus Saputri', 'ichapdas', '1010', 18, 1, NULL),
+(30, 'Distia Lailatul Ramadhani', 'distialr', '1111', 19, 1, NULL),
+(31, 'Camandira Razakimah Wicaksono', 'camandirarw', '1212', 20, 1, NULL),
+(32, 'Silviana', 'silviana', '1313', 23, 4, NULL),
+(33, 'Sukarti', 'sukarti', '1414', 25, 5, NULL),
+(34, 'Noven', 'novengd', 'novengd', 1, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -79121,96 +79174,164 @@ CREATE TABLE `user_access` (
 --
 
 INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
-(52, 11, 1),
-(53, 11, 11),
-(54, 11, 21),
-(55, 11, 51),
-(56, 11, 52),
-(57, 11, 56),
-(58, 11, 61),
-(59, 11, 62),
-(60, 11, 63),
-(61, 11, 75),
-(62, 11, 76),
-(63, 12, 1),
-(64, 12, 11),
-(65, 12, 21),
-(66, 12, 31),
-(67, 12, 51),
-(68, 12, 52),
-(69, 12, 56),
-(70, 12, 61),
-(71, 12, 62),
-(72, 12, 81),
-(73, 13, 1),
-(74, 13, 2),
-(75, 13, 11),
-(76, 13, 21),
-(77, 13, 31),
-(78, 13, 51),
-(79, 13, 52),
-(80, 13, 56),
-(81, 13, 61),
-(82, 13, 62),
-(83, 13, 63),
-(84, 13, 71),
-(85, 13, 72),
-(86, 13, 73),
-(87, 13, 74),
-(88, 13, 75),
-(89, 13, 76),
-(90, 13, 77),
-(91, 13, 81),
-(92, 14, 1),
-(93, 14, 11),
-(94, 14, 21),
-(95, 14, 31),
-(96, 14, 51),
-(97, 14, 52),
-(98, 14, 56),
-(99, 14, 61),
-(100, 14, 62),
-(101, 14, 63),
-(102, 14, 81),
-(103, 14, 76),
-(104, 14, 77),
-(105, 14, 75),
-(106, 12, 77),
-(107, 12, 76),
-(108, 12, 75),
-(109, 12, 63),
-(110, 11, 81),
-(111, 15, 1),
-(112, 16, 1),
-(113, 16, 2),
-(115, 16, 21),
-(116, 16, 11),
-(117, 16, 31),
-(118, 16, 51),
-(119, 16, 52),
-(120, 16, 56),
-(121, 16, 61),
-(122, 16, 62),
-(123, 16, 63),
-(124, 16, 71),
-(125, 16, 72),
-(126, 16, 73),
-(127, 16, 74),
-(128, 16, 75),
-(129, 16, 76),
-(130, 16, 77),
-(131, 16, 81),
-(132, 17, 1),
-(133, 17, 21),
-(134, 17, 61),
-(135, 17, 62),
-(136, 17, 63),
-(137, 17, 2),
-(139, 13, 55),
-(140, 13, 58),
-(141, 13, 59),
-(142, 13, 57),
-(143, 13, 53);
+(143, 18, 71),
+(144, 18, 74),
+(145, 18, 2),
+(146, 18, 11),
+(147, 18, 21),
+(148, 18, 31),
+(149, 18, 51),
+(150, 18, 52),
+(151, 18, 53),
+(152, 18, 55),
+(153, 18, 56),
+(154, 18, 57),
+(155, 18, 58),
+(156, 18, 59),
+(157, 18, 61),
+(158, 18, 62),
+(159, 18, 63),
+(160, 18, 72),
+(161, 18, 73),
+(162, 18, 75),
+(163, 18, 76),
+(164, 18, 77),
+(165, 18, 81),
+(166, 19, 1),
+(167, 19, 11),
+(168, 19, 21),
+(169, 19, 2),
+(170, 19, 31),
+(171, 19, 51),
+(172, 19, 52),
+(173, 19, 53),
+(174, 19, 55),
+(175, 19, 56),
+(176, 19, 57),
+(177, 19, 58),
+(178, 19, 59),
+(179, 19, 61),
+(180, 19, 62),
+(181, 19, 63),
+(182, 19, 71),
+(183, 19, 72),
+(184, 19, 73),
+(185, 19, 74),
+(186, 19, 75),
+(187, 19, 76),
+(188, 19, 77),
+(189, 19, 81),
+(190, 20, 1),
+(191, 20, 2),
+(192, 20, 11),
+(193, 20, 21),
+(194, 20, 31),
+(195, 20, 51),
+(196, 20, 56),
+(197, 20, 52),
+(198, 20, 61),
+(199, 20, 81),
+(200, 21, 1),
+(201, 21, 2),
+(202, 21, 11),
+(203, 21, 21),
+(204, 21, 31),
+(205, 21, 51),
+(206, 21, 52),
+(207, 21, 53),
+(208, 21, 55),
+(209, 21, 56),
+(210, 21, 57),
+(211, 21, 58),
+(212, 21, 59),
+(213, 21, 81),
+(214, 22, 1),
+(215, 22, 2),
+(216, 22, 11),
+(217, 22, 31),
+(218, 22, 21),
+(219, 22, 52),
+(220, 22, 51),
+(221, 22, 53),
+(222, 22, 55),
+(223, 22, 56),
+(224, 22, 57),
+(225, 22, 58),
+(226, 22, 59),
+(227, 22, 61),
+(228, 22, 62),
+(229, 22, 63),
+(230, 22, 71),
+(231, 22, 76),
+(232, 22, 75),
+(233, 22, 77),
+(234, 22, 81),
+(235, 23, 1),
+(236, 23, 11),
+(237, 23, 21),
+(238, 23, 31),
+(241, 24, 1),
+(242, 24, 2),
+(243, 24, 11),
+(244, 24, 21),
+(245, 24, 31),
+(246, 24, 51),
+(247, 24, 52),
+(248, 24, 53),
+(249, 24, 56),
+(250, 24, 57),
+(251, 24, 81),
+(252, 25, 1),
+(253, 25, 11),
+(254, 25, 21),
+(255, 25, 31),
+(256, 25, 81),
+(257, 26, 1),
+(258, 26, 2),
+(259, 26, 11),
+(260, 26, 21),
+(261, 26, 31),
+(262, 26, 81),
+(263, 27, 1),
+(264, 27, 21),
+(265, 27, 51),
+(266, 27, 31),
+(267, 27, 2),
+(268, 28, 1),
+(269, 28, 11),
+(270, 28, 21),
+(271, 28, 31),
+(273, 23, 81),
+(274, 29, 1),
+(275, 29, 11),
+(276, 29, 21),
+(277, 29, 31),
+(278, 30, 1),
+(279, 30, 11),
+(280, 30, 21),
+(281, 30, 31),
+(282, 30, 81),
+(283, 31, 1),
+(284, 31, 11),
+(285, 31, 21),
+(286, 31, 31),
+(287, 32, 1),
+(288, 32, 51),
+(289, 32, 56),
+(290, 32, 57),
+(291, 32, 58),
+(292, 32, 59),
+(293, 32, 61),
+(294, 32, 62),
+(295, 32, 63),
+(296, 32, 75),
+(297, 32, 76),
+(298, 32, 81),
+(299, 33, 1),
+(300, 33, 61),
+(301, 33, 81),
+(302, 32, 21),
+(303, 34, 1);
 
 -- --------------------------------------------------------
 
@@ -79221,7 +79342,7 @@ INSERT INTO `user_access` (`id`, `id_user`, `id_menu`) VALUES
 CREATE TABLE `user_menu` (
   `id` int NOT NULL,
   `menu` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
-  `level` enum('1','2','3') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `level` enum('1','2','3') COLLATE utf8mb4_general_ci NOT NULL,
   `parent` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `icon` varchar(80) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `url` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
@@ -79371,7 +79492,8 @@ ALTER TABLE `penjualan_online_produk`
 ALTER TABLE `penjualan_outlet`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_cabang` (`id_cabang`),
-  ADD KEY `id_customer` (`id_customer`);
+  ADD KEY `id_customer` (`id_customer`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `penjualan_outlet_jasa`
@@ -79421,7 +79543,8 @@ ALTER TABLE `provinsi`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_karyawan` (`id_karyawan`);
+  ADD KEY `id_karyawan` (`id_karyawan`),
+  ADD KEY `id_cabang` (`id_cabang`);
 
 --
 -- Indexes for table `user_access`
@@ -79451,7 +79574,7 @@ ALTER TABLE `cabang`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `inbound`
@@ -79469,19 +79592,19 @@ ALTER TABLE `inbound_detail`
 -- AUTO_INCREMENT for table `jasa`
 --
 ALTER TABLE `jasa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `jasa_jenis`
 --
 ALTER TABLE `jasa_jenis`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `kecamatan`
@@ -79517,43 +79640,43 @@ ALTER TABLE `outbound_detail`
 -- AUTO_INCREMENT for table `penjualan_online`
 --
 ALTER TABLE `penjualan_online`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `penjualan_online_produk`
 --
 ALTER TABLE `penjualan_online_produk`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet`
 --
 ALTER TABLE `penjualan_outlet`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet_jasa`
 --
 ALTER TABLE `penjualan_outlet_jasa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `penjualan_outlet_produk`
 --
 ALTER TABLE `penjualan_outlet_produk`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `produk_jenis`
 --
 ALTER TABLE `produk_jenis`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `produk_label`
@@ -79571,13 +79694,13 @@ ALTER TABLE `provinsi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `user_access`
 --
 ALTER TABLE `user_access`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -79657,7 +79780,8 @@ ALTER TABLE `penjualan_online_produk`
 --
 ALTER TABLE `penjualan_outlet`
   ADD CONSTRAINT `penjualan_outlet_ibfk_1` FOREIGN KEY (`id_cabang`) REFERENCES `cabang` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `penjualan_outlet_ibfk_2` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `penjualan_outlet_ibfk_2` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `penjualan_outlet_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
 -- Constraints for table `penjualan_outlet_jasa`
@@ -79685,7 +79809,8 @@ ALTER TABLE `produk`
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`id_cabang`) REFERENCES `cabang` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_access`

@@ -8,7 +8,7 @@
 
 		<div class="card">
 			<div class="card-body">
-				<form autocomplete="off" class="row needs-validation" novalidate action="<?= base_url() ?>penjualan_outlet/store" method="post" onsubmit="return validateForm()">
+				<form id="form-sale" autocomplete="off" class="row needs-validation" novalidate action="<?= base_url() ?>penjualan_outlet/store" method="post">
 					<div class="row">
 						<div class="col-sm-5 col-12">
 							<div class="row">
@@ -43,8 +43,11 @@
 								</div>
 								<div class="col-lg-6 col-12">
 									<div class="form-group">
-										<label>Tanggal</label>
-										<input class="form-control" required id="tanggal" name="tanggal" type="text" value="<?= date('Y-m-d') ?>" onchange="ganti_tanggal(this)">
+										<label>Tanggal dan Jam</label>
+										<div class="input-group">
+											<input class="form-control" required id="tanggal" name="tanggal" type="text" value="<?= date('Y-m-d') ?>" onchange="ganti_tanggal(this)">
+											<input class="form-control bg-white" readonly id="jam" name="jam" type="text" value="<?= date('H:i:s') ?>">
+										</div>
 									</div>
 								</div>
 								<div class="col-lg-12 col-12">
@@ -57,7 +60,7 @@
 						</div>
 					</div>
 
-					<div class="mb-5 mt-4">
+					<div class="my-4">
 
 						<button type="button" class="btn btn-sm btn-submit p-1 mb-3" onclick="BtnAdd()">Tambah Produk</button>
 						<button type="button" class="btn btn-sm btn-submit p-1 mb-3" onclick="BtnAddJasa()">Tambah Treatment</button>
@@ -68,7 +71,7 @@
 									<tr>
 										<th width="60%">Produk</th>
 										<th>Qty</th>
-										<th>Satuan</th>
+										<th>Harga</th>
 										<th>Diskon</th>
 										<th width="12%">Total</th>
 										<th width="3%"></th>
@@ -144,32 +147,7 @@
 									<tr>
 										<td colspan="4" class="fs-5 text-dark text-end"><b>Grand Total</b></td>
 										<td>
-											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="grand_total" id="grand_total" readonly>
-										</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td colspan="4" class="fs-5 text-dark text-end"><b>Jenis Bayar</b></td>
-										<td>
-											<select class="select form-control" required id="jenis_bayar" name="jenis_bayar" onchange="ganti_jenis_bayar(this)">
-												<option value="Cash">Cash</option>
-												<option value="Transfer">Transfer</option>
-												<option value="Kartu Kredit">Kartu Kredit</option>
-											</select>
-										</td>
-										<td></td>
-									</tr>
-									<tr id="tr-bayar">
-										<td colspan="4" class="fs-5 text-dark text-end"><b>Bayar</b></td>
-										<td>
-											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="bayar" id="bayar" required onkeyup="hitung_kembalian()" value="0">
-										</td>
-										<td></td>
-									</tr>
-									<tr id="tr-kembalian">
-										<td colspan="4" class="fs-5 text-dark text-end"><b>Kembalian</b></td>
-										<td>
-											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="kembalian" id="kembalian" readonly value="0">
+											<input autocomplete="off" class="form-control text-end bg-white" type="text" name="grand_total" id="grand_total" readonly value="0">
 										</td>
 										<td></td>
 									</tr>
@@ -178,9 +156,44 @@
 						</div>
 					</div>
 
+					<div class="row mb-4">
+						<div class="col-lg-4 col-12">
+							<div class="form-group">
+								<label>Jenis Bayar</label>
+								<select class="select form-control fs-4" required id="jenis_bayar" name="jenis_bayar" onchange="ganti_jenis_bayar(this)">
+									<option value="Cash">Cash</option>
+									<option value="Transfer">Transfer</option>
+									<option value="Kartu Kredit">Kartu Kredit</option>
+									<option value="Debit">Debit</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-4 col-12">
+							<div class="form-group">
+								<label>Bayar</label>
+								<input autocomplete="off" class="form-control fs-4 text-end bg-white" type="text" name="bayar" id="bayar" required onkeyup="hitung_kembalian()" value="0">
+							</div>
+						</div>
+						<div class="col-lg-4 col-12" id="div-bank" hidden>
+							<div class="form-group">
+								<label>Bank</label>
+								<select class="select form-control fs-4" required id="bank" name="bank">
+									<option value="BCA">BCA</option>
+									<option value="BRI">BRI</option>
+									<option value="Mandiri">Mandiri</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-4 col-12" id="div-kembalian">
+							<div class="form-group">
+								<label>Kembalian</label>
+								<input autocomplete="off" class="form-control fs-4 text-end bg-white" type="text" name="kembalian" id="kembalian" readonly value="0">
+							</div>
+						</div>
+					</div>
 
 					<div class="col-lg-12">
-						<button href="javascript:void(0);" class="btn btn-submit me-2" type="submit">Simpan</button>
+						<button href="javascript:void(0);" class="btn btn-submit me-2" type="button" onclick="userValidation()">Simpan</button>
 						<a href="<?= base_url() ?>penjualan_outlet" class="btn btn-cancel" type="button">Batal</a>
 					</div>
 				</form>
@@ -203,6 +216,21 @@
 					<span aria-hidden="true">×</span></button>
 			</div>
 			<div class="modal-body m-0 p-0" id="modal-body">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="mymodal-sm" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-6" id="modal-label-sm"></h1>
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span></button>
+			</div>
+			<div class="modal-body m-0 p-0" id="modal-body-sm">
 
 			</div>
 		</div>
@@ -235,11 +263,15 @@
 
 	function ganti_jenis_bayar(jenis) {
 		if (jenis.value == 'Cash') {
-			$('#tr-bayar').attr('hidden', false);
-			$('#tr-kembalian').attr('hidden', false);
+			$('#bayar').val(0);
+			$('#bayar').attr('readonly', false);
+			$('#div-kembalian').attr('hidden', false);
+			$('#div-bank').attr('hidden', true);
 		} else {
-			$('#tr-bayar').attr('hidden', true);
-			$('#tr-kembalian').attr('hidden', true);
+			$('#bayar').val($('#grand_total').val());
+			$('#bayar').attr('readonly', true);
+			$('#div-kembalian').attr('hidden', true);
+			$('#div-bank').attr('hidden', false);
 		}
 	}
 
@@ -355,21 +387,69 @@
 		var grandTotalValue = $('#grand_total').val();
 		var customer = $('#customer').val();
 		var kembalian = $('#kembalian').val();
+		var bayar = $('#bayar').val();
+		var tanggal = $('#tanggal').val();
 
 		if (customer.trim() === '') {
 			alert_toastr('error', 'Customer belum dipilih.');
 			return false;
 		}
-		if (grandTotalValue.trim() === '') {
-			alert_toastr('error', 'Belum ada list produk yang dijual.');
+		if (grandTotalValue.trim() === '0') {
+			alert_toastr('error', 'Belum ada list produk atau treatment yang dijual.');
+			return false;
+		}
+		if (bayar.trim() < grandTotalValue) {
+			alert_toastr('error', 'Jumlah bayar kurang.');
 			return false;
 		}
 		if (kembalian.trim() < 0) {
 			alert_toastr('error', 'Jumlah bayar tidak benar.');
 			return false;
 		}
+		if (tanggal === '') {
+			alert_toastr('error', 'Tanggal tidak boleh kosong.');
+			return false;
+		}
 
 		return true;
+	}
+
+
+
+	function userValidation() {
+		$.ajax({
+			type: "GET",
+			url: "<?= base_url() ?>akun/userValidation",
+			dataType: 'JSON',
+			success: function(response) {
+				$('#modal-body-sm').html(response.form_user);
+				$('#modal-label-sm').html('Autentikasi Admin');
+				$('#mymodal-sm').modal('show');
+			}
+		})
+	}
+
+	function authUser() {
+		if ($('#id_akun').val() == '') {
+			alert_toastr('error', 'User belum dipilih.');
+		} else {
+			$.ajax({
+				type: "GET",
+				url: "<?= base_url() ?>akun/userAuthentication",
+				data: 'id_akun=' + $('#id_akun').val() + '&password=' + $('#password').val(),
+				dataType: 'JSON',
+				success: function(response) {
+					if (response.status == 'ok') {
+						if (validateForm()) {
+							$('#form-sale').submit();
+							$('#mymodal-sm').modal('hide');
+						};
+					} else {
+						alert_toastr('error', 'password salah.');
+					}
+				}
+			})
+		}
 	}
 
 

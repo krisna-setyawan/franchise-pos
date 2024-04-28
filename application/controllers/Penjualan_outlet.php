@@ -93,9 +93,11 @@ class Penjualan_outlet extends CI_Controller
 	{
 		$data = array(
 			'id_cabang' => $this->session->userdata('id_cabang'),
+			'id_user' => $this->session->userdata('id_user'),
 			'nomor' => $this->input->post('nomor'),
 			'id_customer' => $this->input->post('id_customer'),
 			'tanggal' => $this->input->post('tanggal'),
+			'jam' => $this->input->post('jam'),
 			'total_hg_produk' => str_replace(".", "", $this->input->post('total_hg_produk')),
 			'total_hg_jasa' => str_replace(".", "", $this->input->post('total_hg_jasa')),
 			'diskon' => str_replace(".", "", $this->input->post('diskon')),
@@ -103,6 +105,7 @@ class Penjualan_outlet extends CI_Controller
 			'bayar' => str_replace(".", "", $this->input->post('bayar')),
 			'kembalian' => str_replace(".", "", $this->input->post('kembalian')),
 			'jenis_bayar' => $this->input->post('jenis_bayar'),
+			'bank' => $this->input->post('bank'),
 			'catatan' => $this->input->post('catatan'),
 		);
 		$this->db->insert('penjualan_outlet', $data);
@@ -174,7 +177,8 @@ class Penjualan_outlet extends CI_Controller
 
 		$datasession = array(
 			'pesan-notif' => 'Berhasil membuat penjualan outlet.',
-			'icon-notif' => 'success'
+			'icon-notif' => 'success',
+			'penjualan_outlet' => $this->input->post('nomor')
 		);
 		$this->session->set_flashdata($datasession);
 		redirect('penjualan_outlet');
@@ -217,9 +221,11 @@ class Penjualan_outlet extends CI_Controller
 	{
 		$data = array(
 			'id_cabang' => $this->session->userdata('id_cabang'),
+			'id_user' => $this->session->userdata('id_user'),
 			'nomor' => $this->input->post('nomor'),
 			'id_customer' => $this->input->post('id_customer'),
 			'tanggal' => $this->input->post('tanggal'),
+			'jam' => $this->input->post('jam'),
 			'total_hg_produk' => str_replace(".", "", $this->input->post('total_hg_produk')),
 			'total_hg_jasa' => str_replace(".", "", $this->input->post('total_hg_jasa')),
 			'diskon' => str_replace(".", "", $this->input->post('diskon')),
@@ -227,6 +233,7 @@ class Penjualan_outlet extends CI_Controller
 			'bayar' => str_replace(".", "", $this->input->post('bayar')),
 			'kembalian' => str_replace(".", "", $this->input->post('kembalian')),
 			'jenis_bayar' => $this->input->post('jenis_bayar'),
+			'bank' => $this->input->post('bank'),
 			'catatan' => $this->input->post('catatan'),
 		);
 		$id_penjualan = $this->input->post('id_penjualan');
@@ -357,13 +364,15 @@ class Penjualan_outlet extends CI_Controller
 									kelurahan.nama AS kelurahan, 
 									kecamatan.nama AS kecamatan, 
 									kota.nama AS kota, 
-									provinsi.nama AS provinsi 
+									provinsi.nama AS provinsi, 
+									user.nama AS user 
 								FROM penjualan_outlet
 								JOIN customer ON penjualan_outlet.id_customer = customer.id 
 								JOIN kelurahan ON customer.id_kelurahan = kelurahan.id 
 								JOIN kecamatan ON customer.id_kecamatan = kecamatan.id 
 								JOIN kota ON customer.id_kota = kota.id 
 								JOIN provinsi ON customer.id_provinsi = provinsi.id 
+								JOIN user ON penjualan_outlet.id_user = user.id 
 								WHERE penjualan_outlet.nomor = '$nomor'";
 		$penjualan_outlet = $this->db->query($q_penjualan_outlet)->row_array();
 		$id_penjualan_outlet = $penjualan_outlet['id'];
@@ -387,5 +396,45 @@ class Penjualan_outlet extends CI_Controller
 		];
 
 		echo json_encode($data);
+	}
+
+
+
+	public function print($nomor)
+	{
+		$q_penjualan_outlet = "SELECT 
+									penjualan_outlet.*, 
+									customer.nama, customer.kode, customer.alamat, customer.telp, 
+									kelurahan.nama AS kelurahan, 
+									kecamatan.nama AS kecamatan, 
+									kota.nama AS kota, 
+									provinsi.nama AS provinsi, 
+									user.nama AS user 
+								FROM penjualan_outlet
+								JOIN customer ON penjualan_outlet.id_customer = customer.id 
+								JOIN kelurahan ON customer.id_kelurahan = kelurahan.id 
+								JOIN kecamatan ON customer.id_kecamatan = kecamatan.id 
+								JOIN kota ON customer.id_kota = kota.id 
+								JOIN provinsi ON customer.id_provinsi = provinsi.id 
+								JOIN user ON penjualan_outlet.id_user = user.id 
+								WHERE penjualan_outlet.nomor = '$nomor'";
+		$penjualan_outlet = $this->db->query($q_penjualan_outlet)->row_array();
+		$id_penjualan_outlet = $penjualan_outlet['id'];
+		$q_penjualan_outlet_produk = "SELECT penjualan_outlet_produk.*, produk.nama AS nama_produk, produk.stok AS stok FROM penjualan_outlet_produk JOIN produk ON penjualan_outlet_produk.id_produk = produk.id WHERE penjualan_outlet_produk.id_penjualan_outlet = $id_penjualan_outlet";
+		$penjualan_outlet_produk = $this->db->query($q_penjualan_outlet_produk)->result();
+		$q_penjualan_outlet_jasa = "SELECT penjualan_outlet_jasa.*, jasa.nama AS nama_jasa FROM penjualan_outlet_jasa JOIN jasa ON penjualan_outlet_jasa.id_jasa = jasa.id WHERE penjualan_outlet_jasa.id_penjualan_outlet = $id_penjualan_outlet";
+		$penjualan_outlet_jasa = $this->db->query($q_penjualan_outlet_jasa)->result();
+
+		$id_cabang = $this->session->userdata('id_cabang');
+		$cabang = $this->db->get_where('cabang', ['id' => $id_cabang])->row_array();
+
+		$data_view = [
+			'penjualan' => $penjualan_outlet,
+			'penjualan_produk' => $penjualan_outlet_produk,
+			'penjualan_jasa' => $penjualan_outlet_jasa,
+			'cabang' => $cabang,
+		];
+
+		$this->load->view('penjualan_outlet/print', $data_view);
 	}
 }

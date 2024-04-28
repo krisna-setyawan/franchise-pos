@@ -9,7 +9,7 @@
 		<div class="card">
 			<div class="card-body">
 				<form class="row needs-validation" novalidate action="<?= base_url() ?>akun/store" method="post">
-					<div class="col-lg-4 col-sm-6 col-12">
+					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Karyawan</label>
 							<select class="select form-control" required id="id_karyawan" name="id_karyawan">
@@ -19,13 +19,23 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6 col-12">
+					<div class="col-lg-6 col-sm-6 col-12">
+						<div class="form-group">
+							<label>Cabang</label>
+							<select class="select form-control" required id="id_cabang" name="id_cabang">
+								<?php foreach ($cabang as $dt) : ?>
+									<option value="<?= $dt->id ?>"><?= $dt->nama ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Username</label>
 							<input class="form-control" required id="username" name="username" type="text">
 						</div>
 					</div>
-					<div class="col-lg-4 col-sm-6 col-12">
+					<div class="col-lg-6 col-sm-6 col-12">
 						<div class="form-group">
 							<label>Password</label>
 							<input class="form-control" required id="password" name="password" type="text">

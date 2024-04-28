@@ -53,8 +53,8 @@
 											<a onclick="detail('<?= base_url() ?>penjualan_outlet/show/<?= $dt->nomor ?>', 'Detail Penjualan')" href="javascript:void(0);"><?= $dt->nomor ?></a>
 										</td>
 										<td><?= $dt->customer ?> (<?= $dt->kode_customer ?>)</td>
-										<td class="text-end px-3"><?= number_format($dt->total_hg_jasa, 0, ',', '.') ?></td>
 										<td class="text-end px-3"><?= number_format($dt->total_hg_produk, 0, ',', '.') ?></td>
+										<td class="text-end px-3"><?= number_format($dt->total_hg_jasa, 0, ',', '.') ?></td>
 										<td class="text-end px-3"><?= number_format($dt->diskon, 0, ',', '.') ?></td>
 										<td class="text-end px-3"><?= number_format($dt->grand_total, 0, ',', '.') ?></td>
 										<td class="text-center">

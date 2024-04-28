@@ -42,7 +42,7 @@
 								<th>NIK</th>
 								<th>Cabang</th>
 								<th>Nama</th>
-								<th>KTP</th>
+								<th>Jabatan</th>
 								<th>Telp</th>
 								<th>Alamat</th>
 								<th>Kontak Darurat</th>

@@ -35,11 +35,11 @@ class Zauth extends CI_Controller
 		if ($user) {
 			//cek password
 			if ($password == $user['password']) {
-				$karyawan = $this->db->get_where('karyawan', ['id' => $user['id_karyawan']])->row_array();
+				// $karyawan = $this->db->get_where('karyawan', ['id' => $user['id_karyawan']])->row_array();
 				$data = [
 					'id_user' => $user['id'],
 					'nama_user' => $user['nama'],
-					'id_cabang' => $karyawan['id_cabang'],
+					'id_cabang' => $user['id_cabang'],
 					'franchise_pos_login' => 'logged_in',
 				];
 				$this->session->set_userdata($data);

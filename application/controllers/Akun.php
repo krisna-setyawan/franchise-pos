@@ -20,7 +20,8 @@ class Akun extends CI_Controller
 			'cabang' => $this->db->get_where('cabang', ['id' => $this->session->userdata('id_cabang')])->row_array(),
 		];
 
-		$data['akun'] = $this->db->get_where('user', ['deleted_at' => null])->result();
+		$q_akun = "SELECT user.*, cabang.nama AS cabang FROM user JOIN cabang ON user.id_cabang = cabang.id WHERE user.deleted_at IS NULL";
+		$data['akun'] = $this->db->query($q_akun)->result();
 
 		$this->load->view('template/header');
 		$this->load->view('template/topbar', $data_topbar);
@@ -40,10 +41,12 @@ class Akun extends CI_Controller
 			'cabang' => $this->db->get_where('cabang', ['id' => $this->session->userdata('id_cabang')])->row_array(),
 		];
 
-		$q_karyawan_not_in_user = "SELECT karyawan.id, karyawan.nama FROM karyawan LEFT JOIN user ON karyawan.id = user.id_karyawan WHERE user.id IS NULL AND karyawan.deleted_at IS NULL";
-		$karyawan = $this->db->query($q_karyawan_not_in_user)->result();
+		// $q_karyawan_not_in_user = "SELECT karyawan.id, karyawan.nama FROM karyawan LEFT JOIN user ON karyawan.id = user.id_karyawan WHERE user.id IS NULL AND karyawan.deleted_at IS NULL";
+		// $karyawan = $this->db->query($q_karyawan_not_in_user)->result();
+
 		$data = [
-			'karyawan' => $karyawan
+			'karyawan' => $this->db->get('karyawan')->result(),
+			'cabang' => $this->db->get('cabang')->result()
 		];
 
 		$this->load->view('template/header');
@@ -58,6 +61,7 @@ class Akun extends CI_Controller
 		$karyawan = $this->db->get_where('karyawan', ['id' => $this->input->post('id_karyawan')])->row_array();
 		$data = array(
 			'id_karyawan' => $this->input->post('id_karyawan'),
+			'id_cabang' => $this->input->post('id_cabang'),
 			'nama' => $karyawan['nama'],
 			'username' => $this->input->post('username'),
 			'password' => $this->input->post('password'),
@@ -150,4 +154,38 @@ class Akun extends CI_Controller
 		}
 	}
 	// MENU USER --------------------------------------------------------------------------------------- MENU USER
+
+
+
+
+
+
+
+	public function userValidation()
+	{
+		$data_view = [
+			'akun' => $this->db->get_where('user', ['id_cabang' => $this->session->userdata('id_cabang')])->result(),
+		];
+
+		$data = [
+			'form_user' => $this->load->view('akun/authakun', $data_view, TRUE),
+		];
+
+		echo json_encode($data);
+	}
+
+	public function userAuthentication()
+	{
+		$id_akun = $this->input->get('id_akun');
+		$password = $this->input->get('password');
+
+		$user = $this->db->get_where('user', ['id' => $id_akun, 'password' => $password])->row_array();
+
+		if ($user) {
+			$data = ['status' => 'ok'];
+		} else {
+			$data = ['status' => 'notfound'];
+		}
+		echo json_encode($data);
+	}
 }

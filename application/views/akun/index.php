@@ -28,6 +28,7 @@
 							<tr class="text-center">
 								<th>Karyawan</th>
 								<th>Username</th>
+								<th>Cabang</th>
 								<th width="10%">Aksi</th>
 							</tr>
 						</thead>
@@ -38,6 +39,7 @@
 										<a href="javascript:void(0);"><?= $dt->nama ?></a>
 									</td>
 									<td><?= $dt->username ?></td>
+									<td><?= $dt->cabang ?></td>
 									<td class="text-center">
 										<a class="me-3" onclick="hak_menu(<?= $dt->id ?>)">
 											<img src="<?= base_url() ?>assets/template/assets/img/icons/settings.svg" alt="img">
