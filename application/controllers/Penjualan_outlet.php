@@ -93,7 +93,7 @@ class Penjualan_outlet extends CI_Controller
 	{
 		$data = array(
 			'id_cabang' => $this->session->userdata('id_cabang'),
-			'id_user' => $this->session->userdata('id_user'),
+			'id_user' => $this->input->post('id_user'),
 			'nomor' => $this->input->post('nomor'),
 			'id_customer' => $this->input->post('id_customer'),
 			'tanggal' => $this->input->post('tanggal'),

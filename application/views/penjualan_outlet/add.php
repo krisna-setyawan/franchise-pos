@@ -9,6 +9,7 @@
 		<div class="card">
 			<div class="card-body">
 				<form id="form-sale" autocomplete="off" class="row needs-validation" novalidate action="<?= base_url() ?>penjualan_outlet/store" method="post">
+					<input type="hidden" id="id_user" name="id_user">
 					<div class="row">
 						<div class="col-sm-5 col-12">
 							<div class="row">
@@ -433,6 +434,7 @@
 		if ($('#id_akun').val() == '') {
 			alert_toastr('error', 'User belum dipilih.');
 		} else {
+			$('#id_user').val($('#id_akun').val());
 			$.ajax({
 				type: "GET",
 				url: "<?= base_url() ?>akun/userAuthentication",
