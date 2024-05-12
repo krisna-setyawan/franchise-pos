@@ -102,7 +102,7 @@ class Produk extends CI_Controller
 		];
 
 		$data = [
-			'produk' => $this->db->get_where('produk', ['kode' => $kode])->row_array(),
+			'produk' => $this->db->get_where('produk', ['kode' => str_replace('%20', ' ', $kode)])->row_array(),
 			'produk_jenis' => $this->db->get('produk_jenis')->result(),
 			'produk_label' => $this->db->get('produk_label')->result()
 		];
