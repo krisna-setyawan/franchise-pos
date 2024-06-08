@@ -42,6 +42,7 @@
 					</div>
 					<hr class="m-0">
 					<hr class="m-0">
+					<a class="dropdown-item pb-0" href="<?= base_url() ?>profil"><img src="<?= base_url() ?>assets/template/assets/img/icons/users1.svg" class="me-2 ms-1" alt="img">Profil</a>
 					<a class="dropdown-item logout pb-0" href="<?= base_url() ?>logout"><img src="<?= base_url() ?>assets/template/assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
 				</div>
 			</div>

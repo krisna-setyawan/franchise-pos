@@ -29,8 +29,8 @@
 								<option value="Shopee">Shopee</option>
 								<option value="Tokopedia">Tokopedia</option>
 								<option value="Lazada">Lazada</option>
-								<option value="Bukalapak">Bukalapak</option>
-								<option value="Blibli">Blibli</option>
+								<option value="Agen">Agen</option>
+								<option value="Reseller">Reseller</option>
 								<option value="Whatsapp">Whatsapp</option>
 							</select>
 						</div>

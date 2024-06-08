@@ -97,19 +97,19 @@
 							</div>
 							<div class="col-lg-12 col-sm-12 col-12">
 								<div class="form-group">
-									<label>Harga di bukalapak</label>
+									<label>Harga Agen</label>
 									<div class="input-group">
 										<span class="input-group-text" style="font-size: 14px;">Rp</span>
-										<input class="form-control input-masked" required id="hg_bukalapak" name="hg_bukalapak" type="text" value="<?= $produk['hg_bukalapak'] ?>">
+										<input class="form-control input-masked" required id="hg_agen" name="hg_agen" type="text" value="<?= $produk['hg_agen'] ?>">
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-12 col-sm-12 col-12">
 								<div class="form-group">
-									<label>Harga di blibli</label>
+									<label>Harga Reseller</label>
 									<div class="input-group">
 										<span class="input-group-text" style="font-size: 14px;">Rp</span>
-										<input class="form-control input-masked" required id="hg_blibli" name="hg_blibli" type="text" value="<?= $produk['hg_blibli'] ?>">
+										<input class="form-control input-masked" required id="hg_reseller" name="hg_reseller" type="text" value="<?= $produk['hg_reseller'] ?>">
 									</div>
 								</div>
 							</div>

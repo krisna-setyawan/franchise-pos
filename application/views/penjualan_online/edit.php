@@ -29,8 +29,8 @@
 								<option <?= $penjualan['marketplace'] == 'Shopee' ? 'selected' : '' ?> value="Shopee">Shopee</option>
 								<option <?= $penjualan['marketplace'] == 'Tokopedia' ? 'selected' : '' ?> value="Tokopedia">Tokopedia</option>
 								<option <?= $penjualan['marketplace'] == 'Lazada' ? 'selected' : '' ?> value="Lazada">Lazada</option>
-								<option <?= $penjualan['marketplace'] == 'Bukalapak' ? 'selected' : '' ?> value="Bukalapak">Bukalapak</option>
-								<option <?= $penjualan['marketplace'] == 'Blibli' ? 'selected' : '' ?> value="Blibli">Blibli</option>
+								<option <?= $penjualan['marketplace'] == 'Agen' ? 'selected' : '' ?> value="Agen">Agen</option>
+								<option <?= $penjualan['marketplace'] == 'Reseller' ? 'selected' : '' ?> value="Reseller">Reseller</option>
 								<option <?= $penjualan['marketplace'] == 'Whatsapp' ? 'selected' : '' ?> value="Whatsapp">Whatsapp</option>
 							</select>
 						</div>

@@ -95,19 +95,19 @@
 							</div>
 							<div class="col-lg-12 col-sm-12 col-12">
 								<div class="form-group">
-									<label>Harga di bukalapak</label>
+									<label>Harga agen</label>
 									<div class="input-group">
 										<span class="input-group-text" style="font-size: 14px;">Rp</span>
-										<input class="form-control input-masked" required id="hg_bukalapak" name="hg_bukalapak" type="text">
+										<input class="form-control input-masked" required id="hg_agen" name="hg_agen" type="text">
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-12 col-sm-12 col-12">
 								<div class="form-group">
-									<label>Harga di blibli</label>
+									<label>Harga reseller</label>
 									<div class="input-group">
 										<span class="input-group-text" style="font-size: 14px;">Rp</span>
-										<input class="form-control input-masked" required id="hg_blibli" name="hg_blibli" type="text">
+										<input class="form-control input-masked" required id="hg_reseller" name="hg_reseller" type="text">
 									</div>
 								</div>
 							</div>

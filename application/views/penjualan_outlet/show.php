@@ -1,7 +1,10 @@
 <div class="m-4 mb-5">
 
-	<div class="row mt-4">
-		<div class="col-6">
+
+	<div class="row mt-4" style="font-size: 17px;">
+		<div class="col-7">
+			<img src="<?= base_url() ?>assets/image/Logo2.png" alt="" style="width: 50%;">
+			<br>
 			<strong style="font-size: 20px; margin-bottom: 0px;"><?= $cabang['nama'] ?></strong>
 			<p class="mb-2">
 				<?= $cabang['alamat'] ?>
@@ -16,7 +19,7 @@
 			</div>
 
 		</div>
-		<div class="col-6 text-end">
+		<div class="col-5 mt-5 text-end">
 			<div class="text-muted">Customer</div>
 			<strong><?= $penjualan['nama'] ?></strong> <br>
 			<strong><?= $penjualan['alamat'] ?>, <?= $penjualan['kelurahan'] ?>, <?= $penjualan['kecamatan'] ?>, <?= $penjualan['kota'] ?></strong> <br>
@@ -27,7 +30,7 @@
 
 
 
-	<table class="table table-sm mt-4" width="100%">
+	<table class="table table-sm mt-4" width="100%" style="font-size: 17px;">
 		<thead>
 			<tr>
 				<th width="3%">No</th>

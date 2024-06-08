@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['auth'] = 'zauth';
 $route['logout'] = 'zauth/logout';
 $route['dashboard'] = 'zdashboard';
+$route['profil'] = 'zprofil';
 $route['data-karyawan'] = 'Data_karyawan';
 $route['online'] = 'Penjualan_online';
 $route['online/add'] = 'Penjualan_online/add';

@@ -10,7 +10,7 @@
 	<meta name="robots" content="noindex, nofollow">
 	<title>Penjualan <?= $penjualan['nomor'] ?></title>
 
-	<link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/image/logo2.png">
+	<link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/image/Logo2.png">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/template/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/template/assets/css/style.css">
 
@@ -20,8 +20,10 @@
 <body>
 	<div class="m-4 mb-3">
 
-		<div class="row mt-4">
-			<div class="col-6">
+		<div class="row mt-4" style="font-size: 17px;">
+			<div class="col-7">
+				<img src="<?= base_url() ?>assets/image/Logo2.png" alt="" style="width: 50%;">
+				<br>
 				<strong style="font-size: 20px; margin-bottom: 0px;"><?= $cabang['nama'] ?></strong>
 				<p class="mb-2">
 					<?= $cabang['alamat'] ?>
@@ -36,7 +38,7 @@
 				</div>
 
 			</div>
-			<div class="col-6 text-end">
+			<div class="col-5 mt-5 text-end">
 				<div class="text-muted">Customer</div>
 				<strong><?= $penjualan['nama'] ?></strong> <br>
 				<strong><?= $penjualan['alamat'] ?>, <?= $penjualan['kelurahan'] ?>, <?= $penjualan['kecamatan'] ?>, <?= $penjualan['kota'] ?></strong> <br>
@@ -47,7 +49,7 @@
 
 
 
-		<table class="table table-sm mt-4" width="100%">
+		<table class="table table-sm mt-4" width="100%" style="font-size: 17px;">
 			<thead>
 				<tr>
 					<th width="3%">No</th>
@@ -79,28 +81,50 @@
 					</tr>
 				<?php } ?>
 				<tr>
-					<td colspan="5" class="text-end">Total</td>
+					<td colspan="4" rowspan="6" class="border-0">
+						<div class="row justify-content-center">
+							<div class="col-5 text-center">
+								Hormat Kami
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								(..........................)
+							</div>
+							<div class="col-6 text-center">
+								Penerima
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+								(..........................)
+							</div>
+						</div>
+					</td>
+					<td class="text-end">Total</td>
 					<td class="text-end">Rp. <?= number_format($penjualan['total_hg_produk'] + $penjualan['total_hg_jasa'], 0, ',', '.') ?></td>
 				</tr>
 				<tr>
-					<td colspan="5" class="text-end">Diskon</td>
+					<td class="text-end">Diskon</td>
 					<td class="text-end">Rp. <?= number_format($penjualan['diskon'], 0, ',', '.') ?></td>
 				</tr>
 				<tr>
-					<td colspan="5" class="text-end">Grand Total</td>
+					<td class="text-end">Grand Total</td>
 					<td class="text-end">Rp. <?= number_format($penjualan['grand_total'], 0, ',', '.') ?></td>
 				</tr>
 				<tr>
-					<td colspan="5" class="text-end">Jenis Bayar</td>
+					<td class="text-end">Jenis Bayar</td>
 					<td class="text-end"><?= $penjualan['jenis_bayar'] ?></td>
 				</tr>
 				<?php if ($penjualan['jenis_bayar'] == 'Cash') { ?>
 					<tr>
-						<td colspan="5" class="text-end">Bayar</td>
+						<td class="text-end">Bayar</td>
 						<td class="text-end">Rp. <?= number_format($penjualan['bayar'], 0, ',', '.') ?></td>
 					</tr>
 					<tr>
-						<td colspan="5" class="text-end">Kembalian</td>
+						<td class="text-end">Kembalian</td>
 						<td class="text-end">Rp. <?= number_format($penjualan['kembalian'], 0, ',', '.') ?></td>
 					</tr>
 				<?php } ?>

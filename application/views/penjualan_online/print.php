@@ -10,7 +10,7 @@
 	<meta name="robots" content="noindex, nofollow">
 	<title>Penjualan <?= $penjualan['nomor'] ?></title>
 
-	<link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/image/logo2.png">
+	<link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/image/Logo2.png">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/template/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/template/assets/css/style.css">
 
@@ -22,28 +22,40 @@
 
 		<div class="row mt-4">
 			<div class="col-6">
+				<img src="<?= base_url() ?>assets/image/Logo2.png" alt="" style="width: 50%;">
+				<br>
 				<strong style="font-size: 20px; margin-bottom: 0px;"><?= $cabang['nama'] ?></strong>
 				<p class="mb-2">
 					<?= $cabang['alamat'] ?>
 					<br> <?= $cabang['telp'] ?>
 				</p>
-				<div class="row mt-1">
-					<div class="col-12">
-						<div class="text-muted">Nomor &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong><?= $penjualan['nomor'] ?></strong> </div>
-						<div class="text-muted">Tanggal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong><?= $penjualan['tanggal'] ?></strong> </div>
-						<div class="text-muted">Pengiriman &nbsp; &nbsp; &nbsp;<strong><?= $penjualan['ekspedisi'] ?> - <?= $penjualan['tgl_kirim'] ?></strong> </div>
-						<div class="text-muted">Alamat Kirim &nbsp; &nbsp;<strong><?= $penjualan['alamat_kirim'] ?></strong> </div>
-					</div>
+			</div>
+
+			<div class="col-6">
+				<div class="text-end mb-4">
+					<div class="text-muted">Customer</div>
+					<strong><?= $penjualan['marketplace'] ?></strong> <br>
+					<strong><?= $penjualan['customer'] ?></strong>
 				</div>
 
-			</div>
-			<div class="col-6 text-end">
-				<div class="text-muted">Customer</div>
-				<strong><?= $penjualan['marketplace'] ?></strong> <br>
-				<strong><?= $penjualan['customer'] ?></strong>
-				<br>
-				<br>
-				<strong><?= $penjualan['no_penjualan_mp'] ?></strong>
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 25%;">Nomor</td>
+						<td class="text-end"><strong><?= $penjualan['nomor'] ?></strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;">Tanggal</td>
+						<td class="text-end"><strong><?= $penjualan['tanggal'] ?></strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;">Pengiriman</td>
+						<td class="text-end"><strong><?= $penjualan['ekspedisi'] ?> - <?= $penjualan['tgl_kirim'] ?></strong></td>
+					</tr>
+					<tr>
+						<td style="width: 25%;">Alamat Kirim</td>
+						<td class="text-end"><strong><?= $penjualan['alamat_kirim'] ?></strong></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 

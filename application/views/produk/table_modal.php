@@ -34,13 +34,13 @@
 							<td><?= number_format($dt->hg_lazada, 0, ',', '.') ?></td>
 						<?php $harga = $dt->hg_lazada;
 							break;
-						case 'Bukalapak': ?>
-							<td><?= number_format($dt->hg_bukalapak, 0, ',', '.') ?></td>
-						<?php $harga = $dt->hg_bukalapak;
+						case 'Agen': ?>
+							<td><?= number_format($dt->hg_agen, 0, ',', '.') ?></td>
+						<?php $harga = $dt->hg_agen;
 							break;
-						case 'Blibli': ?>
-							<td><?= number_format($dt->hg_blibli, 0, ',', '.') ?></td>
-						<?php $harga = $dt->hg_blibli;
+						case 'Reseller': ?>
+							<td><?= number_format($dt->hg_reseller, 0, ',', '.') ?></td>
+						<?php $harga = $dt->hg_reseller;
 							break;
 						case 'Whatsapp': ?>
 							<td><?= number_format($dt->hg_whatsapp, 0, ',', '.') ?></td>
