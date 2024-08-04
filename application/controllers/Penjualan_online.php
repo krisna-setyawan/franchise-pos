@@ -13,7 +13,7 @@ class Penjualan_online extends CI_Controller
 	{
 		$tanggal = $this->input->get('tanggal');
 		$data = [
-			'nomor' => nomor_penjualan_online_auto($tanggal),
+			'nomor' => nomor_penjualan_online_auto($tanggal, $this->session->userdata('id_cabang')),
 		];
 		echo json_encode($data);
 	}
@@ -76,7 +76,7 @@ class Penjualan_online extends CI_Controller
 		];
 
 		$data = [
-			'nomor' => nomor_penjualan_online_auto(date('Y-m-d')),
+			'nomor' => nomor_penjualan_online_auto(date('Y-m-d'), $this->session->userdata('id_cabang')),
 		];
 
 		$this->load->view('template/header');

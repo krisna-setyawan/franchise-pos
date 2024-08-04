@@ -44,7 +44,7 @@ class Outbound extends CI_Controller
 		];
 
 		$data = [
-			'nomor' => getNomorOutbound(date('Y-m-d')),
+			'nomor' => getNomorOutbound(date('Y-m-d'), $this->session->userdata('id_cabang')),
 		];
 
 		$this->load->view('template/header');

@@ -147,6 +147,36 @@ function codeExistsInDatabaseProduk($code)
 
 
 
+function getKodePaket($length = 6)
+{
+	$code = '';
+
+	// Loop hingga kode yang dihasilkan unik
+	do {
+		$code = generateRandomCodePaket($length);
+	} while (codeExistsInDatabasePaket($code));
+
+	return $code;
+}
+
+function generateRandomCodePaket($length)
+{
+	$code = '';
+	for ($i = 0; $i < $length; $i++) {
+		$code .= mt_rand(1, 9);
+	}
+	return $code;
+}
+
+function codeExistsInDatabasePaket($code)
+{
+	$ci = get_instance();
+	$query = $ci->db->get_where('produk_paket', array('kode' => $code));
+	return $query->num_rows() > 0;
+}
+
+
+
 function getKodeJasa($length = 4)
 {
 	$code = '';
@@ -202,7 +232,7 @@ function get_new_nik()
 
 
 
-function getNomorInbound($tgl)
+function getNomorInbound($tgl, $cabang)
 {
 	date_default_timezone_set('Asia/Jakarta');
 
@@ -212,7 +242,7 @@ function getNomorInbound($tgl)
 	$tahun = date('Y', strtotime($tgl));
 
 	// Query untuk mendapatkan nomor urut terakhir
-	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM inbound WHERE YEAR(tanggal) = '$tahun'";
+	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM inbound WHERE YEAR(tanggal) = '$tahun' AND id_cabang = $cabang";
 	$query = $ci->db->query($quer)->row_array();
 
 	if ($query && $query['kode'] !== null) {
@@ -234,7 +264,7 @@ function getNomorInbound($tgl)
 
 
 
-function getNomorOutbound($tgl)
+function getNomorOutbound($tgl, $cabang)
 {
 	date_default_timezone_set('Asia/Jakarta');
 
@@ -244,7 +274,7 @@ function getNomorOutbound($tgl)
 	$tahun = date('Y', strtotime($tgl));
 
 	// Query untuk mendapatkan nomor urut terakhir
-	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM outbound WHERE YEAR(tanggal) = '$tahun'";
+	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM outbound WHERE YEAR(tanggal) = '$tahun' AND id_cabang = $cabang";
 	$query = $ci->db->query($quer)->row_array();
 
 	if ($query && $query['kode'] !== null) {
@@ -266,7 +296,7 @@ function getNomorOutbound($tgl)
 
 
 
-function nomor_penjualan_online_auto($tgl)
+function nomor_penjualan_online_auto($tgl, $cabang)
 {
 	date_default_timezone_set('Asia/Jakarta');
 
@@ -279,7 +309,7 @@ function nomor_penjualan_online_auto($tgl)
 
 
 	// Query untuk mendapatkan nomor urut terakhir
-	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM penjualan_online WHERE tanggal = '$tgl'";
+	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM penjualan_online WHERE tanggal = '$tgl' AND id_cabang = $cabang";
 	$query = $ci->db->query($quer)->row_array();
 
 	if ($query && $query['kode'] !== null) {
@@ -301,7 +331,7 @@ function nomor_penjualan_online_auto($tgl)
 
 
 
-function nomor_penjualan_outlet_auto($tgl)
+function nomor_penjualan_outlet_auto($tgl, $cabang)
 {
 	date_default_timezone_set('Asia/Jakarta');
 
@@ -314,7 +344,7 @@ function nomor_penjualan_outlet_auto($tgl)
 
 
 	// Query untuk mendapatkan nomor urut terakhir
-	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM penjualan_outlet WHERE tanggal = '$tgl'";
+	$quer = "SELECT MAX(RIGHT(nomor, 3)) AS kode FROM penjualan_outlet WHERE tanggal = '$tgl' AND id_cabang = $cabang";
 	$query = $ci->db->query($quer)->row_array();
 
 	if ($query && $query['kode'] !== null) {
